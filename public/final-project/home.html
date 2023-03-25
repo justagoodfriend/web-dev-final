@@ -8,17 +8,50 @@
   <!-- All of these HTML Files are to be used as templates for the React Components in JS-->
 </head>
 <body>
+  <!-- Idea is that header would be a reusable component for search, as would be the ./register and ./login modal-->
   <header>
     <form>
       <label for="search-bar">Search</label>
       <input type="text" name="" id="search-bar">
     </form>
     <nav>
-
+      <ul class="nav-list">
+        <li class="nav-pill"><a href="./search/...">Mens</a></li>
+        <li><a href="./search/...">Womens</a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+      </ul>
     </nav>
   </header>
   <main class="main-body">
-    
+    <div class="login-navbar">
+      <a href="./register">Sign Up</a> | <a href="./login">Log In</a>
+      <img src="" alt="profile-pic" href="./profile" hidden>
+    </div>
+    <ul class="card-row">
+      <h4 class="card-row-title">Title to a row of cards</h4>
+      <li class="card">
+        <button class="card-button">Left Button</button>
+        <img class="card-image" src="" alt="image-display">
+        <div class="card-header">
+          <a href="./details/{ObjectID}"><h4 class="card-title">Title to a specific card</h4></a>
+          <span class="card-subtitle"><a href="./profile/{OwnerID}">Owner</a> &#x2022 Date Opened </span>
+        </div>
+        <p class="card-description">
+          card info. lorem ipsum blah blah blah
+        </p>
+        <button class="card-button">Right Button</button>
+      </li>
+      <li class="card"></li>
+      <li class="card"></li>
+      <li class="card hidden"></li>
+    </ul>
+
+    <ul class="card-row">
+      <h4 class="card-row-title">Title to a row of cards</h4>
+    </ul>
   </main>
   <footer></footer>
 </body>
