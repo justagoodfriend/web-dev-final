@@ -14,7 +14,7 @@ const CarouselItems = (props) => {
           <div className="carousel-item active"></div>
           <div className="cards">
             {database.map((clothingitem) => (
-              <ItemComponent item={clothingitem} />
+              <ItemComponent key={clothingitem.id} item={clothingitem} />
             ))}
           </div>
         </div>

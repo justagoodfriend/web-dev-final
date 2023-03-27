@@ -1,5 +1,5 @@
 [
-  { "image": "Cargos.jpeg", "title": "name of clothing", "price": 100 },
-  { "image": "source", "title": "name of clothing", "price": 100 },
-  { "image": "source", "title": "name of clothing", "price": 100 }
+  { "id": "123", "image": "Cargos.jpeg", "title": "name of clothing", "price": 100 },
+  { "id": "234", "image": "source", "title": "name of clothing", "price": 100 },
+  { "id": "345", "image": "source", "title": "name of clothing", "price": 100 }
 ]

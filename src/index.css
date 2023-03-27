@@ -13,7 +13,7 @@ code {
 }
 
 .bg-purple {
-  background-image: url("../public/final-project/images/purple-gradient.png");
+  background-image: url("./images/purple-gradient.png");
 }
 
 .profile-pic {
