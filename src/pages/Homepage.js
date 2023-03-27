@@ -9,7 +9,7 @@ const HomePage = () => {
       <div className="col-3 pt-3 ps-4 bg-purple">
         <UserSection />
       </div>
-      <div class="col-9">
+      <div className="col-9">
         <CarouselItems title="Recommended" id="ExamplesCarousel1" />
         <CarouselItems title="Wishlist" id="ExamplesCarousel2" />
       </div>

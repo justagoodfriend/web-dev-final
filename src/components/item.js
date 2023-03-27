@@ -10,7 +10,7 @@ const ItemComponent = ({
 }) => {
   //not sure why but I can't get the image from the public/image file, so they're still blank,
   //do we want to copy over the images into source as well too?
-  const imageSource = `/public/final-project/images/${item.image}`;
+  const imageSource = `../images/${item.image}`;
   return (
     <div className="card">
       <img src={imageSource} className="card-image-top" alt="" />

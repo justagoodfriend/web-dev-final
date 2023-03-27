@@ -1,5 +1,13 @@
 [
-  { "image": "Cargos.jpeg", "title": "name of clothing", "price": 100 },
-  { "image": "source", "title": "name of clothing", "price": 100 },
-  { "image": "source", "title": "name of clothing", "price": 100 }
+  { "image": "Cargos.jpeg", "title": "Cargos", "price": 10 },
+  {
+    "image": "white-button-up.jpeg",
+    "title": "White Flannel Button",
+    "price": 100
+  },
+  {
+    "image": "white-blue-flowers.jpeg",
+    "title": "Mock-Neck Flower Base ",
+    "price": 100
+  }
 ]

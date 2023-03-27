@@ -3,77 +3,86 @@ import React from "react";
 const UserSection = () => {
   return (
     <div>
-      <div class="row align">
-        <div class="col-auto">
+      <div className="row align">
+        <div className="col-auto">
           <img
             src="images/profile-empty.jpeg"
             alt=""
-            class="profile-pic rounded mb-2"
+            className="profile-pic rounded mb-2"
           />
         </div>
 
-        <div class="col">
-          <h2 class="text-white m-0">Hi Guest!</h2>
-          <div class="login-navbar text-white">
-            <a class="text-white remove-underline small-font" href="./register">
+        <div className="col">
+          <h2 className="text-white m-0">Hi Guest!</h2>
+          <div className="login-navbar text-white">
+            <a
+              className="text-white remove-underline small-font"
+              href="./register"
+            >
               Sign Up
             </a>{" "}
             |{" "}
-            <a class="text-white remove-underline small-font" href="./login">
+            <a
+              className="text-white remove-underline small-font"
+              href="./login"
+            >
               Log In
             </a>
           </div>
         </div>
       </div>
 
-      <div class="input-group mb-3 opacity-50 pt-4">
-        <span class="input-group-text no-border bg-dark">
-          <i class="bi bi-search text-white"></i>
+      <div className="input-group mb-3 opacity-50 pt-4">
+        <span className="input-group-text no-border bg-dark">
+          <i className="bi bi-search text-white"></i>
         </span>
         <input
           type="text"
-          class="form-control bg-dark text-white no-border"
+          className="form-control bg-dark text-white no-border"
           placeholder="Search"
           aria-label="Search"
         />
       </div>
       <nav>
-        <h5 class="text-white">Categories</h5>
-        <ul class="list-group">
-          <a href="./search/..." class="list-group-item active no-background">
+        <h5 className="text-white">Categories</h5>
+        <ul className="list-group">
+          <a
+            href="./search/..."
+            className="list-group-item active no-background"
+          >
             <i
-              class="bi bi-house-door-fill
+              className="bi bi-house-door-fill
 				 text-white pe-3 fs-5"
             ></i>
             Home
           </a>
           <a
             href="./search/..."
-            class="list-group-item no-background text-white"
+            className="list-group-item no-background text-white"
           >
             <i
-              class="bi
+              className="bi
 				 bi-brightness-high-fill text-white pe-3 fs-5"
             ></i>
             Women
           </a>
-          <a href="/" class="list-group-item no-background text-white">
+          <a href="/" className="list-group-item no-background text-white">
             <i
-              class="bi bi-moon-fill text-white
+              className="bi bi-moon-fill text-white
 				pe-3 fs-5"
             ></i>
             Men
           </a>
-          <a href="/" class="list-group-item no-background text-white ">
+          <a href="/" className="list-group-item no-background text-white ">
             <i
-              class="bi bi-cart-fill text-white
+              className="bi bi-cart-fill text-white
 				pe-3 fs-5"
             ></i>
             Kids
           </a>
-          <a href="/" class="list-group-item no-background text-white ">
+          <a href="/" className="list-group-item no-background text-white ">
             <i
-              class="bi bi-wallet-fill text-white
+              className="bi bi-wallet-fill text-white
 				pe-3 fs-5"
             ></i>
             Sale
