@@ -1,5 +1,8 @@
 .bg-purple {
     background-image: url("../images/purple-gradient.png");
+    min-height: 200%;
+    background-size: cover;
+    overflow: visible;
 }
 
 .profile-pic {

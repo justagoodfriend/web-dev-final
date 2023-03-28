@@ -6,7 +6,9 @@ import HomePage from "./pages/Homepage";
 //with each carousel items, they have an id that is used for the buttons, not sure how else to handle creating a general component that
 //will map to them so for now I pass a unique id by prop
 function App() {
-  return <HomePage />;
+  return(
+      <HomePage />
+      );
 }
 
 export default App;

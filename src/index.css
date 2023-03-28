@@ -12,9 +12,9 @@ code {
     monospace;
 }
 
-.bg-purple {
-  background-image: url("./images/purple-gradient.png");
-}
+/*.bg-purple {*/
+/*  background-image: url("./images/purple-gradient.png");*/
+/*}*/
 
 .profile-pic {
   width: 60px;

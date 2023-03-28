@@ -6,20 +6,13 @@ import React from "react";
 //for some reason, everythingn is still in block and the other attributes, including the cascade no longer work which is nice.
 const HomePage = () => {
   return (
-    <div className="row">
-        <img
-            src="../images/profile-empty.jpeg"
-            alt=""
-            className="profile-pic rounded mb-2"
-        />
-      <div className="col-3 pt-3 ps-4 bg-purple">
-        <UserSection />
+      <div className="row">
+          <UserSection />
+          <div className="col-9">
+              <CarouselItems title="Recommended" id="R1" />
+              <CarouselItems title="Wishlist" id="W1" />
+          </div>
       </div>
-      <div className="col-9">
-        <CarouselItems title="Recommended" id="ExamplesCarousel1" />
-        <CarouselItems title="Wishlist" id="ExamplesCarousel2" />
-      </div>
-    </div>
   );
 };
 export default HomePage;
