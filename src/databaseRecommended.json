@@ -1,0 +1,8 @@
+[
+  { "id": "A1", "image": "white-button-up.jpeg", "title": "White Flannel Button", "price": "13.45" },
+  { "id": "B1", "image": "black-wrap-up.jpeg", "title": "Black Wrap-Up Blazer", "price": "27.50" },
+  { "id": "C1", "image": "white-blue-flowers.jpeg", "title": "Mock-Neck Flower Blouse", "price": "9.45" },
+  { "id": "A2", "image": "white-button-up.jpeg", "title": "White Flannel Button", "price": "13.45" },
+  { "id": "B2", "image": "black-wrap-up.jpeg", "title": "Black Wrap-Up Blazer", "price": "27.50" },
+  { "id": "C2", "image": "white-blue-flowers.jpeg", "title": "Mock-Neck Flower Blouse", "price": "9.45" }
+]
