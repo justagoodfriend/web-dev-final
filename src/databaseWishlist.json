@@ -1,0 +1,8 @@
+[
+  { "id": "D1", "image": "Beige-Button-Up.jpeg", "title": "Beige Button Up", "price": "8.68" },
+  { "id": "E1 ", "image": "White-Graphic-Tee.jpeg", "title": "White Graphic Tee", "price": "10.50" },
+  { "id": "F1", "image": "Cargos.jpeg", "title": "Green Cargo Pants", "price": "17.65" },
+  { "id": "D2", "image": "Beige-Button-Up.jpeg", "title": "Beige Button Up", "price": "8.68" },
+  { "id": "E2 ", "image": "White-Graphic-Tee.jpeg", "title": "White Graphic Tee", "price": "10.50" },
+  { "id": "F2", "image": "Cargos.jpeg", "title": "Green Cargo Pants", "price": "17.65" }
+]

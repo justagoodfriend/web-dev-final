@@ -1,58 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <!-- All of these HTML Files are to be used as templates for the React Components in JS-->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	<link href="../../src/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="../../src/css/index.css" rel="stylesheet"/>
+	
+	<title>Shopping Site</title>
+	<!-- All of these HTML Files are to be used as templates for the React Components in JS-->
 </head>
 <body>
-  <!-- Idea is that header would be a reusable component for search, as would be the ./register and ./login modal-->
-  <header>
-    <form>
-      <label for="search-bar">Search</label>
-      <input type="text" name="" id="search-bar">
-    </form>
-    <nav>
-      <ul class="nav-list">
-        <li class="nav-pill"><a href="./search/...">Mens</a></li>
-        <li><a href="./search/...">Womens</a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-      </ul>
-    </nav>
-  </header>
-  <main class="main-body">
-    <div class="login-navbar">
-      <a href="./register">Sign Up</a> | <a href="./login">Log In</a>
-      <img src="" alt="profile-pic" href="./profile" hidden>
-    </div>
-    <ul class="card-row">
-      <h4 class="card-row-title">Title to a row of cards</h4>
-      <li class="card">
-        <button class="card-button">Left Button</button>
-        <img class="card-image" src="" alt="image-display">
-        <div class="card-header">
-          <a href="./details/{ObjectID}"><h4 class="card-title">Title to a specific card</h4></a>
-          <span class="card-subtitle"><a href="./profile/{OwnerID}">Owner</a> &#x2022 Date Opened </span>
-        </div>
-        <p class="card-description">
-          card info. lorem ipsum blah blah blah
-        </p>
-        <button class="card-button">Right Button</button>
-      </li>
-      <li class="card"></li>
-      <li class="card"></li>
-      <li class="card hidden"></li>
-    </ul>
-
-    <ul class="card-row">
-      <h4 class="card-row-title">Title to a row of cards</h4>
-    </ul>
-  </main>
-  <footer></footer>
+<div class="row">
+	<!--start of nav (left hand) section-->
+	<div class="col-3 pt-3 ps-4 bg-purple">
+		<div class="row align">
+			<div class="col-auto">
+				<img src="../../src/images/profile-empty.jpeg" alt="empty profile picture" class="profile-pic rounded mb-2"/>
+			</div>
+			
+			<!-- welcome intro and log in/sign up-->
+			<div class="col">
+				<h2 class="text-white m-0">Hi Guest!</h2>
+				<div class="login-navbar text-white">
+					<a class="text-white remove-underline small-font" href="./register">Sign Up</a> | <a
+						class="text-white remove-underline small-font" href="./login">Log In</a>
+				</div>
+			</div>
+		
+		</div>
+		
+		<!--search bar-->
+		<div class="input-group mb-3 opacity-50 pt-4">
+			<span class="input-group-text no-border bg-dark"><i class="bi bi-search text-white"></i></span>
+			<input type="text" class="form-control bg-dark text-white no-border" placeholder="Search" aria-label="Search">
+		</div>
+		<nav>
+			
+			<!--buttons to access categories-->
+			<h5 class="text-white">Categories</h5>
+			<ul class="list-group">
+				<a href="./search/..." class="list-group-item active no-background"><i class="bi bi-house-door-fill
+				 text-white pe-3 fs-5"></i>Home</a>
+				<a href="./search/..." class="list-group-item no-background text-white"><i class="bi
+				 bi-brightness-high-fill text-white pe-3 fs-5"></i>Women</a>
+				<a href="" class="list-group-item no-background text-white"><i class="bi bi-moon-fill text-white
+				pe-3 fs-5"></i>Men</a>
+				<a href="" class="list-group-item no-background text-white "><i class="bi bi-cart-fill text-white
+				pe-3 fs-5"></i>Kids</a>
+				<a href="" class="list-group-item no-background text-white "><i class="bi bi-wallet-fill text-white
+				pe-3 fs-5"></i>Sale</a>
+			</ul>
+		</nav>
+	</div>
+	<!--start of nav (left hand) section-->
+	
+	<!-- start of shopping (right hand) section-->
+	<div class="col-9">
+		<h2 class="pt-3 ps-4">Recommended</h2>
+		<!-- start of overall carousel-->
+		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<!-- start of first shown section-->
+				<div class="carousel-item active">
+					<!-- start of 3 cards-->
+					<div class="cards">
+						<!--card #1-->
+						<div class="card">
+							<img src="../../src/images/white-button-up.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">White Flannel Button
+									<br/>
+									<b>$13.45</b>
+								</p>
+							
+							</div>
+						</div>
+						<!--card #2-->
+						<div class="card">
+							<img src="../../src/images/black-wrap-up.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Black Wrap-Up Blazer
+									<br/>
+									<b>$27.50</b>
+								</p>
+							
+							</div>
+						</div>
+						<!--card #3-->
+						<div class="card">
+							<img src="../../src/images/white-blue-flowers.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Mock-Neck Flower Blouse
+									<br/>
+									<b>$9.45</b>
+								</p>
+							
+							</div>
+						</div>
+					</div>
+					<!-- end of 3 cards-->
+				</div>
+				<!-- end of first shown section-->
+				<!-- start of hidden section-->
+				<div class="carousel-item">
+					<!-- start of 3 cards-->
+					<div class="cards">
+						<!--card #4-->
+						<div class="card">
+							<img src="../../src/images/white-button-up.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">White Flannel Button
+									<br/>
+									<b>$13.45</b>
+								</p>
+							
+							</div>
+						</div>
+						<!--card #5-->
+						<div class="card">
+							<img src="../../src/images/black-wrap-up.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Black Wrap-Up Blazer
+									<br/>
+									<b>$27.50</b>
+								</p>
+							
+							</div>
+						</div>
+						<!--card #6-->
+						<div class="card">
+							<img src="../../src/images/white-blue-flowers.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Mock-Neck Flower Blouse
+									<br/>
+									<b>$9.45</b>
+								</p>
+							
+							</div>
+						</div>
+					</div>
+					<!-- end of 3 cards-->
+				</div>
+				<!-- end of hidden section-->
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+		<!-- end of overall carousel-->
+		
+		<h2 class="pt-3 ps-4">Wishlist</h2>
+		<!-- start of overall carousel-->
+		<div id="carouselExampleControls2" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<!-- start of first shown section-->
+				<div class="carousel-item active">
+					<!-- start of 3 cards-->
+					<div class="cards">
+						<!--card #1-->
+						<div class="card">
+							<img src="../../src/images/Beige-Button-Up.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Beige Button Up
+									<br/>
+									<b>$8.68</b>
+								</p>
+							
+							</div>
+						</div>
+						<!--card #2-->
+						<div class="card">
+							<img src="../../src/images/White-Graphic-Tee.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">White Graphic Tee
+									<br/>
+									<b>$10.50</b>
+								</p>
+							
+							</div>
+						</div>
+						<!--card #3-->
+						<div class="card">
+							<img src="../../src/images/Cargos.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Green Cargo Pants
+									<br/>
+									<b>$17.65</b>
+								</p>
+							
+							</div>
+						</div>
+					</div>
+					<!-- end of 3 cards-->
+				</div>
+				<!-- end of first shown section-->
+				<!-- start of hidden section-->
+				<div class="carousel-item">
+					<!-- start of 3 cards-->
+					<div class="cards">
+						<!--card #1-->
+						<div class="card">
+							<img src="../../src/images/Beige-Button-Up.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Beige Button Up
+									<br/>
+									<b>$8.68</b>
+								</p>
+							
+							</div>
+						</div>
+						<!--card #2-->
+						<div class="card">
+							<img src="../../src/images/White-Graphic-Tee.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">White Graphic Tee
+									<br/>
+									<b>$10.50</b>
+								</p>
+							
+							</div>
+						</div>
+						<!--card #3-->
+						<div class="card">
+							<img src="../../src/images/Cargos.jpeg" class="card-img-top" alt="...">
+							<div class="card-body">
+								<p class="card-text">Green Cargo Pants
+									<br/>
+									<b>$17.65</b>
+								</p>
+							
+							</div>
+						</div>
+					</div>
+					<!-- end of 3 cards-->
+				</div>
+				<!-- end of hidden section-->
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+		<!-- end of overall carousel-->
+	
+	</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
 </body>
 </html>

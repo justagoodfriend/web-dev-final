@@ -1,0 +1,136 @@
+.bg-purple {
+  background-image: url("../images/purple-gradient.png");
+  min-height: 200%;
+  background-size: cover;
+  overflow: visible;
+}
+
+.profile-pic {
+  width: 60px;
+  height: 60px;
+}
+
+.remove-underline {
+  text-decoration: none;
+}
+
+.search-padding {
+  top: 73px;
+  left: 8px;
+}
+
+.no-border {
+  border: none;
+}
+
+.no-background {
+  background-color: transparent;
+  border: none;
+}
+
+.small-font {
+  font-size: 12px;
+}
+
+.cards {
+  display: flex;
+  padding-top: 15px;
+  margin-left: 9px;
+  justify-content: center;
+}
+
+.card {
+  margin-right: 15px;
+  margin-left: 15px;
+  width: 25%;
+  height: 25%;
+}
+
+/*change color of the arrows*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
+
+/*change color of the active button*/
+.list-group-item.active:not(.disabled) {
+  background-color: #a094ec;
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.flex {
+  display: flex;
+}
+
+.search-image {
+  width: 25%;
+  height: 25%;
+  border-radius: 25px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-full {
+  width: 100%;
+}
+
+.search-bold-font {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.gap-between {
+  gap: 1rem;
+}
+
+.details-image-width {
+  height: 100%;
+  width: 75%;
+}
+
+.details-margin {
+  margin-right: 20px;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.xl-font-size {
+  font-size: x-large;
+}
+
+.rounded-image {
+  border-radius: 10px;
+}
+
+/* fix this last */
+.drop-down-button {
+  font-size: large;
+  border-radius: 5px;
+  background-color: #d3d3d3;
+}
+
+.grey-background {
+  background-color: #d3d3d3;
+}
+
+.heart-size {
+  font-size: 26px;
+}
+
+.add-to-cart-button {
+  color: white;
+  background-color: #cbc3e3;
+  border-color: #cbc3e3;
+}
