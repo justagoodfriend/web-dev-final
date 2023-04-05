@@ -3,6 +3,8 @@ import HomePage from "./pages/Homepage";
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import ProfilePage from "./pages/Profilepage";
+import SearchPage from "./pages/Searchpage";
+
 
 //within this app component I was thinking it should handle the routing information/have react Browser to go to the other pages,
 
@@ -20,6 +22,18 @@ function App() {
                        element={<ProfilePage active="Wishlist"/>}/>
                 <Route path="/profile/settings"
                        element={<ProfilePage active="Settings"/>}/>
+                <Route path="/search/query"
+                       element={<SearchPage/>}/>
+                <Route path="/search/women"
+                       element={<SearchPage page="Women"/>}/>
+                <Route path="/search/men"
+                       element={<SearchPage page="Men"/>}/>
+                <Route path="/search/kids"
+                       element={<SearchPage page="Kids"/>}/>
+                <Route path="/search/sale"
+                       element={<SearchPage page="Sale"/>}/>
+
+
             </Routes>
         </BrowserRouter>
     );

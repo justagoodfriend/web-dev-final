@@ -95,3 +95,10 @@
 .custom-underline{
     text-underline-offset: 8px;
 }
+.result-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 20px;
+    padding-left: 90px;
+}
