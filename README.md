@@ -1,5 +1,8 @@
 <h1> Figma Prototype </h1>
 
+<h3> Home page </h3>
+<img src="https://user-images.githubusercontent.com/94317341/229982972-7a69fcbd-3236-4195-9ab8-6dd5a62fe428.png" width=700px/>
+
 <h3> Profile page </h3>
 <img src="https://user-images.githubusercontent.com/94317341/229865820-110317a4-7cff-45c6-9eb6-df4b8ed92612.png" width=700px/>
 <img src="https://user-images.githubusercontent.com/94317341/229865830-8149553d-9c1d-42f1-bd81-e613062d3606.png" width=700px/>
