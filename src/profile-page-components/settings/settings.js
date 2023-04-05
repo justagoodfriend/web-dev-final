@@ -2,7 +2,7 @@
 
 const Settings = () => {
     return (
-        <div className="custom-padding-left pt-3 d-flex flex-row">
+        <div className="custom-padding-left pt-3 d-flex flex-row pb-5 mb-5">
             <div className="d-flex flex-column col-7">
                 <label>
                     <div className="pb-1">
