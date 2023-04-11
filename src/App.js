@@ -3,26 +3,52 @@ import HomePage from "./pages/Homepage";
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import ProfilePage from "./pages/Profilepage";
+import SearchPage from "./pages/Searchpage";
+import SignInModal from "./pages/sign-in-modal"
+import SignUpModal from "./pages/sign-up-modal";
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 //within this app component I was thinking it should handle the routing information/have react Browser to go to the other pages,
 
 //with each carousel items, they have an id that is used for the buttons, not sure how else to handle creating a general component that
 //will map to them so for now I pass a unique id by prop
 function App() {
-    return(
-        <BrowserRouter>
-            <Routes>
-                <Route path="/*"
+  return(
+    <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="login" element={<SignInModal />}></Route>
+        <Route path="register" element={<SignUpModal />}></Route>
+        <Route path="/*"
                        element={<HomePage/>}/>
-                <Route path="/profile"
+        <Route path="/profile"
                        element={<ProfilePage active="Reviews"/>}/>
-                <Route path="/profile/wishlist"
+        <Route path="/profile/wishlist"
                        element={<ProfilePage active="Wishlist"/>}/>
-                <Route path="/profile/settings"
+        <Route path="/profile/settings"
                        element={<ProfilePage active="Settings"/>}/>
-            </Routes>
-        </BrowserRouter>
-    );
+        <Route path="/search/query"
+                       element={<SearchPage/>}/>
+        <Route path="/search/women"
+                       element={<SearchPage page="Women"/>}/>
+        <Route path="/search/men"
+                       element={<SearchPage page="Men"/>}/>
+        <Route path="/search/kids"
+                       element={<SearchPage page="Kids"/>}/>
+        <Route path="/search/sale"
+                       element={<SearchPage page="Sale"/>}/>
+        <Route path="/profile"
+                       element={<ProfilePage active="Reviews"/>}/>
+        <Route path="/profile/wishlist"
+                       element={<ProfilePage active="Wishlist"/>}/>
+        <Route path="/profile/settings"
+                       element={<ProfilePage active="Settings"/>}/>
+      </Routes>
+    </BrowserRouter>
+  </Provider>
+  );
 }
 
 export default App;

@@ -106,4 +106,12 @@
 
 .text-purple{
     color: #a094ec;
+    
+.result-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 20px;
+    padding-left: 90px;
+
 }

@@ -13,6 +13,7 @@ const ReviewElement = ({
         <div className="my-3">
             <h5>{review.title}</h5>
             <div className="rounded-4 bg-secondary bg-opacity-25 p-4 me-5">
+
                 <div className="row">
                     <div className="col-2 d-flex align-items-center">
                         <div className="ms-4">

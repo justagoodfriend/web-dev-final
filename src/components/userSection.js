@@ -31,10 +31,10 @@ const UserSection = ({
         <ul className="list-group">
             <Button active={active} href="/*" title="Home" icon="bi bi-house-door-fill text-white pe-3 fs-5"/>
             <Button active={active} href="/profile" title="Profile" icon="bi bi-person-fill-gear text-white pe-3 fs-5"/>
-            <Button active={active} href="/*" title="Women" icon="bi bi-brightness-high-fill text-white pe-3 fs-5"/>
-            <Button active={active} href="/*" title="Men" icon="bi bi-moon-fill text-white pe-3 fs-5"/>
-            <Button active={active} href="/*" title="Kids" icon="bi bi-cart-fill text-white pe-3 fs-5"/>
-            <Button active={active} href="/*" title="Sale" icon="bi bi-wallet-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/search/women" title="Women" icon="bi bi-brightness-high-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/search/men" title="Men" icon="bi bi-moon-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/search/kids" title="Kids" icon="bi bi-cart-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/search/sale" title="Sale" icon="bi bi-wallet-fill text-white pe-3 fs-5"/>
         </ul>
       </nav>
     </div>
