@@ -1,5 +1,5 @@
 .bg-purple {
-    background-image: url("../images/purple-gradient.png");
+    background-image: url("/public/images/purple-gradient.png");
     min-height: 200%;
     background-size: cover;
     overflow: visible;
@@ -8,6 +8,21 @@
 .profile-pic {
     width: 60px;
     height: 60px;
+}
+
+.profile-pic-larger {
+    width: 100px;
+    height: 100px;
+}
+
+.profile-pic-round-mini {
+    width: 50px;
+    height: 50px;
+}
+
+.profile-pic-larger2 {
+    width: 150px;
+    height: 150px;
 }
 
 .remove-underline {
@@ -56,4 +71,34 @@
 /*change color of the active button*/
 .list-group-item.active:not(.disabled) {
     background-color: #a094ec;
+}
+
+.profile-background {
+    background-image: url("/public/images/roses.jpeg");
+    height: 200px;
+    background-repeat: no-repeat;
+}
+
+.custom-padding{
+    padding: 150px 50px 0 50px;
+}
+
+.custom-padding-extra{
+    padding-top: 220px;
+    padding-left: 50px;
+}
+
+.custom-padding-left{
+    padding-left: 50px;
+}
+
+.custom-underline{
+    text-underline-offset: 8px;
+}
+.result-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 20px;
+    padding-left: 90px;
 }

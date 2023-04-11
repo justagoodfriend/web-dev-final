@@ -1,12 +1,14 @@
 import React from "react";
-import PROFILE from "../images/profile-empty.jpeg";
+import Button from "./button";
 
-const UserSection = () => {
+const UserSection = ({
+    active = "Home"
+                     }) => {
   return (
     <div className="col-3 pt-3 ps-4 bg-purple">
       <div className="row align">
         <div className="col-auto">
-          <img src={PROFILE} alt="..."
+          <img src={`/images/profile-empty.jpeg`} alt="..."
                className="profile-pic rounded mb-2"/>
         </div>
 
@@ -27,16 +29,12 @@ const UserSection = () => {
       <nav>
         <h5 className="text-white">Categories</h5>
         <ul className="list-group">
-          <a href="./search/..." className="list-group-item active no-background"><i className="bi bi-house-door-fill
-				 text-white pe-3 fs-5"></i>Home</a>
-          <a href="./search/..." className="list-group-item no-background text-white"><i className="bi
-				 bi-brightness-high-fill text-white pe-3 fs-5"></i>Women</a>
-          <a href="./search/..." className="list-group-item no-background text-white"><i className="bi bi-moon-fill text-white
-				pe-3 fs-5"></i>Men</a>
-          <a href="./search/..." className="list-group-item no-background text-white "><i className="bi bi-cart-fill text-white
-				pe-3 fs-5"></i>Kids</a>
-          <a href="./search/..." className="list-group-item no-background text-white "><i className="bi bi-wallet-fill text-white
-				pe-3 fs-5"></i>Sale</a>
+            <Button active={active} href="/*" title="Home" icon="bi bi-house-door-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/profile" title="Profile" icon="bi bi-person-fill-gear text-white pe-3 fs-5"/>
+            <Button active={active} href="/search/women" title="Women" icon="bi bi-brightness-high-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/search/men" title="Men" icon="bi bi-moon-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/search/kids" title="Kids" icon="bi bi-cart-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/search/sale" title="Sale" icon="bi bi-wallet-fill text-white pe-3 fs-5"/>
         </ul>
       </nav>
     </div>
