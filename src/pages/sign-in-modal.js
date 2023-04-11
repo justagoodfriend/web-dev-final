@@ -38,7 +38,7 @@ export default function SignInModal() {
   const [userInputs, setUserInput] = useState({email:'',password:''});
   
   useEffect(() => {
-    <Navigate to="/"/>
+    <Navigate to="/home"/>
   },[profile]
   );
 

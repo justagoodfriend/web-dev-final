@@ -1,12 +1,10 @@
 import "./App.css";
 import HomePage from "./pages/Homepage";
-import {BrowserRouter} from "react-router-dom";
-import {Routes, Route} from "react-router";
 import ProfilePage from "./pages/Profilepage";
 import SearchPage from "./pages/Searchpage";
 import SignInModal from "./pages/sign-in-modal"
 import SignUpModal from "./pages/sign-up-modal";
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom'
 import store from "./redux/store";
 import { Provider } from "react-redux";
 
@@ -19,10 +17,12 @@ function App() {
     <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="login" element={<SignInModal />}></Route>
-        <Route path="register" element={<SignUpModal />}></Route>
-        <Route path="/*"
-                       element={<HomePage/>}/>
+
+        <Route path="/"
+                       element={<HomePage/>}>
+          <Route path="login" element={<SignInModal />}/>
+          <Route path="register" element={<SignUpModal />}/>
+        </Route>
         <Route path="/profile"
                        element={<ProfilePage active="Reviews"/>}/>
         <Route path="/profile/wishlist"
