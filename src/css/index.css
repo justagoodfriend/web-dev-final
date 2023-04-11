@@ -21,8 +21,8 @@
 }
 
 .profile-pic-larger2 {
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
 }
 
 .remove-underline {
@@ -95,10 +95,23 @@
 .custom-underline{
     text-underline-offset: 8px;
 }
+
+.border-purple{
+    border: solid #a094ec;
+}
+
+.background-purple{
+    background-color: #a094ec;
+}
+
+.text-purple{
+    color: #a094ec;
+    
 .result-layout {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
     gap: 20px;
     padding-left: 90px;
+
 }

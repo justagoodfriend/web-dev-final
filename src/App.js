@@ -39,6 +39,12 @@ function App() {
                        element={<SearchPage page="Kids"/>}/>
         <Route path="/search/sale"
                        element={<SearchPage page="Sale"/>}/>
+        <Route path="/profile"
+                       element={<ProfilePage active="Reviews"/>}/>
+        <Route path="/profile/wishlist"
+                       element={<ProfilePage active="Wishlist"/>}/>
+        <Route path="/profile/settings"
+                       element={<ProfilePage active="Settings"/>}/>
       </Routes>
     </BrowserRouter>
   </Provider>

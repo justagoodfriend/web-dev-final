@@ -11,11 +11,11 @@ const Stars = ({rating= 0}) => {
     return (
         <div>
             {
-                starsCurrent.map(star => {
+                starsCurrent.map((star, index) => {
                     if (star === 0) {
-                        return <i className="bi bi-star pe-1"/>
+                        return <i key={index} className="bi bi-star pe-1"/>
                     } else {
-                        return <i className="bi bi-star-fill pe-1"/>
+                        return <i key={index} className="bi bi-star-fill pe-1"/>
                     }
                 })
             }
