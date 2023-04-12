@@ -31,14 +31,14 @@ const Settings = () => {
                     </button>
                 </div>
             </div>
-            <div className="col-4 pt-3 text-center">
-                <img alt="..." src={`/images/profile-empty.jpeg`} className="rounded-4 profile-pic-larger2"/>
-                <button className="no-border no-background pt-3 text">
+            <div className="col-4 pt-3">
+                <img alt="..." src={`/images/profile-empty.jpeg`} className="rounded-4 profile-pic-larger2 m-0"/>
+                <button className="no-border no-background p-0 pt-3">
                     <h5>Upload new image</h5>
                 </button>
-                <button className="no-border no-background">
+                <div>
                     me_photo.jpg
-                </button>
+                </div>
             </div>
         </div>
     )

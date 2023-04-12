@@ -29,7 +29,7 @@ const UserSection = ({
       <nav>
         <h5 className="text-white">Categories</h5>
         <ul className="list-group">
-            <Button active={active} href="/*" title="Home" icon="bi bi-house-door-fill text-white pe-3 fs-5"/>
+            <Button active={active} href="/" title="Home" icon="bi bi-house-door-fill text-white pe-3 fs-5"/>
             <Button active={active} href="/profile" title="Profile" icon="bi bi-person-fill-gear text-white pe-3 fs-5"/>
             <Button active={active} href="/search/women" title="Women" icon="bi bi-brightness-high-fill text-white pe-3 fs-5"/>
             <Button active={active} href="/search/men" title="Men" icon="bi bi-moon-fill text-white pe-3 fs-5"/>
