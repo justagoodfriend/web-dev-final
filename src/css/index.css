@@ -80,7 +80,7 @@
 }
 
 .custom-padding{
-    padding: 150px 50px 0 50px;
+    padding: 150px 0 0 50px;
 }
 
 .custom-padding-extra{
@@ -115,4 +115,9 @@
     gap: 20px;
     padding-left: 90px;
 
+}
+
+.button-position {
+    left: 700px;
+    top: -100px;
 }
