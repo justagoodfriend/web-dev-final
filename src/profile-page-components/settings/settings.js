@@ -36,7 +36,7 @@ const Settings = () => {
                 <button className="no-border no-background p-0 pt-3">
                     <h5>Upload new image</h5>
                 </button>
-                <div className="">
+                <div>
                     me_photo.jpg
                 </div>
             </div>
