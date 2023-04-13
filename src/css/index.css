@@ -1,0 +1,118 @@
+.bg-purple {
+    background-image: url("/public/images/purple-gradient.png");
+    min-height: 200%;
+    background-size: cover;
+    overflow: visible;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+}
+
+.profile-pic-larger {
+    width: 100px;
+    height: 100px;
+}
+
+.profile-pic-round-mini {
+    width: 50px;
+    height: 50px;
+}
+
+.profile-pic-larger2 {
+    width: 170px;
+    height: 170px;
+}
+
+.remove-underline {
+    text-decoration: none;
+}
+
+.search-padding {
+    top: 73px;
+    left: 8px;
+}
+
+
+.no-border {
+    border: none;
+}
+
+.no-background {
+    background-color: transparent;
+    border: none;
+}
+
+.small-font {
+    font-size: 12px;
+}
+
+.cards {
+    display: flex;
+    padding-top: 15px;
+    margin-left: 9px;
+    justify-content: center;
+}
+
+.card {
+    margin-right: 15px;
+    margin-left: 15px;
+    width: 25%;
+    height: 25%;
+}
+
+/*change color of the arrows*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%);
+}
+
+/*change color of the active button*/
+.list-group-item.active:not(.disabled) {
+    background-color: #a094ec;
+}
+
+.profile-background {
+    background-image: url("/public/images/roses.jpeg");
+    height: 200px;
+    background-repeat: no-repeat;
+}
+
+.custom-padding{
+    padding: 150px 0 0 50px;
+}
+
+.custom-padding-extra{
+    padding-top: 220px;
+    padding-left: 50px;
+}
+
+.custom-padding-left{
+    padding-left: 50px;
+}
+
+.custom-underline{
+    text-underline-offset: 8px;
+}
+
+.border-purple{
+    border: solid #a094ec;
+}
+
+.background-purple{
+    background-color: #a094ec;
+}
+
+.text-purple{
+    color: #a094ec;
+}
+    
+.result-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 20px;
+    padding-left: 90px;
+
+}
