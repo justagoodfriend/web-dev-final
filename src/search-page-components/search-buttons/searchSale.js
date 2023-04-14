@@ -1,11 +1,21 @@
-import React from "react";
-import ItemComponent from "../../components/item";
-import databaseSearch from "../databaseSearch.json";
+import React, {useEffect, useState} from "react";
 import UserSection from "../../components/userSection";
+import querySearch from "../shein-service";
+import JsonItemComponent from "../../components/jsonItem";
+import JsonSaleItemComponent from "../../components/jsonSaleItem";
 
 const SearchSale = () => {
 
-    let database = databaseSearch;
+    const [database, setDatabase] = useState([]);
+
+    useEffect(() => {
+        const getSaleData = async () => {
+            const saleResults = await querySearch("Sale&all?is_on_sale=1&");
+            setDatabase(saleResults.info.products);
+        };
+
+        getSaleData();
+    }, []);
 
     return(
         <div className="row">
@@ -16,7 +26,7 @@ const SearchSale = () => {
                 </div>
                 <div className="cards result-layout">
                     {database.map((item) => (
-                        <ItemComponent key={item.id} item={item} />
+                        <JsonSaleItemComponent item={item}/>
                     ))}
                 </div>
             </div>

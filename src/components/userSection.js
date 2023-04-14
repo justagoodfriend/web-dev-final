@@ -18,6 +18,8 @@ const UserSection = ({ active = "Home" }) => {
     currentUser();
   }, []);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <div className="col-3 pt-3 ps-4 bg-purple">
       <div className="row align">
@@ -72,7 +74,10 @@ const UserSection = ({ active = "Home" }) => {
           className="form-control bg-dark text-white no-border"
           placeholder="Search"
           aria-label="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
+      <button className="btn btn-light" onClick={() => navigate(`/search/${searchQuery}`)}>Go</button>
       </div>
       <nav>
         <h5 className="text-white">Categories</h5>

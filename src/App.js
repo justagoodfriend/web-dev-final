@@ -30,7 +30,7 @@ function App() {
               path="/profile/settings"
               element={<ProfilePage active="Settings" />}
             />
-            <Route path="/search/query" element={<SearchPage />} />
+            <Route path="/search/:query" element={<SearchPage />} />
             <Route path="/search/women" element={<SearchPage page="Women" />} />
             <Route path="/search/men" element={<SearchPage page="Men" />} />
             <Route path="/search/kids" element={<SearchPage page="Kids" />} />
