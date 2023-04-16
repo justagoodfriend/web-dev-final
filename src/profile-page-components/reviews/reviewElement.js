@@ -1,5 +1,7 @@
 import React from "react";
 import Stars from "./stars";
+import {useDispatch} from "react-redux";
+import {deleteReviewThunk, updateReviewThunk} from "../../ApiClient/reviewsThunk";
 
 const ReviewElement = ({
     review = {
@@ -9,6 +11,19 @@ const ReviewElement = ({
         "content": ""
     }
 }) => {
+    const dispatch = useDispatch();
+    const updateReviewHandler = (id, event) => {
+        const contentValue = event.target.content;
+        const ratingValue = event.target.rating;
+        const newReview = {
+            content: contentValue,
+            rating: ratingValue,
+        };
+        dispatch(updateReviewThunk(id, newReview));
+    }
+    const deleteReviewHandler = (id) => {
+        dispatch(deleteReviewThunk(id));
+    }
     return(
         <div className="my-3">
             <h5>{review.title}</h5>
@@ -28,8 +43,8 @@ const ReviewElement = ({
                         {review.content}
                     </div>
                     <div className="col-auto p-0">
-                        <i className="bi bi-pen pe-2"/>
-                        <i className="bi bi-x-lg"/>
+                        <i className="bi bi-pen pe-2" onClick={() => updateReviewHandler(review._id)}/>
+                        <i className="bi bi-x-lg" onClick={() => deleteReviewHandler(review._id)}/>
                     </div>
                 </div>
             </div>
