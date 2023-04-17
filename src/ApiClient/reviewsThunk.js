@@ -6,17 +6,21 @@ export const findReviewsThunk = createAsyncThunk(
         await reviewService.getReviews()
 )
 
-// export const findReviewThunk = createAsyncThunk(
-//     'reviews/getReviewById', async (rid) => {
-//         await reviewService.getReviewById(rid)
-//         return rid
-//     }
-// )
+export const findReviewsForItemThunk = createAsyncThunk(
+    'reviews/getReviewsForItem', async (iid) => {
+        // const reviews = await reviewService.getReviewsForItem(iid)
+        const reviews = await reviewService.getReviews();
+        if (iid !== "") {
+            return reviews.filter(review => review.itemId === iid);
+        }
+        return reviews;
+    }
+)
 
 export const deleteReviewThunk = createAsyncThunk(
     'reviews/deleteReview',
     async (rid) => {
-        await reviewService.deleteReview(rid)
+        await reviewService.deleteReview({rid})
         return rid
     }
 )
@@ -29,8 +33,7 @@ export const createReviewThunk = createAsyncThunk(
     }
 )
 
-export const updateReviewThunk =
-    createAsyncThunk(
+export const updateReviewThunk = createAsyncThunk(
         'reviews/updateReview',
         async (rid, review) =>
             await reviewService.updateReview({rid, review})

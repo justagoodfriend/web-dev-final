@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Stars from "./stars";
 import {useDispatch} from "react-redux";
 import {deleteReviewThunk, updateReviewThunk} from "../../ApiClient/reviewsThunk";
@@ -12,13 +12,14 @@ const ReviewElement = ({
     }
 }) => {
     const dispatch = useDispatch();
+    const [stars, setStars] = useState(<Stars key={review._id} rating={review.rating}/>);
     const updateReviewHandler = (id, event) => {
         const icon = event.target;
         const contentDiv = event.target.parentNode.parentNode.parentNode.children[1];
         const currentContent = contentDiv.textContent;
         if (icon.className === "bi bi-pen pe-2") {
-            const stars = contentDiv.firstElementChild;
-            const rating = document.createElement('textarea');
+            const starsExtra = contentDiv.firstElementChild;
+            const rating = document.createElement('input');
             const ratingLabel = document.createElement('label');
             rating.value = review.rating;
             rating.className = "form-control textarea-autosize";
@@ -27,7 +28,7 @@ const ReviewElement = ({
             ratingLabel.htmlFor = "ratingArea";
             ratingLabel.textContent = "Rating:";
             contentDiv.textContent = "";
-            contentDiv.insertAdjacentElement("beforeend", stars);
+            contentDiv.insertAdjacentElement("beforeend", starsExtra);
             contentDiv.insertAdjacentElement("beforeend", ratingLabel);
             contentDiv.insertAdjacentElement("beforeend", rating);
             icon.className = "bi bi-check-lg pe-2";
@@ -53,7 +54,7 @@ const ReviewElement = ({
             };
             dispatch(updateReviewThunk(id, newReview));
             contentDiv.textContent = "";
-            stars.rating = ratingValue;
+            setStars(<Stars key={review._id} rating={ratingValue}/>);
             contentDiv.insertAdjacentElement("beforeend", stars);
             contentDiv.insertAdjacentHTML("beforeend", contentValue);
             icon.className = "bi bi-pen pe-2";
@@ -62,6 +63,7 @@ const ReviewElement = ({
     const deleteReviewHandler = (id) => {
         dispatch(deleteReviewThunk(id));
     }
+
     return(
         <div className="my-3">
             <h5>{review.title}</h5>
@@ -77,15 +79,16 @@ const ReviewElement = ({
                         </div>
                     </div>
                     <div className="col-9 pe-0">
-                        <Stars key={review._id} rating={review.rating}/>
+                        {stars}
                         {review.content}
                     </div>
                     <div className="col-auto p-0">
                         <button onClick={(event) => updateReviewHandler(review._id, event)}>
                             <i className="bi bi-pen pe-2"/>
                         </button>
-
-                        <i className="bi bi-x-lg" onClick={() => deleteReviewHandler(review._id)}/>
+                        <button onClick={() => deleteReviewHandler(review._id)}>
+                            <i className="bi bi-x-lg" />
+                        </button>
                     </div>
                 </div>
             </div>

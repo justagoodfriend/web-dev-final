@@ -21,10 +21,11 @@ export const getReviews = async () => {
 
 }
 
-// export const getReviewByBuyerId = async ({ rid }) => {
-//     const response = await api.get(`${URL}/${rid}`);
+// export const getReviewsForItem = async ({ iid }) => {
+//     const response = await api.get(`${URL}/${iid}`);
 //     return response.data;
 // }
+
 //
 // export const getReviewByItemId = async ({ rid }) => {
 //     const response = await api.get(`${URL}/${rid}`);
@@ -39,6 +40,7 @@ export const updateReview = async ({ rid, review }) => {
 }
 
 export const deleteReview = async ({ rid }) => {
-    const response = await api.delete(`${URL}/delete${rid}`);
+    console.log("rid again", rid);
+    const response = await api.delete(`${URL}/delete/${rid}`);
     return response.data;
 }

@@ -1,9 +1,11 @@
 import ReviewElement from "./reviewElement";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {findReviewsThunk} from "../../ApiClient/reviewsThunk";
+import {findReviewsForItemThunk, findReviewsThunk} from "../../ApiClient/reviewsThunk";
 
-const Reviews = () => {
+const Reviews = ({
+    itemId=""
+                 }) => {
     const {reviews, loading} = useSelector(
         state => state.reviews)
     const dispatch = useDispatch();

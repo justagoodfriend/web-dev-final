@@ -13,7 +13,7 @@ const userController = (app) => {
     //     res.json(reviews);
     // }
     //
-    // const getReviewByItemId = async (req, res) => {
+    // const getReviewsByItemId = async (req, res) => {
     //     console.log("getting item reviews");
     //     const reviews = await dao.findReviewsByItemId(req.params.iid);
     //     res.json(reviews);
@@ -26,7 +26,7 @@ const userController = (app) => {
     }
 
     const updateReview = async (req, res) => {
-        console.log("updating review");
+        console.log("updating review", req.params.rid);
         const status = await dao.updateReview(req.params.rid, req.body);
         res.json(status);
     }
@@ -38,7 +38,7 @@ const userController = (app) => {
     }
 
     app.get("/api/reviews", getReviews);
-    // app.get("/api/reviews/:bid", getReviewByBuyerId);
+    // app.get("/api/reviews/:iid", getReviewsByItemId);
     app.post("/api/reviews/create", createReview);
     app.put("/api/reviews/update/:rid", updateReview);
     app.delete("/api/reviews/delete/:rid", deleteReview);

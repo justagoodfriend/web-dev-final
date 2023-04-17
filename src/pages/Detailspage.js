@@ -1,14 +1,12 @@
 import React from "react";
-import WHITETOP from "../images/white-button-up.jpeg";
 import UserSection from "../components/userSection";
 import database from "../databaseDetails.json";
-import Review, { createStars } from "../components/review";
-
+// import Review, { createStars } from "../components/review";
+import Reviews from "../profile-page-components/reviews/reviews.js";
 const DetailsPage = () => {
   const item = database[0];
   //thinking whenever the user favorites an icon the heart fills similar to what we had to do with the assignment
   //const [favorite, setFavorite] = useState(item.favorited);
-  const imageSource = WHITETOP;
   return (
     <div className="row">
       <UserSection />
@@ -16,7 +14,7 @@ const DetailsPage = () => {
         <div className="flex pt-4">
           <div className="flex-col flex-full items-center">
             <img
-              src={imageSource}
+              src={`/images/white-button-up.jpeg`}
               className="details-image-width rounded-image"
               alt="display"
             />
@@ -53,12 +51,13 @@ const DetailsPage = () => {
         </div>
 
         <div className="flex-col gap-between px-4">
-          <div className="flex gap-between">3 Reviews {createStars(4)}</div>
-          {Array(3)
-            .fill(0)
-            .map((element) => (
-              <Review />
-            ))}
+          <Reviews/>
+          {/*<div className="flex gap-between">3 Reviews {createStars(4)}</div>*/}
+          {/*{Array(3)*/}
+          {/*  .fill(0)*/}
+          {/*  .map((element) => (*/}
+          {/*    <Review />*/}
+          {/*  ))}*/}
         </div>
       </div>
     </div>

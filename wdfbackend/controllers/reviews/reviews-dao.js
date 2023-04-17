@@ -6,7 +6,9 @@ export const findAllReviews = async () => {
 };
 
 // export const findReviewsByItemId = async (itemId) => {
-//     const reviews = await reviewsModel.findById({ itemId });
+//     const reviews = findAllReviews().then(reviews => {
+//         return reviews.
+//     });
 //     return reviews;
 // };
 //
@@ -22,6 +24,7 @@ export const createReview = async (review) => {
 };
 
 export const updateReview = (rid, review) => {
+    console.log("test", review);
     const reviews = reviewsModel.updateOne({ _id: rid }, review);
     return reviews;
 }

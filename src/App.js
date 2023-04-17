@@ -1,6 +1,6 @@
 import "./App.css";
 import HomePage from "./pages/Homepage";
-import sampledb from "./databaseWishlist.json";
+// import sampledb from "./databaseWishlist.json";
 import DetailsPage from "./pages/Detailspage";
 import ProfilePage from "./pages/Profilepage";
 import SearchPage from "./pages/Searchpage";
@@ -49,6 +49,10 @@ function App() {
             <Route
               path="/profile/settings"
               element={<ProfilePage active="Settings" />}
+            />
+            <Route
+              path="/details"
+              element={<DetailsPage/>}
             />
           </Routes>
         </BrowserRouter>
