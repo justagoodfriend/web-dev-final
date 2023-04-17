@@ -5,9 +5,11 @@
 /.pnp
 .pnp.js
 .idea
-
+.env
 # testing
 /coverage
+
+/wdfbackend/node_modules
 
 # production
 /build
