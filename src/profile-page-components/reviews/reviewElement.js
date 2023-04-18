@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import Stars from "./stars";
+import {useDispatch} from "react-redux";
+import {deleteReviewThunk, updateReviewThunk} from "../../ApiClient/reviewsThunk";
 
 const ReviewElement = ({
     review = {
@@ -9,6 +11,59 @@ const ReviewElement = ({
         "content": ""
     }
 }) => {
+    const dispatch = useDispatch();
+    const [stars, setStars] = useState(<Stars key={review._id} rating={review.rating}/>);
+    const updateReviewHandler = (id, event) => {
+        const icon = event.target;
+        const contentDiv = event.target.parentNode.parentNode.parentNode.children[1];
+        const currentContent = contentDiv.textContent;
+        if (icon.className === "bi bi-pen pe-2") {
+            const starsExtra = contentDiv.firstElementChild;
+            const rating = document.createElement('input');
+            const ratingLabel = document.createElement('label');
+            rating.value = review.rating;
+            rating.className = "form-control textarea-autosize";
+            rating.name = "ratingArea";
+            rating.rows = 1;
+            ratingLabel.htmlFor = "ratingArea";
+            ratingLabel.textContent = "Rating:";
+            contentDiv.textContent = "";
+            contentDiv.insertAdjacentElement("beforeend", starsExtra);
+            contentDiv.insertAdjacentElement("beforeend", ratingLabel);
+            contentDiv.insertAdjacentElement("beforeend", rating);
+            icon.className = "bi bi-check-lg pe-2";
+            const input = document.createElement('textarea');
+            const inputLabel = document.createElement('label');
+            input.value = currentContent;
+            input.className = "form-control textarea-autosize";
+            input.name = "contentArea";
+            inputLabel.htmlFor = "contentArea";
+            inputLabel.textContent = "Review:";
+            contentDiv.insertAdjacentElement("beforeend", inputLabel);
+            contentDiv.insertAdjacentElement("beforeend", input);
+        }
+        else if (icon.className === "bi bi-check-lg pe-2") {
+            let stars = contentDiv.firstElementChild;
+            const input = contentDiv.children[4];
+            const contentValue = input.value;
+            const rating = contentDiv.children[2];
+            const ratingValue = rating.value;
+            const newReview = {
+                content: contentValue,
+                rating: ratingValue,
+            };
+            dispatch(updateReviewThunk(id, newReview));
+            contentDiv.textContent = "";
+            setStars(<Stars key={review._id} rating={ratingValue}/>);
+            contentDiv.insertAdjacentElement("beforeend", stars);
+            contentDiv.insertAdjacentHTML("beforeend", contentValue);
+            icon.className = "bi bi-pen pe-2";
+        }
+    }
+    const deleteReviewHandler = (id) => {
+        dispatch(deleteReviewThunk(id));
+    }
+
     return(
         <div className="my-3">
             <h5>{review.title}</h5>
@@ -24,12 +79,16 @@ const ReviewElement = ({
                         </div>
                     </div>
                     <div className="col-9 pe-0">
-                        <Stars key={review._id} rating={review.rating}/>
+                        {stars}
                         {review.content}
                     </div>
                     <div className="col-auto p-0">
-                        <i className="bi bi-pen pe-2"/>
-                        <i className="bi bi-x-lg"/>
+                        <button onClick={(event) => updateReviewHandler(review._id, event)}>
+                            <i className="bi bi-pen pe-2"/>
+                        </button>
+                        <button onClick={() => deleteReviewHandler(review._id)}>
+                            <i className="bi bi-x-lg" />
+                        </button>
                     </div>
                 </div>
             </div>

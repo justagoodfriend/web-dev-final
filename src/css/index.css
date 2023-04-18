@@ -70,13 +70,91 @@
 
 /*change color of the active button*/
 .list-group-item.active:not(.disabled) {
-    background-color: #a094ec;
+  background-color: #a094ec;
 }
 
 .profile-background {
     background-image: url("/public/images/roses.jpeg");
     height: 200px;
     background-repeat: no-repeat;
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.flex {
+  display: flex;
+}
+
+.search-image {
+  width: 25%;
+  height: 25%;
+  border-radius: 25px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-full {
+  width: 100%;
+}
+
+.search-bold-font {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.gap-between {
+  gap: 1rem;
+}
+
+.details-image-width {
+  height: 100%;
+  width: 75%;
+}
+
+.details-margin {
+  margin-right: 20px;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.xl-font-size {
+  font-size: x-large;
+}
+
+.rounded-image {
+  border-radius: 10px;
+}
+
+/* fix this last */
+.drop-down-button {
+  font-size: large;
+  border-radius: 5px;
+  background-color: #d3d3d3;
+}
+
+.grey-background {
+  background-color: #d3d3d3;
+}
+
+.heart-size {
+  font-size: 26px;
+}
+
+.add-to-cart-button {
+  color: white;
+  background-color: #cbc3e3;
+  border-color: #cbc3e3;
 }
 
 .custom-padding{
@@ -116,3 +194,4 @@
     padding-left: 90px;
 
 }
+

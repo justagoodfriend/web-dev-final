@@ -1,5 +1,3 @@
-
-
 const Stars = ({rating= 0}) => {
     const starsCurrent = [0,0,0,0,0];
     let index = 0;
