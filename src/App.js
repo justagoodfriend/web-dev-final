@@ -51,7 +51,7 @@ function App() {
               element={<ProfilePage active="Settings" />}
             />
             <Route
-              path="/details"
+              path="/details/:iid"
               element={<DetailsPage/>}
             />
           </Routes>

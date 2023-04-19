@@ -1,9 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import UserSection from "../components/userSection";
 import database from "../databaseDetails.json";
 // import Review, { createStars } from "../components/review";
 import Reviews from "../profile-page-components/reviews/reviews.js";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router";
+import {findItemByIdThunk} from "../ApiClient/itemThunk.js";
 const DetailsPage = () => {
+  // const itemId = useParams();
+  // const {item, loading} = useSelector(
+  //     state => state.item)
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(findItemByIdThunk(itemId))}, [dispatch])
   const item = database[0];
   //thinking whenever the user favorites an icon the heart fills similar to what we had to do with the assignment
   //const [favorite, setFavorite] = useState(item.favorited);
@@ -14,7 +23,7 @@ const DetailsPage = () => {
         <div className="flex pt-4">
           <div className="flex-col flex-full items-center">
             <img
-              src={`/images/white-button-up.jpeg`}
+              src={`/images/${item.image}`}
               className="details-image-width rounded-image"
               alt="display"
             />

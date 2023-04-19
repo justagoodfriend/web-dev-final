@@ -23,14 +23,18 @@ const CarouselItems = (props) => {
           <div className="carousel-item active">
             <div className="cards">
               {activeItems.map((clothingitem) => (
-                  <ItemComponent key={clothingitem.id} item={clothingitem} />
+                  <a href={"/details/" + clothingitem.id}>
+                    <ItemComponent key={clothingitem.id} item={clothingitem} />
+                  </a>
               ))}
             </div>
           </div>
           <div className="carousel-item">
             <div className="cards">
               {inactiveItems1.map((clothingitem) => (
-                  <ItemComponent key={clothingitem.id} item={clothingitem} />
+                  <a href={"/details/" + clothingitem.id}>
+                    <ItemComponent key={clothingitem.id} item={clothingitem} />
+                  </a>
               ))}
             </div>
           </div>

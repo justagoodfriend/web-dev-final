@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import userController from "./controllers/users/usersController.js";
 import reviewsController from "./controllers/reviews/reviewsController.js";
+import itemController from "./controllers/item/itemController.js";
 dotenv.config({ path: "../.env" });
 const db_string = process.env.CONNECTION_STRING;
 mongoose.connect(db_string);
@@ -27,6 +28,7 @@ app.use(
 app.use(express.json());
 userController(app);
 reviewsController(app);
+itemController(app);
 
 app.listen(PORT, () =>
   console.log(`Local Server is listening on port ${PORT}`)
