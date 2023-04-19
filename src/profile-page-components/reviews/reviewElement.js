@@ -49,6 +49,7 @@ const ReviewElement = ({
             const rating = contentDiv.children[2];
             const ratingValue = rating.value;
             const newReview = {
+                ...review,
                 content: contentValue,
                 rating: ratingValue,
             };
