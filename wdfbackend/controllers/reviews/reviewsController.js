@@ -26,7 +26,7 @@ const userController = (app) => {
     }
 
     const updateReview = async (req, res) => {
-        console.log("updating review", req.params.rid);
+        console.log("updating review", req.body);
         const status = await dao.updateReview(req.params.rid, req.body);
         res.json(status);
     }

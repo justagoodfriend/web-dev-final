@@ -24,8 +24,8 @@ export const createReview = async (review) => {
 };
 
 export const updateReview = (rid, review) => {
-    console.log("test", review);
-    const reviews = reviewsModel.updateOne({ _id: rid }, review);
+    console.log("update", review);
+    const reviews = reviewsModel.updateOne({ _id: rid }, {$set: review});
     return reviews;
 }
 

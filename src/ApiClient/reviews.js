@@ -5,9 +5,10 @@ const api = axios.create({
     baseURL: "http://localhost:8080/api/reviews",
 });
 
-export const createReview = async ({ buyerId, content, rating }) => {
+export const createReview = async ({ buyerId, itemId, content, rating }) => {
     const response = await api.post(`${URL}/create`, {
         buyerId,
+        itemId,
         content,
         rating,
     });
@@ -33,6 +34,7 @@ export const getReviews = async () => {
 // }
 
 export const updateReview = async ({ rid, review }) => {
+    console.log("test", review);
     const response = await api.put(`${URL}/update/${rid}`, {
         review
     })
