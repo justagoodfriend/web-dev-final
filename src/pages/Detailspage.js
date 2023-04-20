@@ -51,7 +51,7 @@ const DetailsPage = () => {
         </div>
 
         <div className="flex-col gap-between px-4">
-          <Reviews/>
+          <Reviews />
           {/*<div className="flex gap-between">3 Reviews {createStars(4)}</div>*/}
           {/*{Array(3)*/}
           {/*  .fill(0)*/}

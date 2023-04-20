@@ -83,7 +83,9 @@ export default function SignInModal() {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => {}}></Button>
+            <Button colorScheme="blue" mr={3} onClick={() => setIsOpen(false)}>
+              Cancel
+            </Button>
             <Button variant="ghost" onClick={() => login()}>
               Submit
             </Button>

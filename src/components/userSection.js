@@ -21,7 +21,7 @@ const UserSection = ({ active = "Home" }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="col-3 pt-3 ps-4 bg-purple">
+    <div className="col-3 pt-3 ps-4 bg-purple" style={{ minHeight: "100vh" }}>
       <div className="row align">
         <div className="col-auto">
           <img
@@ -40,6 +40,7 @@ const UserSection = ({ active = "Home" }) => {
                   userService.logout();
                   navigate("/");
                 }}
+                id="logoutbutton"
               >
                 {" "}
                 Log Out{" "}
@@ -76,8 +77,18 @@ const UserSection = ({ active = "Home" }) => {
           aria-label="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              navigate(`/search/${searchQuery}`);
+            }
+          }}
         />
-      <button className="btn btn-light" onClick={() => navigate(`/search/${searchQuery}`)}>Go</button>
+        <button
+          className="btn btn-light"
+          onClick={() => navigate(`/search/${searchQuery}`)}
+        >
+          Go
+        </button>
       </div>
       <nav>
         <h5 className="text-white">Categories</h5>
