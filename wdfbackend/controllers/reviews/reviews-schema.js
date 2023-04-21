@@ -7,6 +7,6 @@ const reviewsSchema = mongoose.Schema(
         content: String,
         rating: { type: Number, default: 0},
     },
-    { collection: "Reviews" }
+    { collection: 'review' }
 );
 export default reviewsSchema;

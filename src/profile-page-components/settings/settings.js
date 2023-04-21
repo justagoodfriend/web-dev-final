@@ -10,7 +10,7 @@ const Settings = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.users);
+  const currentUser = useSelector((state) => state.users.currentUser);
   // const currentUser = async () => {
   //const user1 = await userService.profile();
   //const { payload } = await dispatch(profileThunk());
@@ -33,7 +33,7 @@ const Settings = () => {
               </div>
               <input
                 className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-75"
-                defaultValue={`${currentUser.handle}`}
+                defaultValue={`${currentUser.email}`}
               />
             </label>
             <label>
