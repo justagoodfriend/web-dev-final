@@ -9,7 +9,7 @@ const SearchMen = () => {
 
     useEffect(() => {
         const getMenData = async () => {
-            const menResults = await querySearch("Men");
+            const menResults = await querySearch("Men", "18");
             setDatabase(menResults.info.products);
         };
 

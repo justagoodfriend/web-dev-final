@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import * as userService from "../../ApiClient/users.js";
+import * as userService from "../../ApiClient/services/users.js";
 import { useNavigate } from "react-router";
-import { profileThunk } from "../../ApiClient/authThunks.js";
+import { profileThunk } from "../../ApiClient/thunks/authThunks.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const Settings = () => {

@@ -5,8 +5,23 @@ export const findAllItems = async () => {
     return items;
 };
 
-export const findReviewsBySellerId = async (sellerId) => {
-    const item = await itemModel.findById({ sellerId });
+export const findItemByItemId = async (itemId) => {
+    const item = await itemModel.findById({ itemId });
     return item;
 };
+
+export const createItem = async (item) => {
+    const newItem = await itemModel.create(item);
+    return newItem;
+}
+
+export const updateItem = async (iid, item) => {
+    const items = await itemModel.updateOne({ _id: iid }, {$set: item});
+    return items;
+}
+
+export const deleteItem = async (iid) => {
+    const items = await itemModel.deleteOne({ _id: iid });
+    return items;
+}
 

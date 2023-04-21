@@ -10,7 +10,7 @@ const SearchWomen = () => {
 
     useEffect(() => {
         const getWomenData = async () => {
-            const womenResults = await querySearch("Women");
+            const womenResults = await querySearch("Women", "18");
             setDatabase(womenResults.info.products);
         };
 

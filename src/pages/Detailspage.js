@@ -1,21 +1,62 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import UserSection from "../components/userSection";
-import database from "../databaseDetails.json";
-// import Review, { createStars } from "../components/review";
-import Reviews from "../profile-page-components/reviews/reviews.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router";
-import {findItemByIdThunk} from "../ApiClient/itemThunk.js";
+import querySearchByGoodsID from "../search-page-components/shien-queries-goodsId";
+import {createReviewThunk} from "../ApiClient/thunks/reviewsThunk";
+import ReviewsItem from "../profile-page-components/reviews/reviewsItem";
+import {createFavoriteThunk} from "../ApiClient/thunks/favoritesThunk";
 const DetailsPage = () => {
-  // const itemId = useParams();
-  // const {item, loading} = useSelector(
-  //     state => state.item)
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(findItemByIdThunk(itemId))}, [dispatch])
-  const item = database[0];
+  const goodsId = useParams().iid;
+  const [itemImg, setItemImg] = useState("");
+  const [itemName, setItemName] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
+  const [itemColors, setItemColors] = useState([]);
+  const sizes = ["Small", "Medium", "Large"];
+  const [review, setReview] = useState("");
+  const [rating, setRating] = useState("");
+  const {currentUser} = useSelector((state) => state.users);
   //thinking whenever the user favorites an icon the heart fills similar to what we had to do with the assignment
-  //const [favorite, setFavorite] = useState(item.favorited);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getData = async () => {
+      const results = await querySearchByGoodsID(goodsId);
+      setItemImg(results.info.goods_img);
+      setItemName(results.info.goods_name);
+      setItemPrice(results.info.retail_price.amountWithSymbol);
+      const moreDetails = results.info.mainSaleAttribute.info;
+      let colors = [];
+      moreDetails.forEach(detail => {
+        colors.push(detail.attr_value);
+      })
+      setItemColors(colors);
+    };
+
+    getData();
+  }, []);
+
+  const updateLikesHandler = () => {
+    if (currentUser != null) {
+      // dispatch(createFavoriteThunk(currentUser._id, goodsId));
+    } else {
+      alert("Must be logged in to favorite an item");
+    }
+  }
+
+  const createReviewHandler = () => {
+    if (currentUser != null) {
+      const reviewFull = {
+        itemId: goodsId,
+        content: review,
+        rating: parseInt(rating)
+      }
+      dispatch(createReviewThunk(reviewFull))
+    } else {
+      alert("Must be logged in to post a review");
+    }
+  }
+
   return (
     <div className="row">
       <UserSection />
@@ -23,7 +64,7 @@ const DetailsPage = () => {
         <div className="flex pt-4">
           <div className="flex-col flex-full items-center">
             <img
-              src={`/images/${item.image}`}
+              src={`${itemImg}`}
               className="details-image-width rounded-image"
               alt="display"
             />
@@ -31,28 +72,49 @@ const DetailsPage = () => {
 
           <div className="flex flex-full space-between">
             <div className="flex-col gap-between details-margin">
-              <h1>{item.title}</h1>
-              <p>{item.description}</p>
+              <h1>{itemName}</h1>
+              <h2>{itemPrice}</h2>
+              {/*<p>{item.description}</p>*/}
+              <select className="drop-down-button px-4 py-1">
+                <option disabled defaultValue="Select color" hidden>
+                  {" "}
+                  Select color
+                </option>
+                {itemColors.map((element, index) => (
+                  <option value={index}>{element}</option>
+                ))}
+              </select>
               <select className="drop-down-button px-4 py-1">
                 <option disabled selected hidden>
                   {" "}
                   Select size
                 </option>
-                {item["availableColors"].map((element, index) => (
+                {sizes.map((element, index) => (
                   <option value={index}>{element}</option>
                 ))}
               </select>
-              <select className="drop-down-button px-4 py-1">
-                <option disabled selected hidden>
-                  {" "}
-                  Select color
-                </option>
-                {item["availableSizes"].map((element, index) => (
-                  <option value={index}>{element}</option>
-                ))}
-              </select>
+              <button className="rounded-pill xl-font-size py-1 add-to-cart-button"
+              onClick={() => updateLikesHandler()}>
+                <i className="bi bi-heart"></i> Favorite
+              </button>
               <button className="rounded-pill xl-font-size py-1 add-to-cart-button">
                 <i className="bi bi-cart"></i> Add to Card
+              </button>
+              <label>
+                <div className="pb-1">
+                  <b>Review</b>
+                </div>
+                <textarea className="form-control" onChange={(e) => setReview(e.target.value)}/>
+              </label>
+              <label>
+                <div className="pb-1">
+                  <b>Rating</b>
+                </div>
+                <input type="text" className="form-control" onChange={(e) => setRating(e.target.value)}/>
+              </label>
+              <button className="rounded-pill xl-font-size py-1 add-to-cart-button"
+                      onClick={() => createReviewHandler()}>
+                <i className="bi bi-pencil-square"></i> Post Review
               </button>
             </div>
           </div>
@@ -60,13 +122,7 @@ const DetailsPage = () => {
         </div>
 
         <div className="flex-col gap-between px-4">
-          <Reviews/>
-          {/*<div className="flex gap-between">3 Reviews {createStars(4)}</div>*/}
-          {/*{Array(3)*/}
-          {/*  .fill(0)*/}
-          {/*  .map((element) => (*/}
-          {/*    <Review />*/}
-          {/*  ))}*/}
+          <ReviewsItem itemId={goodsId}/>
         </div>
       </div>
     </div>

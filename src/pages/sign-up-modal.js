@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 //rename this later
-import * as userService from "../ApiClient/users";
+import * as userService from "../ApiClient/services/users";
 
 export default function SignUpModal() {
   const profile = useSelector((state) => state.profile);

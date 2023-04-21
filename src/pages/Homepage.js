@@ -10,8 +10,8 @@ const HomePage = () => {
         <div className="row">
             <UserSection active="Home" />
             <div className="col-9">
-                <CarouselItems title="Recommended" id="R1" />
-                <CarouselItems title="Wishlist" id="W1" />
+                <CarouselItems title="Recommended" id="R1" queryTitle="Women"/>
+                {/*<CarouselItems title="Wishlist" id="W1" />*/}
                 <Outlet />
             </div>
         </div>

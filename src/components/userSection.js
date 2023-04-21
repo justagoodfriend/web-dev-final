@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "./button";
-import * as userService from "../ApiClient/users";
+import * as userService from "../ApiClient/services/users";
 import { useNavigate } from "react-router";
 
 const UserSection = ({ active = "Home" }) => {

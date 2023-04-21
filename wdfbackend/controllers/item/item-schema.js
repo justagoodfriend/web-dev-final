@@ -1,25 +1,12 @@
 import mongoose from "mongoose";
 
-const AvailableSizes = {
-    SMALL: "Small",
-    MEDIUM: "Medium",
-    LARGE: "Large"
-}
-
-const Gender = {
-    MEN: "Men",
-    WOMEN: "Women",
-    KIDS: "Kids"
-}
-
 const itemSchema = mongoose.Schema(
     {
-        sellerId: { type: Number, required: true },
+        itemId: { type: Number, required: true },
         title: String,
-        price: Number,
+        price: String,
         description: String,
-        availableSizes: [AvailableSizes],
-        gender: Gender,
+        availableColors: [String],
         image: String,
     },
     { collection: "Items" }

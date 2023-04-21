@@ -10,7 +10,7 @@ const SearchSale = () => {
 
     useEffect(() => {
         const getSaleData = async () => {
-            const saleResults = await querySearch("Sale&all?is_on_sale=1&");
+            const saleResults = await querySearch("Sale&all?is_on_sale=1&", "18");
             setDatabase(saleResults.info.products);
         };
 

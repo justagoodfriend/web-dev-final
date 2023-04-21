@@ -3,21 +3,25 @@ const userController = (app) => {
 
     const createReview = async (req, res) => {
         console.log("creating review");
-        const newReview = await dao.createReview(req.body);
+        const review = req.body.review
+        const currentUser = req.session['currentUser'];
+        review.author = currentUser._id;
+        console.log(review)
+        const newReview = await dao.createReview(review);
         res.json(newReview);
     }
 
-    // const getReviewByBuyerId = async (req, res) => {
-    //     console.log("getting buyer reviews");
-    //     const reviews = await dao.findReviewsByBuyerId(req.params.bid);
-    //     res.json(reviews);
-    // }
-    //
-    // const getReviewsByItemId = async (req, res) => {
-    //     console.log("getting item reviews");
-    //     const reviews = await dao.findReviewsByItemId(req.params.iid);
-    //     res.json(reviews);
-    // }
+    const getReviewsByUserId = async (req, res) => {
+        console.log("getting user reviews for", req.params.uid);
+        const reviews = await dao.findReviewsByUserId(req.params.uid);
+        res.json(reviews);
+    }
+
+    const getReviewsByItemId = async (req, res) => {
+        console.log("getting item reviews for", req.params.iid);
+        const reviews = await dao.findReviewsByItemId(req.params.iid);
+        res.json(reviews);
+    }
 
     const getReviews = async (req, res) => {
         console.log("getting reviews");
@@ -38,7 +42,8 @@ const userController = (app) => {
     }
 
     app.get("/api/reviews", getReviews);
-    // app.get("/api/reviews/:iid", getReviewsByItemId);
+    app.get("/api/reviews/item/:iid", getReviewsByItemId);
+    app.get("/api/reviews/user/:uid", getReviewsByUserId);
     app.post("/api/reviews/create", createReview);
     app.put("/api/reviews/update/:rid", updateReview);
     app.delete("/api/reviews/delete/:rid", deleteReview);

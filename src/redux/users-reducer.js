@@ -5,7 +5,7 @@ import {
   logoutThunk,
   registerThunk,
   profileThunk,
-} from "../ApiClient/authThunks";
+} from "../ApiClient/thunks/authThunks";
 const initialState = {
   currentUser: null,
 };

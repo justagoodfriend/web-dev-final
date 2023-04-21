@@ -41,15 +41,6 @@ function App() {
             <Route path="/search/men" element={<SearchPage page="Men" />} />
             <Route path="/search/kids" element={<SearchPage page="Kids" />} />
             <Route path="/search/sale" element={<SearchPage page="Sale" />} />
-            <Route path="/profile" element={<ProfilePage active="Reviews" />} />
-            <Route
-              path="/profile/wishlist"
-              element={<ProfilePage active="Wishlist" />}
-            />
-            <Route
-              path="/profile/settings"
-              element={<ProfilePage active="Settings" />}
-            />
             <Route
               path="/details/:iid"
               element={<DetailsPage/>}

@@ -1,20 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 //a sample database that takes jsons, which includes the names of the clothing, price, and the image:
 import databaseRecommended from "../databaseRecommended.json";
 import databaseWishlist from "../databaseWishlist.json";
 import ItemComponent from "./item";
+import JsonItemComponent from "./jsonItem";
+import querySearch from "../search-page-components/shein-service";
+import {Link} from "react-router-dom";
+// import {Link} from "@chakra-ui/react";
 
 //props -> title => name of the heading for the component, id => unique id for the carousel items
 const CarouselItems = (props) => {
-  console.log(props.id);
-  let database;
-  if (props.id.toString().includes("R")) {
-    database = databaseRecommended;
-  } else if (props.id.toString().includes("W")) {
-    database = databaseWishlist;
-  }
-  let activeItems = database.slice(0,3);
-  let inactiveItems1 = database.slice(3,6);
+  const [activeItems, setActiveItems] = useState([]);
+  const [inactiveItems, setInactiveItems] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const results = await querySearch(props.queryTitle, "9");
+      const allResults = results.info.products;
+      if (allResults.length > 3) {
+        setActiveItems(allResults.splice(0,3));
+        setInactiveItems(allResults.splice(3, allResults.length));
+      } else {
+        setActiveItems(allResults);
+        setInactiveItems(allResults);
+      }
+    };
+    getData();
+  }, []);
+
+
   return (
     <div>
       <h2 className="pt-3 ps-4"> {props.title}</h2>
@@ -23,18 +37,14 @@ const CarouselItems = (props) => {
           <div className="carousel-item active">
             <div className="cards">
               {activeItems.map((clothingitem) => (
-                  <a href={"/details/" + clothingitem.id}>
-                    <ItemComponent key={clothingitem.id} item={clothingitem} />
-                  </a>
+                  <JsonItemComponent key={clothingitem.goods_id} item={clothingitem}/>
               ))}
             </div>
           </div>
           <div className="carousel-item">
             <div className="cards">
-              {inactiveItems1.map((clothingitem) => (
-                  <a href={"/details/" + clothingitem.id}>
-                    <ItemComponent key={clothingitem.id} item={clothingitem} />
-                  </a>
+              {inactiveItems.map((clothingitem) => (
+                  <JsonItemComponent key={clothingitem.goods_id} item={clothingitem}/>
               ))}
             </div>
           </div>

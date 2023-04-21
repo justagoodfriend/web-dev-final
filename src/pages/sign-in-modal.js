@@ -15,8 +15,8 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import * as userService from "../ApiClient/users.js";
-import { loginThunk } from "../ApiClient/authThunks.js";
+import * as userService from "../ApiClient/services/users.js";
+import { loginThunk } from "../ApiClient/thunks/authThunks.js";
 
 export default function SignInModal() {
   const profile = useSelector((state) => state.profile);

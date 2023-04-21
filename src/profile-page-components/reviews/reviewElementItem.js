@@ -1,18 +1,29 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Stars from "./stars";
 import {useDispatch} from "react-redux";
-import {deleteReviewThunk, updateReviewThunk} from "../../ApiClient/reviewsThunk";
+import {deleteReviewThunk, updateReviewThunk} from "../../ApiClient/thunks/reviewsThunk";
+import querySearchByGoodsID from "../../search-page-components/shien-queries-goodsId";
+import JsonItemComponent from "../../components/jsonItem";
+import {Link} from "react-router-dom";
 
-const ReviewElement = ({
-    review = {
-        "_id": 123,
-        "title": "",
-        "rating": 0,
-        "content": ""
-    }
-}) => {
+const ReviewElementItem = ({
+          review = {
+              "author": "",
+              "_id": 123,
+              "review": {
+                  "content": "",
+                  "itemId": "",
+                  "userId": "",
+                  "rating": 0
+              }
+          }
+      }) => {
     const dispatch = useDispatch();
     const [stars, setStars] = useState(<Stars key={review._id} rating={review.rating}/>);
+
+    // get item info from item id
+
+    // console.log(review);
     const updateReviewHandler = (id, event) => {
         const icon = event.target;
         const contentDiv = event.target.parentNode.parentNode.parentNode.children[1];
@@ -49,7 +60,6 @@ const ReviewElement = ({
             const rating = contentDiv.children[2];
             const ratingValue = rating.value;
             const newReview = {
-                ...review,
                 content: contentValue,
                 rating: ratingValue,
             };
@@ -67,7 +77,6 @@ const ReviewElement = ({
 
     return(
         <div className="my-3">
-            <h5>{review.title}</h5>
             <div className="rounded-4 bg-secondary bg-opacity-25 p-4 me-5">
                 <div className="row d-flex flex-nowrap">
                     <div className="col-2 d-flex align-items-center">
@@ -97,4 +106,4 @@ const ReviewElement = ({
     )
 }
 
-export default ReviewElement;
+export default ReviewElementItem;

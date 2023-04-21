@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as reviewService from "./reviews.js";
+import * as reviewService from "../services/reviews.js";
 
 export const findReviewsThunk = createAsyncThunk(
     'reviews/getReviews', async () =>
@@ -8,11 +8,16 @@ export const findReviewsThunk = createAsyncThunk(
 
 export const findReviewsForItemThunk = createAsyncThunk(
     'reviews/getReviewsForItem', async (iid) => {
-        // const reviews = await reviewService.getReviewsForItem(iid)
-        const reviews = await reviewService.getReviews();
-        if (iid !== "") {
-            return reviews.filter(review => review.itemId === iid);
-        }
+        const reviews = await reviewService.getReviewsForItemId(iid);
+        return reviews;
+    }
+)
+
+export const findReviewsForUserThunk = createAsyncThunk(
+    'reviews/getReviewsForUser', async (uid) => {
+        console.log("got here?");
+        const reviews = await reviewService.getReviewsForUserId(uid);
+        console.log("got", reviews);
         return reviews;
     }
 )
@@ -20,7 +25,7 @@ export const findReviewsForItemThunk = createAsyncThunk(
 export const deleteReviewThunk = createAsyncThunk(
     'reviews/deleteReview',
     async (rid) => {
-        await reviewService.deleteReview({rid})
+        await reviewService.deleteReview(rid)
         return rid
     }
 )
@@ -35,6 +40,8 @@ export const createReviewThunk = createAsyncThunk(
 
 export const updateReviewThunk = createAsyncThunk(
         'reviews/updateReview',
-        async (rid, review) =>
-            await reviewService.updateReview({rid, review})
+        async (rid, review) =>{
+            const newReview = await reviewService.updateReview(rid, review)
+            return newReview
+        }
     )
