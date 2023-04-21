@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import UserSection from "../components/userSection";
+import * as userService from "../ApiClient/users.js";
 import ProfileElement from "../profile-page-components/profileElement";
 import ProfileNav from "../profile-page-components/profile-nav/profileNav";
 
-const ProfilePage = ({
-    active = "Reviews"
-                     }) => {
+const ProfilePage = ({active = "Reviews"}) => {
+    const [user, setUser] = useState(null);
+    const currentUser = async () => {
+        const user1 = await userService.profile();
+        setUser(user1);
+    };
+
+    useEffect(() => {
+        currentUser();
+    }, []);
     return (
         <div className="row">
             <UserSection active="Profile"/>
@@ -16,10 +24,7 @@ const ProfilePage = ({
                              className="profile-pic-larger rounded-circle border border-white border-3"/>
                     </div>
                     <div className="text-center">
-                        <h3 className="mb-0">Aliyah</h3>
-                    </div>
-                    <div className="text-center">
-                        @aliyah_9
+                        <h3 className="mb-0">{user && user.username}</h3>
                     </div>
                 </div>
                 <div className="col-10">

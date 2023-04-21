@@ -8,11 +8,15 @@ const api = axios.create({
 });
 
 //probably don't need to destructure in the parameters:
-export const register = async ({ username, password, email }) => {
+export const register = async ({ username, password, email, items, reviews, wishlist, transactions}) => {
   const response = await api.post(`${URL}/register`, {
     username,
     password,
     email,
+    items,
+    reviews,
+    wishlist,
+    transactions
   });
 
   const user = response.data;

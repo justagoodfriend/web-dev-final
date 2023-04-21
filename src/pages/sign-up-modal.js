@@ -52,15 +52,17 @@ export default function SignUpModal() {
   const [userInputs, setUserInput] = useState({
     username: "",
     password: "",
-    email:""
+    email:"",
+    transactions: []
   });
 
   const setAccountType = (input) => {
     const copy = userInputs;
     if (input === 'buyer') {
       delete copy.items;
-      setUserInput({...copy, reviews: []});
+      setUserInput({...copy, reviews: [], wishlist:[]});
     } else {
+      delete copy.wishlist;
       delete copy.reviews;
       setUserInput({...copy, items: []});
     }

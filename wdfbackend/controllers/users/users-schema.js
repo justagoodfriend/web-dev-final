@@ -4,12 +4,12 @@ const usersSchema = mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    // email should definitely be required.
     email: {type: String, required:true, unique:true },
+    // either or relationship -- buyers have reviews, sellers have items for sale. 
     reviews: {type: Buffer, required: false},
-    items: {type:Buffer, required:false},
-    Name: String,
-    phone: String,
+    wishlist: {type: Buffer, required: false},
+    itemsForSale: {type:Buffer, required:false},
+    transactions: {type:Buffer, require: true}
   },
   { collection: 'accounts' }
 );
