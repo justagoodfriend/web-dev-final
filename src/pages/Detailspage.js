@@ -5,7 +5,9 @@ import {useParams} from "react-router";
 import querySearchByGoodsID from "../search-page-components/shien-queries-goodsId";
 import {createReviewThunk} from "../ApiClient/thunks/reviewsThunk";
 import ReviewsItem from "../profile-page-components/reviews/reviewsItem";
+import * as userService from "../ApiClient/services/users.js";
 import {createFavoriteThunk} from "../ApiClient/thunks/favoritesThunk";
+import {updateUserLikesThunk} from "../ApiClient/thunks/authThunks";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
   const [itemImg, setItemImg] = useState("");
@@ -15,7 +17,16 @@ const DetailsPage = () => {
   const sizes = ["Small", "Medium", "Large"];
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
-  const {currentUser} = useSelector((state) => state.users);
+  // const {currentUser} = useSelector((state) => state.users);
+  const [user, setUser] = useState(null);
+  const currentUser = async () => {
+      const user1 = await userService.profile();
+      setUser(user1);
+  };
+
+  useEffect(() => {
+      currentUser();
+  }, []);
   //thinking whenever the user favorites an icon the heart fills similar to what we had to do with the assignment
 
   const dispatch = useDispatch();
@@ -39,6 +50,8 @@ const DetailsPage = () => {
   const updateLikesHandler = () => {
     if (currentUser != null) {
       // dispatch(createFavoriteThunk(currentUser._id, goodsId));
+      console.log("test", goodsId);
+      dispatch(updateUserLikesThunk(goodsId))
     } else {
       alert("Must be logged in to favorite an item");
     }

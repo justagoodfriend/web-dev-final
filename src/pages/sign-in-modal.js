@@ -42,7 +42,7 @@ export default function SignInModal() {
     try {
       //await userService.login(userInputs);
       await dispatch(loginThunk(userInputs));
-      navigate("/profile");
+      navigate("/");
     } catch (e) {
       //fix up the error Messages
       alert(e);

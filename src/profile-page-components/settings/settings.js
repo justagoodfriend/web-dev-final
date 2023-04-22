@@ -5,12 +5,13 @@ import { useNavigate } from "react-router";
 import { profileThunk } from "../../ApiClient/thunks/authThunks.js";
 import { useDispatch, useSelector } from "react-redux";
 
-const Settings = () => {
+const Settings = ({user= {}}) => {
   //fetch the items from the current
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.users);
+  // const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = user;
   // const currentUser = async () => {
   //const user1 = await userService.profile();
   //const { payload } = await dispatch(profileThunk());
@@ -33,7 +34,7 @@ const Settings = () => {
               </div>
               <input
                 className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-75"
-                defaultValue={`${currentUser.handle}`}
+                defaultValue={`${currentUser.email}`}
               />
             </label>
             <label>

@@ -1,4 +1,4 @@
-const Stars = ({rating= 0}) => {
+const Stars = ({rating = 0}) => {
     const starsCurrent = [0,0,0,0,0];
     let index = 0;
     while (rating > 0) {

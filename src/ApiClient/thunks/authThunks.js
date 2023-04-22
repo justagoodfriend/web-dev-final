@@ -30,6 +30,16 @@ export const profileThunk = createAsyncThunk(
   "users/profile",
   async (credentials) => {
     const user = await userService.profile();
+    console.log("got user in thunk", user);
     return user;
   }
+);
+
+export const updateUserLikesThunk = createAsyncThunk(
+    "users/likes",
+    async (goodsId) => {
+        const user = await userService.updateLikes(goodsId);
+        console.log("got updated user in thunk", user);
+        return user;
+    }
 );

@@ -10,8 +10,13 @@ export const findUserById = async (id) => {
   return users;
 };
 
+export const findUserByEmail = async (email) => {
+  const users = await userModel.findOne({ email: email });
+  return users;
+}
+
 export const findUserByUserName = async (username) => {
-  const users = await userModel.findOne({ username });
+  const users = await userModel.findOne({ username: username });
   return users;
 };
 
@@ -28,5 +33,10 @@ export const createUser = async (user) => {
 
 export const updateUser = (uid, user) =>
   userModel.updateOne({ _id: uid }, user);
+
+export const updateLikes = async (uid, itemId) => {
+  const user = await userModel.find({ _id: uid });
+  // if (user.wishlist )
+}
 
 export const deleteUser = (uid) => userModel.deleteOne({ _id: uid });

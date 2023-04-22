@@ -41,6 +41,7 @@ export const createReviewThunk = createAsyncThunk(
 export const updateReviewThunk = createAsyncThunk(
         'reviews/updateReview',
         async (rid, review) =>{
+            console.log(review);
             const newReview = await reviewService.updateReview(rid, review)
             return newReview
         }
