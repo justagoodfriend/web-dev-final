@@ -36,20 +36,21 @@ function App() {
               path="/profile/settings"
               element={<ProfilePage active="Settings" />}
             />
+                        <Route
+              path="/profile/items"
+              element={<ProfilePage active="Items" />}
+            />
+            <Route
+              path="/profile/transactions"
+              element={<ProfilePage active="Transactions" />}
+            />
+            
             <Route path="/search/:query" element={<SearchPage />} />
             <Route path="/search/women" element={<SearchPage page="Women" />} />
             <Route path="/search/men" element={<SearchPage page="Men" />} />
             <Route path="/search/kids" element={<SearchPage page="Kids" />} />
             <Route path="/search/sale" element={<SearchPage page="Sale" />} />
             <Route path="/profile" element={<ProfilePage active="Reviews" />} />
-            <Route
-              path="/profile/wishlist"
-              element={<ProfilePage active="Wishlist" />}
-            />
-            <Route
-              path="/profile/settings"
-              element={<ProfilePage active="Settings" />}
-            />
             <Route
               path="/details"
               element={<DetailsPage/>}

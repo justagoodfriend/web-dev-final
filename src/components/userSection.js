@@ -94,6 +94,7 @@ const UserSection = ({ active = "Home" }) => {
             title="Profile"
             icon="bi bi-person-fill-gear text-white pe-3 fs-5"
           />}
+          { user && user.wishlist && <>
           <Button
             active={active}
             href="/search/women"
@@ -118,6 +119,12 @@ const UserSection = ({ active = "Home" }) => {
             title="Sale"
             icon="bi bi-wallet-fill text-white pe-3 fs-5"
           />
+          </>}
+          {user && user.items 
+          && <>
+            <Button active={active} href="/new-item" title="Add Item" 
+              icon="bi bi-plus text-white pe-3 fs-5"></Button>
+          </>}
         </ul>
       </nav>
     </div>
