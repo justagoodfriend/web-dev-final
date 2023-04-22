@@ -6,22 +6,8 @@ import { profileThunk } from "../../ApiClient/authThunks.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const Settings = () => {
-  //fetch the items from the current
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.users);
-  // const currentUser = async () => {
-  //const user1 = await userService.profile();
-  //const { payload } = await dispatch(profileThunk());
-  //  setUser(payload);
-  //};
-  //on mount load the user information
-  //useEffect(() => {
-  //  currentUser();
-  //}, []);
-
-  //in the profile page -> also may log out here as well
+  const currentUser = useSelector((state) => state.users.currentUser);
   return (
     <>
       {currentUser ? (
@@ -54,7 +40,7 @@ const Settings = () => {
                 defaultValue={`${currentUser.password}`}
               />
             </label>
-            <div className="pt-4">
+            <div className="flex pt-4" style={{ gap: "2rem" }}>
               {/*TODO */}
               <button className="background-purple text-white rounded-3 no-border px-4 py-1">
                 Save
@@ -62,9 +48,8 @@ const Settings = () => {
               <button className="no-background no-border text-purple px-4 py-1">
                 Cancel
               </button>
-              {/* TODO: style this button better */}
               <button
-                className="no-border text-purple px-4 py-1"
+                className="text-white no-border px-4 py-1"
                 style={{ background: "red" }}
                 onClick={() => {
                   userService.logout();

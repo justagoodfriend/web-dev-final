@@ -47,11 +47,18 @@ const userController = (app) => {
 
   const update = async (req, res) => {};
 
+  const findByUserId = async (req, res) => {
+    const user = await dao.findUserById(req.params.id);
+    console.log(req.params.id);
+    res.json(user);
+  };
+
   app.post("/api/users/register", register);
   app.post("/api/users/login", login);
   app.post("/api/users/profile", profile);
   app.post("/api/users/logout", logout);
   app.put("/api/users", update);
+  app.get("/api/users/id/:id", findByUserId);
 };
 
 export default userController;

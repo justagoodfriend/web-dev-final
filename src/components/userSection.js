@@ -99,12 +99,14 @@ const UserSection = ({ active = "Home" }) => {
             title="Home"
             icon="bi bi-house-door-fill text-white pe-3 fs-5"
           />
-          <Button
-            active={active}
-            href="/profile"
-            title="Profile"
-            icon="bi bi-person-fill-gear text-white pe-3 fs-5"
-          />
+          {user && (
+            <Button
+              active={active}
+              href="/profile"
+              title="Profile"
+              icon="bi bi-person-fill-gear text-white pe-3 fs-5"
+            />
+          )}
           <Button
             active={active}
             href="/search/women"

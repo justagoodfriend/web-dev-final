@@ -27,6 +27,7 @@ function App() {
               <Route path="/login" element={<SignInModal />} />
               <Route path="register" element={<SignUpModal />} />
             </Route>
+            <Route path="/profile/:id" element={<ProfilePage />} />
             <Route path="/profile" element={<ProfilePage active="Reviews" />} />
             <Route
               path="/profile/wishlist"
@@ -50,10 +51,7 @@ function App() {
               path="/profile/settings"
               element={<ProfilePage active="Settings" />}
             />
-            <Route
-              path="/details"
-              element={<DetailsPage/>}
-            />
+            <Route path="/details" element={<DetailsPage />} />
           </Routes>
         </BrowserRouter>
       </CurrentUserContext>

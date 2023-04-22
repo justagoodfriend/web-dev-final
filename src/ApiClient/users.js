@@ -38,6 +38,11 @@ export const profile = async () => {
   return response.data;
 };
 
+export const findUserById = async (id) => {
+  const response = await api.get(`${URL}/id/${id}`);
+  return response.data;
+};
+
 /*
    export const updateUser = async (user) => {
     const response = await api.put(`${USERS_URL}/${user._id}`, user);
