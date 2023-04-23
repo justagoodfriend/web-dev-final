@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "./button";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutThunk } from "../ApiClient/authThunks";
+import { logoutThunk } from "../ApiClient/thunks/authThunks";
 const UserSection = ({ active = "Home" }) => {
   //TODO: in the sidebar when we are signed in as a user change the signup/login to sign out
   //currently doing it the annoying way where I fetch each time for the current user
@@ -27,7 +27,9 @@ const UserSection = ({ active = "Home" }) => {
           {/* TODO: make this take in the current user: */}
           <h2 className="text-white m-0">Hi Guest!</h2>
           <>
-            {user ? (
+            {console.log("TEST" + user.username) } 
+            {
+            user && user.username ? (
               <span
                 onClick={() => {
                   dispatch(logoutThunk())
@@ -100,6 +102,7 @@ const UserSection = ({ active = "Home" }) => {
               icon="bi bi-person-fill-gear text-white pe-3 fs-5"
             />
           )}
+          {<>
           <Button
             active={active}
             href="/search/women"
@@ -123,8 +126,7 @@ const UserSection = ({ active = "Home" }) => {
             href="/search/sale"
             title="Sale"
             icon="bi bi-wallet-fill text-white pe-3 fs-5"
-          />
-          </>}
+          /></>}
           {user && user.items 
           && <>
             <Button active={active} href="/new-item" title="Add Item" 

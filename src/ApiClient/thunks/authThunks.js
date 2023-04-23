@@ -13,6 +13,7 @@ export const loginThunk = createAsyncThunk(
 export const logoutThunk = createAsyncThunk(
   "users/logout",
   async (credentials) => {
+    console.log("Logging out");
     const user = await userService.logout();
     return user;
   }

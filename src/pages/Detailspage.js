@@ -26,7 +26,7 @@ const DetailsPage = () => {
   const [liked, setLiked] = useState(false);
   const findUserLiked = async () => {
     const item = {
-      uid: otherCurrentUser._id,
+      uid: currentUser._id,
       iid: goodsId,
     };
     const userliked = await getFavoritesOfUserAndID(item);
@@ -40,7 +40,6 @@ const DetailsPage = () => {
   //console.log(likesOnItem);
 
   useEffect(() => {
-    currentUser;
     findUserLiked();
     //maybe / maybe not need this condition check idk
     // if (currentUser != null) {
@@ -73,10 +72,10 @@ const DetailsPage = () => {
   const updateLikesHandler = () => {
     if (currentUser != null) {
       const item = {
-        uid: otherCurrentUser._id,
+        uid: currentUser._id,
         iid: goodsId,
       };
-      console.log(item);
+      console.log("Item" + item);
       if (liked) {
         dispatch(deleteFavoriteThunk(item));
       } else {

@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
 import UserSection from "../components/userSection";
-import { useSelector } from "react-redux";
 import ProfileElement from "../profile-page-components/profileElement";
 import ProfileNav from "../profile-page-components/profile-nav/profileNav";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,6 +7,7 @@ import {useParams} from "react-router";
 
 const ProfilePage = ({active = "Reviews"}) => {
     const user = useSelector((state) => state.users.currentUser);
+    const userID = useParams().uid;
     return (
         <div className="row">
             <UserSection active="Profile"/>
@@ -19,12 +18,12 @@ const ProfilePage = ({active = "Reviews"}) => {
                              className="profile-pic-larger rounded-circle border border-white border-3"/>
                     </div>
                     <div className="text-center">
-                        <h3 className="mb-0">{user && user.username}</h3>
+                        <h3 className="mb-0">{user && userID}</h3>
                     </div>
                 </div>
                 <div className="col-10">
-                    <ProfileNav active={active} user={user && userId}/>
-                    <ProfileElement active={active} user={user && userId}/>
+                    <ProfileNav active={active} user={user && userID}/>
+                    <ProfileElement active={active} user={user && userID}/>
                 </div>
             </div>
         </div>
