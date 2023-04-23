@@ -1,21 +1,20 @@
 import reviewsModel from "./reviews-model.js";
+import {ObjectId} from "mongodb";
 
 export const findAllReviews = async () => {
     const reviews = await reviewsModel.find();
     return reviews;
 };
 
-// export const findReviewsByItemId = async (itemId) => {
-//     const reviews = findAllReviews().then(reviews => {
-//         return reviews.
-//     });
-//     return reviews;
-// };
-//
-// export const findReviewsByBuyerId = async (buyerId) => {
-//     const reviews = await reviewsModel.findById({ buyerId });
-//     return reviews;
-// };
+export const findReviewsByUserId = async (userId) => {
+    const reviews = await reviewsModel.find({author: new ObjectId(userId)});
+    return reviews;
+};
+
+export const findReviewsByItemId = async (itemId) => {
+    const reviews = await reviewsModel.find({ itemId });
+    return reviews;
+};
 
 //also will need create buyers/create seller
 export const createReview = async (review) => {
@@ -23,13 +22,13 @@ export const createReview = async (review) => {
     return reviews;
 };
 
-export const updateReview = (rid, review) => {
-    console.log("update", review);
-    const reviews = reviewsModel.updateOne({ _id: rid }, {$set: review});
+export const updateReview = async (rid, {content, rating}) => {
+    console.log("update", content, rating);
+    const reviews = await reviewsModel.updateOne({ _id: rid }, {$set: {content, rating}});
     return reviews;
 }
 
-export const deleteReview = (rid) => {
-    const reviews = reviewsModel.deleteOne({ _id: rid });
+export const deleteReview = async (rid) => {
+    const reviews = await reviewsModel.deleteOne({ _id: rid });
     return reviews;
 };

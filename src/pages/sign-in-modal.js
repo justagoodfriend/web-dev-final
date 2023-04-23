@@ -15,8 +15,8 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import * as userService from "../ApiClient/users.js";
-import { loginThunk } from "../ApiClient/authThunks.js";
+import * as userService from "../ApiClient/services/users.js";
+import { loginThunk } from "../ApiClient/thunks/authThunks.js";
 
 export default function SignInModal() {
   const profile = useSelector((state) => state.profile);
@@ -42,9 +42,11 @@ export default function SignInModal() {
     try {
       //await userService.login(userInputs);
       await dispatch(loginThunk(userInputs));
-      navigate("/profile");
+      //reload the page idk it doesn't immediately update:
+      navigate("/");
     } catch (e) {
       //fix up the error Messages
+      //TODO:idk why but this does not create the alert when they fail to login
       alert(e);
     }
   };
@@ -83,7 +85,15 @@ export default function SignInModal() {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => {}}></Button>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              Cancel
+            </Button>
             <Button variant="ghost" onClick={() => login()}>
               Submit
             </Button>

@@ -8,7 +8,7 @@ const SearchKids = () => {
 
     useEffect(() => {
         const getKidsData = async () => {
-            const kidsResults = await querySearch("Toddler");
+            const kidsResults = await querySearch("Toddler", "18");
             setDatabase(kidsResults.info.products);
         };
 

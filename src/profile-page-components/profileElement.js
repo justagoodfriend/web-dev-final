@@ -2,13 +2,15 @@ import Reviews from "./reviews/reviews";
 import Wishlist from "./wishlist/wishlist";
 import Settings from "./settings/settings";
 
-const ProfileElement = ({active = "Reviews"}) => {
+const ProfileElement = ({
+        active = "Reviews",
+        userId = null}) => {
     if (active === "Reviews") {
-        return (<Reviews/>);
+        return (<Reviews user={userId}/>);
     } else if (active === "Wishlist") {
-        return (<Wishlist/>);
+        return (<Wishlist user={userId}/>);
     } else {
-        return (<Settings/>);
+        return (<Settings user={userId}/>);
     }
 }
 

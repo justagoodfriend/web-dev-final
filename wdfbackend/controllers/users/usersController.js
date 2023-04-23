@@ -1,12 +1,14 @@
-import userModel from "./users-model.js";
 import * as dao from "./users-dao.js";
 const userController = (app) => {
   //literally copy paste from login slides :))
   const register = async (req, res) => {
     console.log("this was called");
     const username = req.body.username;
-    const password = req.body.password;
-    const user = await dao.findUserByUserName(username);
+    const email = req.body.email;
+    /**const password = req.body.password;*/
+    let user = await dao.findUserByUserName(username);
+    if (!user) user = await dao.findUserByEmail(email);
+
     if (user) {
       res.sendStatus(409);
       return;
@@ -47,11 +49,20 @@ const userController = (app) => {
 
   const update = async (req, res) => {};
 
+  const updateLikes = async (req, res) => {
+    const currentUser = req.session["currentUser"];
+    const itemId = req.params.iid;
+    const user = dao.updateLikes(currentUser, itemId);
+    res.json(user);
+  };
+
   app.post("/api/users/register", register);
   app.post("/api/users/login", login);
+  // are we sure this shouldn't be "Get"?
   app.post("/api/users/profile", profile);
   app.post("/api/users/logout", logout);
   app.put("/api/users", update);
+  app.put("/api/users/profile/likes/:iid", updateLikes);
 };
 
 export default userController;

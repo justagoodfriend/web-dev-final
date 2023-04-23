@@ -5,9 +5,10 @@ import {
   logoutThunk,
   registerThunk,
   profileThunk,
-} from "../ApiClient/authThunks";
+  updateUserLikesThunk,
+} from "../ApiClient/thunks/authThunks";
 const initialState = {
-  currentUser: null,
+  currentUser: {},
 };
 
 const userSlice = createSlice({
@@ -19,12 +20,15 @@ const userSlice = createSlice({
       state.currentUser = action.payload;
     },
     [logoutThunk.fulfilled]: (state, action) => {
-      state.currentUser = null;
+      state.currentUser = {};
     },
     [registerThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
     },
     [profileThunk.fulfilled]: (state, action) => {
+      state.currentUser = action.payload;
+    },
+    [updateUserLikesThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
     },
   },

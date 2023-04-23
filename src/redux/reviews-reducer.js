@@ -2,11 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 //do update later
 import {
     findReviewsThunk,
-    // findReviewThunk,
+    findReviewsForItemThunk,
+    findReviewsForUserThunk,
     deleteReviewThunk,
     createReviewThunk,
     updateReviewThunk,
-} from "../ApiClient/reviewsThunk.js";
+} from "../ApiClient/thunks/reviewsThunk.js";
 const initialState = {
     reviews: [],
     loading: false
@@ -27,6 +28,36 @@ const reviewsSlice = createSlice({
                 state.reviews = payload
             },
         [findReviewsThunk.rejected]:
+            (state, action) => {
+                state.loading = false
+                state.error = action.error
+            },
+        [findReviewsForItemThunk.pending]:
+            (state) => {
+                state.loading = true
+                state.reviews = []
+            },
+        [findReviewsForItemThunk.fulfilled]:
+            (state, { payload }) => {
+                state.loading = false
+                state.reviews = payload
+            },
+        [findReviewsForItemThunk.rejected]:
+            (state, action) => {
+                state.loading = false
+                state.error = action.error
+            },
+        [findReviewsForUserThunk.pending]:
+            (state) => {
+                state.loading = true
+                state.reviews = []
+            },
+        [findReviewsForUserThunk.fulfilled]:
+            (state, { payload }) => {
+                state.loading = false
+                state.reviews = payload
+            },
+        [findReviewsForUserThunk.rejected]:
             (state, action) => {
                 state.loading = false
                 state.error = action.error
