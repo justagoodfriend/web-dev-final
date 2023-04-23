@@ -49,12 +49,20 @@ const userController = (app) => {
 
   const update = async (req, res) => {};
 
+  const updateLikes = async (req, res) => {
+    const currentUser = req.session["currentUser"];
+    const itemId = req.params.iid;
+    const user = dao.updateLikes(currentUser, itemId);
+    res.json(user);
+  };
+
   app.post("/api/users/register", register);
   app.post("/api/users/login", login);
   // are we sure this shouldn't be "Get"?
   app.post("/api/users/profile", profile);
   app.post("/api/users/logout", logout);
   app.put("/api/users", update);
+  app.put("/api/users/profile/likes/:iid", updateLikes);
 };
 
 export default userController;

@@ -1,13 +1,17 @@
-import React from "react";
-import * as userService from "../../ApiClient/users.js";
+
+import React, { useEffect } from "react";
+import { useState } from "react";
+import * as userService from "../../ApiClient/services/users.js";
 import { useNavigate } from "react-router";
+import { profileThunk } from "../../ApiClient/thunks/authThunks.js";
 import { useDispatch, useSelector } from "react-redux";
 
-const Settings = () => {
+const Settings = ({user= {}}) => {
   //fetch the items from the current
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.users.currentUser);
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   //in the profile page -> also may log out here as well
   return (
     <>
@@ -55,6 +59,7 @@ const Settings = () => {
                 style={{ background: "red" }}
                 onClick={() => {
                   dispatch({})
+                  // we need to call thunk here. 
                   userService.logout();
                   navigate("/");
                 }}

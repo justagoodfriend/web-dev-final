@@ -1,6 +1,6 @@
 import wishlist from "./wishlist.json";
 import WishlistItem from "./wishlistItem";
-const Wishlist = () => {
+const Wishlist = ({user = {}}) => {
     return (
         <div className="d-flex flex-wrap custom-padding-left pt-3">
             {

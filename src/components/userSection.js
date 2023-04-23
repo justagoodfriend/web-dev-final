@@ -13,7 +13,7 @@ const UserSection = ({ active = "Home" }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="col-3 pt-3 ps-4 bg-purple">
+    <div className="col-3 pt-3 ps-4 bg-purple" style={{ minHeight: "100vh" }}>
       <div className="row align">
         <div className="col-auto">
           <img
@@ -24,6 +24,7 @@ const UserSection = ({ active = "Home" }) => {
         </div>
 
         <div className="col">
+          {/* TODO: make this take in the current user: */}
           <h2 className="text-white m-0">Hi Guest!</h2>
           <>
             {user ? (
@@ -32,6 +33,7 @@ const UserSection = ({ active = "Home" }) => {
                   dispatch(logoutThunk())
                   navigate("/");
                 }}
+                id="logoutbutton"
               >
                 {" "}
                 Log Out{" "}
@@ -68,8 +70,18 @@ const UserSection = ({ active = "Home" }) => {
           aria-label="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              navigate(`/search/${searchQuery}`);
+            }
+          }}
         />
-      <button className="btn btn-light" onClick={() => navigate(`/search/${searchQuery}`)}>Go</button>
+        <button
+          className="btn btn-light"
+          onClick={() => navigate(`/search/${searchQuery}`)}
+        >
+          Go
+        </button>
       </div>
       <nav>
         <h5 className="text-white">Categories</h5>
@@ -80,13 +92,14 @@ const UserSection = ({ active = "Home" }) => {
             title="Home"
             icon="bi bi-house-door-fill text-white pe-3 fs-5"
           />
-          {user && <Button
-            active={active}
-            href="/profile"
-            title="Profile"
-            icon="bi bi-person-fill-gear text-white pe-3 fs-5"
-          />}
-          { user && user.wishlist && <>
+          {user && (
+            <Button
+              active={active}
+              href={"/profile/" + user._id}
+              title="Profile"
+              icon="bi bi-person-fill-gear text-white pe-3 fs-5"
+            />
+          )}
           <Button
             active={active}
             href="/search/women"

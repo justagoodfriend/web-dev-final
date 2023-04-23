@@ -34,4 +34,9 @@ export const createUser = async (user) => {
 export const updateUser = (uid, user) =>
   userModel.updateOne({ _id: uid }, user);
 
+export const updateLikes = async (uid, itemId) => {
+  const user = await userModel.find({ _id: uid });
+  // if (user.wishlist )
+}
+
 export const deleteUser = (uid) => userModel.deleteOne({ _id: uid });

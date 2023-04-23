@@ -8,7 +8,15 @@ const api = axios.create({
 });
 
 //probably don't need to destructure in the parameters:
-export const register = async ({ username, password, email, items, reviews, wishlist, transactions}) => {
+export const register = async ({
+  username,
+  password,
+  email,
+  items,
+  reviews,
+  wishlist,
+  transactions,
+}) => {
   const response = await api.post(`${URL}/register`, {
     username,
     password,
@@ -16,7 +24,7 @@ export const register = async ({ username, password, email, items, reviews, wish
     items,
     reviews,
     wishlist,
-    transactions
+    transactions,
   });
 
   const user = response.data;
@@ -39,6 +47,11 @@ export const logout = async () => {
 
 export const profile = async () => {
   const response = await api.post(`${URL}/profile`);
+  return response.data;
+};
+
+export const updateLikes = async (goodsId) => {
+  const response = await api.put(`${URL}/profile/likes${goodsId}`);
   return response.data;
 };
 

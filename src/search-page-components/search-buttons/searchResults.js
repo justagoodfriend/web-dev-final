@@ -14,7 +14,7 @@ const SearchResults = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const searchResults = await querySearch(query);
+            const searchResults = await querySearch(query, "18");
             setDatabase(searchResults.info.products);
         };
 

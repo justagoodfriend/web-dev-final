@@ -3,6 +3,9 @@ import UserSection from "../components/userSection";
 import { useSelector } from "react-redux";
 import ProfileElement from "../profile-page-components/profileElement";
 import ProfileNav from "../profile-page-components/profile-nav/profileNav";
+import {useDispatch, useSelector} from "react-redux";
+import {profileThunk} from "../ApiClient/thunks/authThunks";
+import {useParams} from "react-router";
 
 const ProfilePage = ({active = "Reviews"}) => {
     const user = useSelector((state) => state.users.currentUser);
@@ -20,8 +23,8 @@ const ProfilePage = ({active = "Reviews"}) => {
                     </div>
                 </div>
                 <div className="col-10">
-                    <ProfileNav active={active}/>
-                    <ProfileElement active={active}/>
+                    <ProfileNav active={active} user={user && userId}/>
+                    <ProfileElement active={active} user={user && userId}/>
                 </div>
             </div>
         </div>
