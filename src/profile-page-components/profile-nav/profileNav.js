@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import ProfileNavLink from "./profileNavLink";
-import * as userService from "../../ApiClient/users";
 
 const ProfileNav = ({active = "Reviews"}) => {
-    const [user, setUser] = useState(null);
-    const currentUser = async () => {
-        const user1 = await userService.profile();
-        setUser(user1);
-    };
-
-    useEffect(() => {
-        currentUser();
-    }, []);
+    const user = useSelector((state) => state.users.currentUser);
     return (
         <nav className="nav justify-content-between custom-padding-extra me-5">
             {

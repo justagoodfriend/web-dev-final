@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import * as userService from "../ApiClient/users.js";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import SearchResults from "../search-page-components/search-buttons/searchResults";
 import SearchWomen from "../search-page-components/search-buttons/searchWomen";
 import SearchMen from "../search-page-components/search-buttons/searchMen";
@@ -7,12 +7,7 @@ import SearchKids from "../search-page-components/search-buttons/searchKids";
 import SearchSale from "../search-page-components/search-buttons/searchSale";
 
 const SearchPage = ({page = "None"}) => {
-    const [user, setUser] = useState(null);
-    const currentUser = async () => {
-        const user1 = await userService.profile();
-        setUser(user1);
-    };
-
+    const currentUser = useSelector((state) => state.users.currentUser);
     useEffect(() => {
         currentUser();
     }, []);

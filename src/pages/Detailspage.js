@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from "react";
 import UserSection from "../components/userSection";
 import database from "../databaseDetails.json";
-import * as userService from "../ApiClient/users.js";
-
+import { useSelector } from "react-redux";
 // import Review, { createStars } from "../components/review";
 import Reviews from "../profile-page-components/reviews/reviews.js";
 const DetailsPage = () => {
-  const [user, setUser] = useState(null);
-  const currentUser = async () => {
-      const user1 = await userService.profile();
-      setUser(user1);
-  };
-
-  useEffect(() => {
-      currentUser();
-  }, []);
+  const currentUser = useSelector((state) => state.users.currentUser);
   const item = database[0];
   //thinking whenever the user favorites an icon the heart fills similar to what we had to do with the assignment
   //const [favorite, setFavorite] = useState(item.favorited);
