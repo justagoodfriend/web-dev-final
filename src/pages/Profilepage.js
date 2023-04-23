@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserSection from "../components/userSection";
-import * as userService from "../ApiClient/services/users.js";
+import { useSelector } from "react-redux";
 import ProfileElement from "../profile-page-components/profileElement";
 import ProfileNav from "../profile-page-components/profile-nav/profileNav";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,17 +8,7 @@ import {profileThunk} from "../ApiClient/thunks/authThunks";
 import {useParams} from "react-router";
 
 const ProfilePage = ({active = "Reviews"}) => {
-    const [user, setUser] = useState(null);
-    const userId = useParams();
-    const currentUser = async () => {
-        const user1 = await userService.profile();
-        setUser(user1);
-    };
-
-    useEffect(() => {
-        currentUser();
-    }, []);
-
+    const user = useSelector((state) => state.users.currentUser);
     return (
         <div className="row">
             <UserSection active="Profile"/>

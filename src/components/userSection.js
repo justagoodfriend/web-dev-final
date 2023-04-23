@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Button from "./button";
-import * as userService from "../ApiClient/services/users";
 import { useNavigate } from "react-router";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logoutThunk } from "../ApiClient/authThunks";
 const UserSection = ({ active = "Home" }) => {
   //TODO: in the sidebar when we are signed in as a user change the signup/login to sign out
   //currently doing it the annoying way where I fetch each time for the current user
   //in the future exchange this out with redux and then use that
-  const [user, setUser] = useState(null);
-  const currentUser = async () => {
-    const user1 = await userService.profile();
-    setUser(user1);
-  };
+  const user = useSelector((state) => state.users.currentUser);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    currentUser();
-  }, []);
-
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
@@ -38,7 +30,7 @@ const UserSection = ({ active = "Home" }) => {
             {user ? (
               <span
                 onClick={() => {
-                  userService.logout();
+                  dispatch(logoutThunk())
                   navigate("/");
                 }}
                 id="logoutbutton"
@@ -132,6 +124,12 @@ const UserSection = ({ active = "Home" }) => {
             title="Sale"
             icon="bi bi-wallet-fill text-white pe-3 fs-5"
           />
+          </>}
+          {user && user.items 
+          && <>
+            <Button active={active} href="/new-item" title="Add Item" 
+              icon="bi bi-plus text-white pe-3 fs-5"></Button>
+          </>}
         </ul>
       </nav>
     </div>

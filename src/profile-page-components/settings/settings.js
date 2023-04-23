@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { useState } from "react";
 import * as userService from "../../ApiClient/services/users.js";
@@ -7,20 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Settings = ({user= {}}) => {
   //fetch the items from the current
-  // const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const currentUser = useSelector((state) => state.user.currentUser);
-  const currentUser = user;
-  // const currentUser = async () => {
-  //const user1 = await userService.profile();
-  //const { payload } = await dispatch(profileThunk());
-  //  setUser(payload);
-  //};
-  //on mount load the user information
-  //useEffect(() => {
-  //  currentUser();
-  //}, []);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   //in the profile page -> also may log out here as well
   return (
@@ -68,6 +58,8 @@ const Settings = ({user= {}}) => {
                 className="no-border text-purple px-4 py-1"
                 style={{ background: "red" }}
                 onClick={() => {
+                  dispatch({})
+                  // we need to call thunk here. 
                   userService.logout();
                   navigate("/");
                 }}
