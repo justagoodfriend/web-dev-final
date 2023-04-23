@@ -20,12 +20,27 @@ export const getFavorites = async () => {
   return response.data;
 };
 
-export const createFavorite = async (uid, iid) => {
-  const response = await api.post(`${URL}/users/${uid}/item/${iid}`);
+export const getFavoritesOfUserAndID = async (item) => {
+  console.log("this method was called");
+  const userId = item["uid"];
+  const itemId = item["iid"];
+  const response = await api.get(`${URL}/users/${userId}/item/${itemId}`);
+  //console.log("calling the db");
+  //console.log(response.data);
   return response.data;
 };
 
-export const deleteFavorite = async ({ uid, iid }) => {
-  const response = await api.delete(`${URL}/users/${uid}/item${iid}`);
+export const createFavorite = async (item) => {
+  const userId = item["uid"];
+  const itemId = item["iid"];
+  const response = await api.post(`${URL}/users/${userId}/item/${itemId}`);
+  console.log(response.data);
+  return response.data;
+};
+
+export const deleteFavorite = async (item) => {
+  const userId = item["uid"];
+  const itemId = item["iid"];
+  const response = await api.delete(`${URL}/users/${userId}/item/${itemId}`);
   return response.data;
 };

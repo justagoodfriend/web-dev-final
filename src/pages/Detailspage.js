@@ -6,7 +6,12 @@ import querySearchByGoodsID from "../search-page-components/shien-queries-goodsI
 import { createReviewThunk } from "../ApiClient/thunks/reviewsThunk";
 import ReviewsItem from "../profile-page-components/reviews/reviewsItem";
 import * as userService from "../ApiClient/services/users.js";
-import { createFavoriteThunk } from "../ApiClient/thunks/favoritesThunk";
+import { getFavoritesOfUserAndID } from "../ApiClient/services/favorites";
+import {
+  createFavoriteThunk,
+  findFavoritesForItemandUserThunk,
+  deleteFavoriteThunk,
+} from "../ApiClient/thunks/favoritesThunk";
 import { updateUserLikesThunk } from "../ApiClient/thunks/authThunks";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
@@ -19,20 +24,44 @@ const DetailsPage = () => {
   const [rating, setRating] = useState("");
   // const {currentUser} = useSelector((state) => state.users);
   const [user, setUser] = useState(null);
+  //for some reason, on refresh it loses the currently logged in user, and idk why, so it only works the first time you enter a page
+  //TODO: make a local storage, as suggested on piazza
+  const otherCurrentUser = useSelector((state) => state.users.currentUser);
+  const [liked, setLiked] = useState(false);
   const currentUser = async () => {
     const user1 = await userService.profile();
     setUser(user1);
   };
 
-  const otherCurrentUser = useSelector((state) => state.users.currentUser);
-  console.log(otherCurrentUser);
+  const findUserLiked = async () => {
+    const item = {
+      uid: otherCurrentUser._id,
+      iid: goodsId,
+    };
+    const userliked = await getFavoritesOfUserAndID(item);
+    if (userliked) {
+      setLiked(true);
+    }
+  };
+  const dispatch = useDispatch();
+
+  //const likesOnItem = useSelector((state) => state.favorites);
+  //console.log(likesOnItem);
 
   useEffect(() => {
     currentUser();
+    findUserLiked();
+    //maybe / maybe not need this condition check idk
+    // if (currentUser != null) {
+    //   const item = {
+    //     uid: otherCurrentUser._id,
+    //     iid: goodsId,
+    //   };
+    //   dispatch(findFavoritesForItemandUserThunk(item));
+    // }
+    //on page load, fetch the response from the server, if has object -> means you liked
   }, []);
-  //thinking whenever the user favorites an icon the heart fills similar to what we had to do with the assignment
 
-  const dispatch = useDispatch();
   useEffect(() => {
     const getData = async () => {
       const results = await querySearchByGoodsID(goodsId);
@@ -52,15 +81,19 @@ const DetailsPage = () => {
 
   const updateLikesHandler = () => {
     if (currentUser != null) {
-      console.log(otherCurrentUser._id);
-      console.log("currently in goods: " + goodsId);
-      console.log("what is the type of this object: " + typeof goodsId);
-      //TODO: come back to this later, because this should work its just that the goodsId is creating an object Object
-      //type for no reason...
-      dispatch(createFavoriteThunk(otherCurrentUser._id, goodsId));
-      //console.log("test", goodsId);
+      const item = {
+        uid: otherCurrentUser._id,
+        iid: goodsId,
+      };
+      console.log(item);
+      if (liked) {
+        dispatch(deleteFavoriteThunk(item));
+      } else {
+        dispatch(createFavoriteThunk(item));
+      }
 
-      //dispatch(updateUserLikesThunk(goodsId))
+      //TODO afterwards, find if the current user liked this item:
+      //depending on whether liked or disliked/ create or delete
     } else {
       alert("Must be logged in to favorite an item");
     }
@@ -119,7 +152,7 @@ const DetailsPage = () => {
                 className="rounded-pill xl-font-size py-1 add-to-cart-button"
                 onClick={() => updateLikesHandler()}
               >
-                <i className="bi bi-heart"></i> Favorite
+                <span>Favorite</span>
               </button>
               <button className="rounded-pill xl-font-size py-1 add-to-cart-button">
                 <i className="bi bi-cart"></i> Add to Card
@@ -151,7 +184,11 @@ const DetailsPage = () => {
               </button>
             </div>
           </div>
-          <i className="bi bi-heart heart-size mt-4"></i>
+          <i
+            className={`bi heart-size mt-4 ${
+              liked ? "text-danger bi-heart-fill" : "bi-heart"
+            }`}
+          ></i>
         </div>
 
         <div className="flex-col gap-between px-4">

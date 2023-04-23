@@ -25,22 +25,29 @@ export const findFavoritesThunk = createAsyncThunk(
   }
 );
 
+export const findFavoritesForItemandUserThunk = createAsyncThunk(
+  "details/getUserandIdFavorite",
+  async (item) => {
+    const favorites = await favoritesService.getFavoritesOfUserAndID(item);
+    //console.log("getting items back from db");
+    //console.log(favorites);
+    return favorites;
+  }
+);
+
 export const createFavoriteThunk = createAsyncThunk(
   "details/createFavorite",
-  async (uid, iid) => {
-    console.log("after delegate iid: " + iid);
-    console.log("what does this return? " + { iid });
-    console.log(iid);
-    console.log(iid.iid);
-    const favorites = await favoritesService.createFavorite(uid, iid);
+  async (item) => {
+    console.log(item);
+    const favorites = await favoritesService.createFavorite(item);
     return favorites;
   }
 );
 
 export const deleteFavoriteThunk = createAsyncThunk(
   "details/deleteFavorite",
-  async (uid, iid) => {
-    const favorites = await favoritesService.deleteFavorite({ uid, iid });
+  async (item) => {
+    const favorites = await favoritesService.deleteFavorite(item);
     return favorites;
   }
 );

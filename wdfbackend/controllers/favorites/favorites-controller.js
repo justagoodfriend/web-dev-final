@@ -26,9 +26,22 @@ const favoritesController = (app) => {
     res.json(newFav);
   };
 
+  const getItemandUser = async (req, res) => {
+    console.log("Searching for item and user got called");
+    const potentialFavorite = await dao.findFavoritesForItemandUser(
+      req.params.uid,
+      req.params.iid
+    );
+    console.log(
+      "incoming parameters: " + req.params.uid + " " + req.params.iid
+    );
+    console.log(potentialFavorite);
+    res.json(potentialFavorite);
+  };
+
   const deleteFavorite = async (req, res) => {
     console.log("deleting favorite");
-    const status = await dao.deleteFavorite(req.params.rid);
+    const status = await dao.deleteFavorite(req.params.uid, req.params.iid);
     res.json(status);
   };
 
@@ -38,6 +51,7 @@ const favoritesController = (app) => {
   app.get("/api/favorites/users/:uid/favorites", getFavoritesForUser);
   app.get("/api/favorites/item/:iid/favorites", getFavoritesForItem);
   app.post("/api/favorites/users/:uid/item/:iid", createFavorite);
+  app.get("/api/favorites/users/:uid/item/:iid", getItemandUser);
   app.delete("/api/favorites/users/:uid/item/:iid", deleteFavorite);
 };
 
