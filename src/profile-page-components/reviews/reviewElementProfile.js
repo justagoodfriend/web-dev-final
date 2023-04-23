@@ -19,6 +19,23 @@ const ReviewElementProfile = ({
     const dispatch = useDispatch();
     const [stars, setStars] = useState(<Stars key={review._id} rating={review.rating}/>);
     const [title, setTitle] = useState("");
+    const [contentValue, setContentValue] = useState(review.content);
+    const [ratingValue, setRatingValue] = useState(review.rating.toString());
+    const [content, setContent] = useState(
+        <label className="d-none">
+            Review:
+            <textarea className="form-control textarea-autosize"
+                      onChange={(e) => {setContentValue(e.target.value)}}
+                      value={contentValue}/>
+        </label>);
+    const [rating, setRating] = useState(
+        <label className="d-none">
+            Rating:
+            <input className="form-control textarea-autosize"
+                   onChange={(e) => {setRatingValue(e.target.value)}}
+                   value={ratingValue}/>
+        </label>
+    );
     useEffect(() => {
         const getData = async () => {
             const results = await querySearchByGoodsID(review.itemId);
@@ -33,47 +50,31 @@ const ReviewElementProfile = ({
     const updateReviewHandler = (id, event) => {
         const icon = event.target;
         const contentDiv = event.target.parentNode.parentNode.parentNode.children[1];
-        const currentContent = contentDiv.textContent;
         if (icon.className === "bi bi-pen pe-2") {
-            const starsExtra = contentDiv.firstElementChild;
-            const rating = document.createElement('input');
-            const ratingLabel = document.createElement('label');
-            rating.value = review.review.rating;
-            rating.className = "form-control textarea-autosize";
-            rating.name = "ratingArea";
-            rating.rows = 1;
-            ratingLabel.htmlFor = "ratingArea";
-            ratingLabel.textContent = "Rating:";
-            contentDiv.textContent = "";
-            contentDiv.insertAdjacentElement("beforeend", starsExtra);
-            contentDiv.insertAdjacentElement("beforeend", ratingLabel);
-            contentDiv.insertAdjacentElement("beforeend", rating);
+            // contentDiv.textContent = "";
+            // console.log(contentDiv.children);
+            const rating = contentDiv.children[2];
+            const content = contentDiv.children[3];
+            rating.className = "";
+            content.className = "";
             icon.className = "bi bi-check-lg pe-2";
-            const input = document.createElement('textarea');
-            const inputLabel = document.createElement('label');
-            input.value = currentContent;
-            input.className = "form-control textarea-autosize";
-            input.name = "contentArea";
-            inputLabel.htmlFor = "contentArea";
-            inputLabel.textContent = "Review:";
-            contentDiv.insertAdjacentElement("beforeend", inputLabel);
-            contentDiv.insertAdjacentElement("beforeend", input);
         }
         else if (icon.className === "bi bi-check-lg pe-2") {
-            let stars = contentDiv.firstElementChild;
-            const input = contentDiv.children[4];
-            const contentValue = input.value;
-            const rating = contentDiv.children[2];
-            const ratingValue = rating.value;
             const newReview = {
+                rid: review._id,
                 content: contentValue,
-                rating: ratingValue,
+                rating: parseInt(ratingValue),
             };
-            dispatch(updateReviewThunk(id, newReview));
-            contentDiv.textContent = "";
-            setStars(<Stars key={review._id} rating={ratingValue}/>);
-            contentDiv.insertAdjacentElement("beforeend", stars);
-            contentDiv.insertAdjacentHTML("beforeend", contentValue);
+            console.log("in review element", newReview);
+            // console.log(contentDiv.children);
+            dispatch(updateReviewThunk(newReview));
+            const newContent = contentDiv.children[1];
+            const rating = contentDiv.children[2];
+            const content = contentDiv.children[3];
+            rating.className = "d-none";
+            content.className = "d-none";
+            newContent.textContent = contentValue;
+            setStars(<Stars key={review._id} rating={parseInt(ratingValue)}/>);
             icon.className = "bi bi-pen pe-2";
         }
     }
@@ -99,7 +100,21 @@ const ReviewElementProfile = ({
                     </div>
                     <div className="col-9 pe-0">
                         {stars}
-                        {review.content}
+                        <span>
+                            {review.content}
+                        </span>
+                        <label className="d-none">
+                            Rating:
+                            <input className="form-control textarea-autosize"
+                                   onChange={(e) => {setRatingValue(e.target.value)}}
+                                   value={ratingValue}/>
+                        </label>
+                        <label className="d-none">
+                            Review:
+                            <textarea className="form-control textarea-autosize"
+                                      onChange={(e) => {setContentValue(e.target.value)}}
+                                      value={contentValue}/>
+                        </label>
                     </div>
                     <div className="col-auto p-0">
                         <button onClick={(event) => updateReviewHandler(review._id, event)}>

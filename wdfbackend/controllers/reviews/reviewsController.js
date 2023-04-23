@@ -30,8 +30,9 @@ const userController = (app) => {
     }
 
     const updateReview = async (req, res) => {
-        console.log("updating review", req.body);
-        const status = await dao.updateReview(req.params.rid, req.body);
+        console.log("updating review", req.body.review);
+        console.log("review id", req.params.rid);
+        const status = await dao.updateReview(req.params.rid, req.body.review);
         res.json(status);
     }
 

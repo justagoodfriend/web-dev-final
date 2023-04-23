@@ -22,9 +22,9 @@ export const createReview = async (review) => {
     return reviews;
 };
 
-export const updateReview = async (rid, review) => {
-    console.log("update", review);
-    const reviews = await reviewsModel.updateOne({ _id: rid }, {$set: review});
+export const updateReview = async (rid, {content, rating}) => {
+    console.log("update", content, rating);
+    const reviews = await reviewsModel.updateOne({ _id: rid }, {$set: {content, rating}});
     return reviews;
 }
 

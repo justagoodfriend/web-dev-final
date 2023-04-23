@@ -30,8 +30,10 @@ export const getReviewsForItemId = async (iid) => {
     return response.data;
 }
 
-export const updateReview = async (rid, review) => {
+export const updateReview = async (rid, content, rating) => {
+    const review = {content, rating};
     console.log("test", review);
+    console.log("id", rid);
     const response = await api.put(`${URL}/update/${rid}`, {
         review
     })

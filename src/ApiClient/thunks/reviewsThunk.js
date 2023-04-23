@@ -15,7 +15,7 @@ export const findReviewsForItemThunk = createAsyncThunk(
 
 export const findReviewsForUserThunk = createAsyncThunk(
     'reviews/getReviewsForUser', async (uid) => {
-        console.log("got here?");
+        // console.log("got here?");
         const reviews = await reviewService.getReviewsForUserId(uid);
         console.log("got", reviews);
         return reviews;
@@ -40,9 +40,11 @@ export const createReviewThunk = createAsyncThunk(
 
 export const updateReviewThunk = createAsyncThunk(
         'reviews/updateReview',
-        async (rid, review) =>{
-            console.log(review);
-            const newReview = await reviewService.updateReview(rid, review)
+        async ({rid, content, rating}) => {
+            console.log(content);
+            console.log(rating);
+            console.log(rid);
+            const newReview = await reviewService.updateReview(rid, content, rating)
             return newReview
         }
     )
