@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import UserSection from "../components/userSection";
-import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 import querySearchByGoodsID from "../search-page-components/shien-queries-goodsId";
-import {createReviewThunk} from "../ApiClient/thunks/reviewsThunk";
+import { createReviewThunk } from "../ApiClient/thunks/reviewsThunk";
 import ReviewsItem from "../profile-page-components/reviews/reviewsItem";
 import * as userService from "../ApiClient/services/users.js";
-import {createFavoriteThunk} from "../ApiClient/thunks/favoritesThunk";
-import {updateUserLikesThunk} from "../ApiClient/thunks/authThunks";
+import { createFavoriteThunk } from "../ApiClient/thunks/favoritesThunk";
+import { updateUserLikesThunk } from "../ApiClient/thunks/authThunks";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
   const [itemImg, setItemImg] = useState("");
@@ -20,12 +20,15 @@ const DetailsPage = () => {
   // const {currentUser} = useSelector((state) => state.users);
   const [user, setUser] = useState(null);
   const currentUser = async () => {
-      const user1 = await userService.profile();
-      setUser(user1);
+    const user1 = await userService.profile();
+    setUser(user1);
   };
 
+  const otherCurrentUser = useSelector((state) => state.users.currentUser);
+  console.log(otherCurrentUser);
+
   useEffect(() => {
-      currentUser();
+    currentUser();
   }, []);
   //thinking whenever the user favorites an icon the heart fills similar to what we had to do with the assignment
 
@@ -38,9 +41,9 @@ const DetailsPage = () => {
       setItemPrice(results.info.retail_price.amountWithSymbol);
       const moreDetails = results.info.mainSaleAttribute.info;
       let colors = [];
-      moreDetails.forEach(detail => {
+      moreDetails.forEach((detail) => {
         colors.push(detail.attr_value);
-      })
+      });
       setItemColors(colors);
     };
 
@@ -49,26 +52,32 @@ const DetailsPage = () => {
 
   const updateLikesHandler = () => {
     if (currentUser != null) {
-      // dispatch(createFavoriteThunk(currentUser._id, goodsId));
-      console.log("test", goodsId);
-      dispatch(updateUserLikesThunk(goodsId))
+      console.log(otherCurrentUser._id);
+      console.log("currently in goods: " + goodsId);
+      console.log("what is the type of this object: " + typeof goodsId);
+      //TODO: come back to this later, because this should work its just that the goodsId is creating an object Object
+      //type for no reason...
+      dispatch(createFavoriteThunk(otherCurrentUser._id, goodsId));
+      //console.log("test", goodsId);
+
+      //dispatch(updateUserLikesThunk(goodsId))
     } else {
       alert("Must be logged in to favorite an item");
     }
-  }
+  };
 
   const createReviewHandler = () => {
     if (currentUser != null) {
       const reviewFull = {
         itemId: goodsId,
         content: review,
-        rating: parseInt(rating)
-      }
-      dispatch(createReviewThunk(reviewFull))
+        rating: parseInt(rating),
+      };
+      dispatch(createReviewThunk(reviewFull));
     } else {
       alert("Must be logged in to post a review");
     }
-  }
+  };
 
   return (
     <div className="row">
@@ -106,8 +115,10 @@ const DetailsPage = () => {
                   <option value={index}>{element}</option>
                 ))}
               </select>
-              <button className="rounded-pill xl-font-size py-1 add-to-cart-button"
-              onClick={() => updateLikesHandler()}>
+              <button
+                className="rounded-pill xl-font-size py-1 add-to-cart-button"
+                onClick={() => updateLikesHandler()}
+              >
                 <i className="bi bi-heart"></i> Favorite
               </button>
               <button className="rounded-pill xl-font-size py-1 add-to-cart-button">
@@ -117,16 +128,25 @@ const DetailsPage = () => {
                 <div className="pb-1">
                   <b>Review</b>
                 </div>
-                <textarea className="form-control" onChange={(e) => setReview(e.target.value)}/>
+                <textarea
+                  className="form-control"
+                  onChange={(e) => setReview(e.target.value)}
+                />
               </label>
               <label>
                 <div className="pb-1">
                   <b>Rating</b>
                 </div>
-                <input type="text" className="form-control" onChange={(e) => setRating(e.target.value)}/>
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={(e) => setRating(e.target.value)}
+                />
               </label>
-              <button className="rounded-pill xl-font-size py-1 add-to-cart-button"
-                      onClick={() => createReviewHandler()}>
+              <button
+                className="rounded-pill xl-font-size py-1 add-to-cart-button"
+                onClick={() => createReviewHandler()}
+              >
                 <i className="bi bi-pencil-square"></i> Post Review
               </button>
             </div>
@@ -135,7 +155,7 @@ const DetailsPage = () => {
         </div>
 
         <div className="flex-col gap-between px-4">
-          <ReviewsItem itemId={goodsId}/>
+          <ReviewsItem itemId={goodsId} />
         </div>
       </div>
     </div>

@@ -42,9 +42,11 @@ export default function SignInModal() {
     try {
       //await userService.login(userInputs);
       await dispatch(loginThunk(userInputs));
+      //reload the page idk it doesn't immediately update:
       navigate("/");
     } catch (e) {
       //fix up the error Messages
+      //TODO:idk why but this does not create the alert when they fail to login
       alert(e);
     }
   };
@@ -83,7 +85,15 @@ export default function SignInModal() {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => {}}></Button>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              Cancel
+            </Button>
             <Button variant="ghost" onClick={() => login()}>
               Submit
             </Button>
