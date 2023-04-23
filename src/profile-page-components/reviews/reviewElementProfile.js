@@ -5,6 +5,7 @@ import {deleteReviewThunk, updateReviewThunk} from "../../ApiClient/thunks/revie
 import querySearchByGoodsID from "../../search-page-components/shien-queries-goodsId";
 import JsonItemComponent from "../../components/jsonItem";
 import {Link} from "react-router-dom";
+import * as userService from "../../ApiClient/services/users";
 
 const ReviewElementProfile = ({
     review = {
@@ -21,21 +22,11 @@ const ReviewElementProfile = ({
     const [title, setTitle] = useState("");
     const [contentValue, setContentValue] = useState(review.content);
     const [ratingValue, setRatingValue] = useState(review.rating.toString());
-    const [content, setContent] = useState(
-        <label className="d-none">
-            Review:
-            <textarea className="form-control textarea-autosize"
-                      onChange={(e) => {setContentValue(e.target.value)}}
-                      value={contentValue}/>
-        </label>);
-    const [rating, setRating] = useState(
-        <label className="d-none">
-            Rating:
-            <input className="form-control textarea-autosize"
-                   onChange={(e) => {setRatingValue(e.target.value)}}
-                   value={ratingValue}/>
-        </label>
-    );
+    const [user, setUser] = useState(null);
+    const currentUser = async () => {
+        const user1 = await userService.profile();
+        setUser(user1);
+    };
     useEffect(() => {
         const getData = async () => {
             const results = await querySearchByGoodsID(review.itemId);
@@ -43,39 +34,50 @@ const ReviewElementProfile = ({
         };
 
         getData();
+        currentUser();
     }, []);
     // get item info from item id
 
     // console.log(review);
     const updateReviewHandler = (id, event) => {
-        const icon = event.target;
-        const contentDiv = event.target.parentNode.parentNode.parentNode.children[1];
-        if (icon.className === "bi bi-pen pe-2") {
-            // contentDiv.textContent = "";
-            // console.log(contentDiv.children);
-            const rating = contentDiv.children[2];
-            const content = contentDiv.children[3];
-            rating.className = "";
-            content.className = "";
-            icon.className = "bi bi-check-lg pe-2";
-        }
-        else if (icon.className === "bi bi-check-lg pe-2") {
-            const newReview = {
-                rid: review._id,
-                content: contentValue,
-                rating: parseInt(ratingValue),
-            };
-            console.log("in review element", newReview);
-            // console.log(contentDiv.children);
-            dispatch(updateReviewThunk(newReview));
-            const newContent = contentDiv.children[1];
-            const rating = contentDiv.children[2];
-            const content = contentDiv.children[3];
-            rating.className = "d-none";
-            content.className = "d-none";
-            newContent.textContent = contentValue;
-            setStars(<Stars key={review._id} rating={parseInt(ratingValue)}/>);
-            icon.className = "bi bi-pen pe-2";
+        if (user != null) {
+            console.log("user id", user._id);
+            console.log("review author", review.author);
+            if (user._id == review.author) {
+                const icon = event.target;
+                const contentDiv = event.target.parentNode.parentNode.parentNode.children[1];
+                if (icon.className === "bi bi-pen pe-2") {
+                    // contentDiv.textContent = "";
+                    // console.log(contentDiv.children);
+                    const rating = contentDiv.children[2];
+                    const content = contentDiv.children[3];
+                    rating.className = "";
+                    content.className = "";
+                    icon.className = "bi bi-check-lg pe-2";
+                }
+                else if (icon.className === "bi bi-check-lg pe-2") {
+                    const newReview = {
+                        rid: review._id,
+                        content: contentValue,
+                        rating: parseInt(ratingValue),
+                    };
+                    console.log("in review element", newReview);
+                    // console.log(contentDiv.children);
+                    dispatch(updateReviewThunk(newReview));
+                    const newContent = contentDiv.children[1];
+                    const rating = contentDiv.children[2];
+                    const content = contentDiv.children[3];
+                    rating.className = "d-none";
+                    content.className = "d-none";
+                    newContent.textContent = contentValue;
+                    setStars(<Stars key={review._id} rating={parseInt(ratingValue)}/>);
+                    icon.className = "bi bi-pen pe-2";
+                } else {
+                    alert("Cannot edit other users' reviews");
+                }
+            }
+        } else {
+            alert("Must be signed in to edit reviews");
         }
     }
     const deleteReviewHandler = (id) => {
