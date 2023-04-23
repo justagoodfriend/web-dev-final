@@ -1,41 +1,58 @@
- import * as dao from "./favorites-dao.js";
+import * as dao from "./favorites-dao.js";
 
 const favoritesController = (app) => {
-    const getFavorites = async (req, res) => {
-        console.log("getting all favorites");
-        const favorites = await dao.findAllFavorites();
-        res.json(favorites);
-    }
+  const getFavorites = async (req, res) => {
+    console.log("getting all favorites");
+    const favorites = await dao.findAllFavorites();
+    res.json(favorites);
+  };
 
-    const getFavoritesForUser = async (req, res) => {
-        console.log("getting favorites for user:", req.params.uid);
-        const favorites = await dao.findFavoritesForUser(req.params.uid);
-        res.json(favorites);
-    }
+  //when viewing profiles of other users, would be necessary to view this information
+  const getFavoritesForUser = async (req, res) => {
+    console.log("getting favorites for user:", req.params.uid);
+    const favorites = await dao.findFavoritesForUser(req.params.uid);
+    res.json(favorites);
+  };
 
-    const getFavoritesForItem = async (req, res) => {
-        console.log("getting favorites for item:", req.params.iid);
-        const favorites = await dao.findFavoritesForItem(req.params.iid);
-        res.json(favorites);
-    }
+  const getFavoritesForItem = async (req, res) => {
+    console.log("getting favorites for item:", req.params.iid);
+    const favorites = await dao.findFavoritesForItem(req.params.iid);
+    res.json(favorites);
+  };
 
-    const createFavorite = async (req, res) => {
-        console.log("creating favorite");
-        const newFav = await dao.createFavorite(req.params.uid, req.params.iid);
-        res.json(newFav);
-    }
+  const createFavorite = async (req, res) => {
+    console.log("creating favorite");
+    const newFav = await dao.createFavorite(req.params.uid, req.params.iid);
+    res.json(newFav);
+  };
 
-    const deleteFavorite = async (req, res) => {
-        console.log("deleting favorite");
-        const status = await dao.deleteFavorite(req.params.rid);
-        res.json(status);
-    }
+  const getItemandUser = async (req, res) => {
+    console.log("Searching for item and user got called");
+    const potentialFavorite = await dao.findFavoritesForItemandUser(
+      req.params.uid,
+      req.params.iid
+    );
+    console.log(
+      "incoming parameters: " + req.params.uid + " " + req.params.iid
+    );
+    console.log(potentialFavorite);
+    res.json(potentialFavorite);
+  };
 
-    app.get("/api/favorites", getFavorites);
-    app.get("/api/favorites/users/:uid/favorites", getFavoritesForUser);
-    app.get("/api/favorites/item/:iid/favorites", getFavoritesForItem);
-    app.post("/api/favorites/users/:uid/item/:iid", createFavorite);
-    app.delete("/api/favorites/users/;uid/item/:iid", deleteFavorite);
+  const deleteFavorite = async (req, res) => {
+    console.log("deleting favorite");
+    const status = await dao.deleteFavorite(req.params.uid, req.params.iid);
+    res.json(status);
+  };
+
+  //would only be allowed to favorite if logged in, so I don't think the iid is necessary
+  app.get("/api/favorites", getFavorites);
+  //TODO: change to use the current
+  app.get("/api/favorites/users/:uid/favorites", getFavoritesForUser);
+  app.get("/api/favorites/item/:iid/favorites", getFavoritesForItem);
+  app.post("/api/favorites/users/:uid/item/:iid", createFavorite);
+  app.get("/api/favorites/users/:uid/item/:iid", getItemandUser);
+  app.delete("/api/favorites/users/:uid/item/:iid", deleteFavorite);
 };
 
 export default favoritesController;

@@ -2,30 +2,45 @@ import axios from "axios";
 const URL = "http://localhost:8080/api/favorites";
 
 const api = axios.create({
-    baseURL: "http://localhost:8080/api/favorites",
+  baseURL: "http://localhost:8080/api/favorites",
 });
 
-export const getFavoritesByUserId = async ({uid}) => {
-    const response = await api.get(`${URL}/${uid}`);
-    return response.data;
-}
+export const getFavoritesByUserId = async ({ uid }) => {
+  const response = await api.get(`${URL}/users/${uid}/favorites`);
+  return response.data;
+};
 
-export const getFavoritesByItemId = async ({iid}) => {
-    const response = await api.get(`${URL}/${iid}`);
-    return response.data;
-}
+export const getFavoritesByItemId = async ({ iid }) => {
+  const response = await api.get(`${URL}/item/${iid}/favorites`);
+  return response.data;
+};
 
 export const getFavorites = async () => {
-    const response = await api.get(`${URL}`);
-    return response.data;
-}
+  const response = await api.get(`${URL}`);
+  return response.data;
+};
 
-export const createFavorite = async ({uid, iid}) => {
-    const response = await api.post(`${URL}/users/${uid}/item${iid}`);
-    return response.data;
-}
+export const getFavoritesOfUserAndID = async (item) => {
+  console.log("this method was called");
+  const userId = item["uid"];
+  const itemId = item["iid"];
+  const response = await api.get(`${URL}/users/${userId}/item/${itemId}`);
+  //console.log("calling the db");
+  //console.log(response.data);
+  return response.data;
+};
 
-export const deleteFavorite = async ({uid, iid}) => {
-    const response = await api.delete(`${URL}/users/${uid}/item${iid}`);
-    return response.data;
-}
+export const createFavorite = async (item) => {
+  const userId = item["uid"];
+  const itemId = item["iid"];
+  const response = await api.post(`${URL}/users/${userId}/item/${itemId}`);
+  console.log(response.data);
+  return response.data;
+};
+
+export const deleteFavorite = async (item) => {
+  const userId = item["uid"];
+  const itemId = item["iid"];
+  const response = await api.delete(`${URL}/users/${userId}/item/${itemId}`);
+  return response.data;
+};
