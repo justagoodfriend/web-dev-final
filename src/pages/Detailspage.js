@@ -5,7 +5,6 @@ import { useParams } from "react-router";
 import querySearchByGoodsID from "../search-page-components/shien-queries-goodsId";
 import { createReviewThunk } from "../ApiClient/thunks/reviewsThunk";
 import ReviewsItem from "../profile-page-components/reviews/reviewsItem";
-import * as userService from "../ApiClient/services/users.js";
 import { getFavoritesOfUserAndID } from "../ApiClient/services/favorites";
 import {
   createFavoriteThunk,
@@ -22,17 +21,9 @@ const DetailsPage = () => {
   const sizes = ["Small", "Medium", "Large"];
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
-  // const {currentUser} = useSelector((state) => state.users);
-  const [user, setUser] = useState(null);
-  //for some reason, on refresh it loses the currently logged in user, and idk why, so it only works the first time you enter a page
-  //TODO: make a local storage, as suggested on piazza
-  const otherCurrentUser = useSelector((state) => state.users.currentUser);
+  const currentUser = useSelector((state) => state.users.currentUser);
+  // not in redux, mayble not important to use redux?
   const [liked, setLiked] = useState(false);
-  const currentUser = async () => {
-    const user1 = await userService.profile();
-    setUser(user1);
-  };
-
   const findUserLiked = async () => {
     const item = {
       uid: otherCurrentUser._id,
@@ -49,7 +40,7 @@ const DetailsPage = () => {
   //console.log(likesOnItem);
 
   useEffect(() => {
-    currentUser();
+    currentUser;
     findUserLiked();
     //maybe / maybe not need this condition check idk
     // if (currentUser != null) {
@@ -113,7 +104,6 @@ const DetailsPage = () => {
       alert("Must be logged in to post a review");
     }
   };
-
   return (
     <div className="row">
       <UserSection />

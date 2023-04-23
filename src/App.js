@@ -36,6 +36,15 @@ function App() {
               path="/profile/:uid/settings"
               element={<ProfilePage active="Settings" />}
             />
+                        <Route
+              path="/profile/items"
+              element={<ProfilePage active="Items" />}
+            />
+            <Route
+              path="/profile/transactions"
+              element={<ProfilePage active="Transactions" />}
+            />
+            
             <Route path="/search/:query" element={<SearchPage />} />
             <Route path="/search/women" element={<SearchPage page="Women" />} />
             <Route path="/search/men" element={<SearchPage page="Men" />} />
