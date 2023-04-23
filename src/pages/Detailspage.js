@@ -92,6 +92,8 @@ const DetailsPage = () => {
         dispatch(createFavoriteThunk(item));
       }
 
+      setLiked(!liked);
+
       //TODO afterwards, find if the current user liked this item:
       //depending on whether liked or disliked/ create or delete
     } else {
