@@ -51,6 +51,9 @@ export const profile = async () => {
 };
 
 export const findProfile = async (userID) => {
+  console.log("reached userService with Query for ID: " + userID);
+  const filepath = `${URL}/profile/${userID}`;
+  console.log("Sending this get req: "+ filepath);
   const response = await api.get(`${URL}/profile/${userID}`);
   return response.data;
 }

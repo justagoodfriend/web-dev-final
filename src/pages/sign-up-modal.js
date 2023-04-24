@@ -53,7 +53,8 @@ export default function SignUpModal() {
     username: "",
     password: "",
     email:"",
-    transactions: []
+    transactions: [],
+    items: []
   });
 
   const setAccountType = (input) => {

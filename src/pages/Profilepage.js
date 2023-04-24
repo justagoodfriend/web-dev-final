@@ -10,15 +10,15 @@ const ProfilePage = ({active = "Reviews"}) => {
     const user = useSelector((state) => state.users.currentUser);
     const target = useSelector((state) => state.users.currentTarget);
     const userID = useParams().uid;
-    console.log("User ID: " + userID);
     const dispatch = useDispatch();
     useEffect(
         () => {
+            console.log("Dispatching for Target ID: " + userID);
             dispatch(findUserByIdThunk(userID))
-            console.log("Target ID: " + target.username);
         },[]); 
     return (
         <div className="row">
+            {console.log("Target: " + target.username)}
             <UserSection active="Profile"/>
             <div className="col-9 profile-background d-flex flex-row h-100">
                 <div className="d-flex flex-column custom-padding col-2">
@@ -27,12 +27,12 @@ const ProfilePage = ({active = "Reviews"}) => {
                              className="profile-pic-larger rounded-circle border border-white border-3"/>
                     </div>
                     <div className="text-center">
-                        <h3 className="mb-0">{user && userID}</h3>
+                        <h3 className="mb-0">{target.username}</h3>
                     </div>
                 </div>
                 <div className="col-10">
-                    <ProfileNav active={active} user={user && userID}/>
-                    <ProfileElement active={active} user={user && userID}/>
+                    <ProfileNav active={active} user={user.username && target._id}/>
+                    <ProfileElement active={active} user={user.username && target._id}/>
                 </div>
             </div>
         </div>

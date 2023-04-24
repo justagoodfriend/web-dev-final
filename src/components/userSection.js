@@ -27,7 +27,6 @@ const UserSection = ({ active = "Home" }) => {
           {/* TODO: make this take in the current user: */}
           <h2 className="text-white m-0">Hi Guest!</h2>
           <>
-            {console.log("TEST" + user.username) } 
             {
             user && user.username ? (
               <span

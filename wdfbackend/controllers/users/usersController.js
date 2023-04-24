@@ -34,12 +34,14 @@ const userController = (app) => {
   };
 
   const findProfileById = async (req, res) => {
-    const id = req.body.uid;
-    console.log("Querying for User with ID: " + id);
-    const user = await dao.findUserById(id);
-    if (user) res.json(user);
+    console.log(req.params.uid);
+    console.log("Reached backend Controller : " + req.params.uid);
+    const user = await dao.findUserById(req.params.uid);
+    if (user) {
+      return res.json(user);
+    }
     else res.sendStatus(404);
-  }
+  };
 
   const profile = async (req, res) => {
     const currentUser = req.session["currentUser"];
@@ -58,6 +60,7 @@ const userController = (app) => {
   const update = async (req, res) => {};
 
   const updateLikes = async (req, res) => {
+    console.log("routing to update likes?");
     const currentUser = req.session["currentUser"];
     const itemId = req.params.iid;
     const user = dao.updateLikes(currentUser, itemId);
