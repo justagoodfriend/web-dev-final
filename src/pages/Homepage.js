@@ -16,8 +16,8 @@ const HomePage = () => {
                 {(user && user.wishlist) && <CarouselItems title="Recommended" id="R1" />}
                 {(user && user.wishlist) && <CarouselItems title="Wishlist" id="W1" />}
                 {/** FIGURE OUT THE WORKAROUND FOR IDs */}
-                {(!user ||user.items) && <CarouselItems title="Best Sellers" id="W1"/>}
-                {(!user || user.items) && <CarouselItems title="Recent Additions" id="R1"/>}
+                {(!user || !user.username || user.items) && <CarouselItems title="Best Sellers" id="W1"/>}
+                {(!user || !user.username || user.items) && <CarouselItems title="Recent Additions" id="R1"/>}
                 <Outlet />
             </div>
         </div>
