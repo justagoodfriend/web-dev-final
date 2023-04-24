@@ -2,12 +2,21 @@ import UserSection from "../components/userSection";
 import ProfileElement from "../profile-page-components/profileElement";
 import ProfileNav from "../profile-page-components/profile-nav/profileNav";
 import {useDispatch, useSelector} from "react-redux";
-import {profileThunk} from "../ApiClient/thunks/authThunks";
+import {findUserByIdThunk, profileThunk} from "../ApiClient/thunks/authThunks";
 import {useParams} from "react-router";
+import { useEffect } from "react";
 
 const ProfilePage = ({active = "Reviews"}) => {
     const user = useSelector((state) => state.users.currentUser);
+    const target = useSelector((state) => state.users.currentTarget);
     const userID = useParams().uid;
+    console.log("User ID: " + userID);
+    const dispatch = useDispatch();
+    useEffect(
+        () => {
+            dispatch(findUserByIdThunk(userID))
+            console.log("Target ID: " + target.username);
+        },[]); 
     return (
         <div className="row">
             <UserSection active="Profile"/>

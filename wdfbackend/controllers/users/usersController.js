@@ -33,6 +33,14 @@ const userController = (app) => {
     }
   };
 
+  const findProfileById = async (req, res) => {
+    const id = req.body.uid;
+    console.log("Querying for User with ID: " + id);
+    const user = await dao.findUserById(id);
+    if (user) res.json(user);
+    else res.sendStatus(404);
+  }
+
   const profile = async (req, res) => {
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
@@ -62,6 +70,7 @@ const userController = (app) => {
   app.post("/api/users/profile", profile);
   app.post("/api/users/logout", logout);
   app.put("/api/users", update);
+  app.get("/api/users/profile/:uid", findProfileById);
   app.put("/api/users/profile/likes/:iid", updateLikes);
 };
 

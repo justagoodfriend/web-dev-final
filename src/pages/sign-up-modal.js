@@ -31,7 +31,7 @@ export default function SignUpModal() {
     await userService.register(newProfile);
     // need to then proceed to build either new buyer or seller. 
 
-    navigate("/profile");
+    navigate("/profile/"+profile._id);
   };
 /** 
   const setUserProfile = (newProfile) => {

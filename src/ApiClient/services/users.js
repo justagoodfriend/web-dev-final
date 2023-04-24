@@ -50,6 +50,11 @@ export const profile = async () => {
   return response.data;
 };
 
+export const findProfile = async (userID) => {
+  const response = await api.get(`${URL}/profile/${userID}`);
+  return response.data;
+}
+
 export const updateLikes = async (goodsId) => {
   const response = await api.put(`${URL}/profile/likes${goodsId}`);
   return response.data;

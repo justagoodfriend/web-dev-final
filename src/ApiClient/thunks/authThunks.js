@@ -44,3 +44,13 @@ export const updateUserLikesThunk = createAsyncThunk(
         return user;
     }
 );
+
+export const findUserByIdThunk = createAsyncThunk(
+  "users/profile",
+  async (userID) => {
+    console.log("Looking for user by ID get...");
+    const user = await userService.findProfile(userID);
+    console.log(user);
+    return user;
+  }
+)
