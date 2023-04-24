@@ -38,12 +38,17 @@ export default function SignInModal() {
   const [isOpen, setIsOpen] = useState(profile.username == "");
 
   const [userInputs, setUserInput] = useState({ username: "", password: "" });
+
   const login = async () => {
     try {
       //await userService.login(userInputs);
       await dispatch(loginThunk(userInputs));
-      //reload the page idk it doesn't immediately update:
+      const user = await userService.profile();
+      localStorage.setItem("user", JSON.stringify(user));
+      console.log(localStorage.getItem("user"));
       navigate("/");
+      window.location.reload();
+      return false;
     } catch (e) {
       //fix up the error Messages
       //TODO:idk why but this does not create the alert when they fail to login
