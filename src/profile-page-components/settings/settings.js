@@ -10,12 +10,15 @@ const Settings = ({user= {}}) => {
   //fetch the items from the current
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user.currentUser);
-
+  const currentUser = useSelector((state) => state.users.currentUser);
+  useEffect(
+    () => {
+        dispatch(profileThunk());
+    },[]); 
   //in the profile page -> also may log out here as well
   return (
     <>
-      {currentUser ? (
+      {(currentUser) ? (
         <div className="custom-padding-left pt-3 d-flex flex-row pb-5 mb-5">
           <div className="d-flex flex-column col-7">
             <label>

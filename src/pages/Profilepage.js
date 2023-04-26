@@ -13,8 +13,8 @@ const ProfilePage = ({active = "Reviews"}) => {
     const dispatch = useDispatch();
     useEffect(
         () => {
-            console.log("Dispatching for Target ID: " + userID);
-            dispatch(findUserByIdThunk(userID))
+            dispatch(findUserByIdThunk(userID));
+            dispatch(profileThunk());
         },[]); 
     return (
         <div className="row">
