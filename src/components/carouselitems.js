@@ -18,14 +18,16 @@ const CarouselItems = (props) => {
   useEffect(() => {
     const getData = async () => {
       let results;
+      let allResults;
 
       if (props.items) {
         results = props.items;
+        console.log("props items", results);
+        allResults = results;
       } else {
         results = await homeQuerySearch(props.queryTitle, "9", props.category);
+        allResults = results.info.products;
       }
-
-      const allResults = results.info.products;
 
       if (allResults.length > 3) {
         setActiveItems(allResults.slice(0, 3));
@@ -37,7 +39,7 @@ const CarouselItems = (props) => {
       setLoading(false);
     };
     getData();
-  }, []);
+  }, [props]);
 
 
   return (

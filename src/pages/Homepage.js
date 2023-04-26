@@ -8,7 +8,7 @@ import querySearch from "../search-page-components/shein-service";
 
 const HomePage = () => {
   const user = useSelector((state) => state.users.currentUser);
-  console.log(user);
+  // console.log(user);
 
     const [recommendedItems, setRecommendedItems] = useState([]);
     const [wishlistItems, setWishlistItems] = useState([]);
@@ -16,22 +16,30 @@ const HomePage = () => {
     useEffect(() => {
         const getRecommendedItems = async () => {
             if (user && user.wishlist) {
-                const mostRecentItemId = user.wishlist[user.wishlist.length - 1];
-                const item = await querySearchByGoodsID(mostRecentItemId);
-
-                const keyword = item.info.goods_name.split(" ")[1];
-
-                const results = await querySearch(keyword, 9);
-                setRecommendedItems(results.info.products);
+                if (user.wishlist.length > 0) {
+                    const mostRecentItemId = user.wishlist[user.wishlist.length - 1];
+                    const item = await querySearchByGoodsID(mostRecentItemId);
+                    // console.log("test", item);
+                    // console.log("test name", item.info.goods_name);
+                    const keyword = item.info.goods_name.split(" ")[1];
+                    const results = await querySearch(keyword, 9);
+                    setRecommendedItems(results.info.products);
+                } else {
+                    const results = await querySearch("Shoes", 9);
+                    // console.log(results.info.products);
+                    setRecommendedItems(results.info.products);
+                }
             }
         }
         const getWishlistItems = async () => {
             if (user && user.wishlist) {
-                const results = user.wishlist.map(async (itemId) => {
-                    const item = await querySearchByGoodsID(itemId);
-                    return item.info;
-                });
-                setWishlistItems(results);
+                if (user.wishlist.length > 0) {
+                    const results = user.wishlist.map(async (itemId) => {
+                        const item = await querySearchByGoodsID(itemId);
+                        return item.info;
+                    });
+                    setWishlistItems(results);
+                }
             }
         }
 
@@ -39,11 +47,12 @@ const HomePage = () => {
         getWishlistItems();
     }, [user]);
 
+
   return (
     <div className="row">
       <UserSection active="Home" />
       <div className="col-9">
-        {console.log(user && user.items)}
+        {console.log("recommended items", recommendedItems)}
         {user && user.wishlist && <CarouselItems title="Recommended" id="R1" items={recommendedItems}/>}
         {user && user.wishlist && <CarouselItems title="Wishlist" id="W1" items={wishlistItems}/>}
 
