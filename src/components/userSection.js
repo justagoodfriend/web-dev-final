@@ -152,7 +152,7 @@ const UserSection = ({ active = "Home" }) => {
               ></Button>
             </>
           )}
-          {currentUser && currentUser.wishlist && (
+          {currentUser && (
             <>
               <Button
                 active={active}

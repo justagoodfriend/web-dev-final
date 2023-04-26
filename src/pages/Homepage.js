@@ -1,23 +1,28 @@
 import CarouselItems from "../components/carouselitems";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import UserSection from "../components/userSection";
 import { Outlet } from "react-router";
 import { useSelector } from "react-redux";
 import querySearchByGoodsID from "../search-page-components/shien-queries-goodsId";
 import querySearch from "../search-page-components/shein-service";
+import {getItems} from "../ApiClient/services/item";
+import {UserContext} from "../redux/userContextTest";
 
 const HomePage = () => {
-  const user = useSelector((state) => state.users.currentUser);
+    const { user } = useContext(UserContext);
+    // console.log(user);
+    const currentUser = JSON.parse(user);
   // console.log(user);
 
     const [recommendedItems, setRecommendedItems] = useState([]);
     const [wishlistItems, setWishlistItems] = useState([]);
+    const [listingItems, setListingItems] = useState([]);
 
     useEffect(() => {
         const getRecommendedItems = async () => {
-            if (user && user.wishlist) {
-                if (user.wishlist.length > 0) {
-                    const mostRecentItemId = user.wishlist[user.wishlist.length - 1];
+            if (currentUser) {
+                if (currentUser.wishlist && currentUser.wishlist.length > 0) {
+                    const mostRecentItemId = currentUser.wishlist[currentUser.wishlist.length - 1];
                     const item = await querySearchByGoodsID(mostRecentItemId);
                     // console.log("test", item);
                     // console.log("test name", item.info.goods_name);
@@ -32,9 +37,9 @@ const HomePage = () => {
             }
         }
         const getWishlistItems = async () => {
-            if (user && user.wishlist) {
-                if (user.wishlist.length > 0) {
-                    const results = user.wishlist.map(async (itemId) => {
+            if (currentUser && currentUser.wishlist) {
+                if (currentUser.wishlist.length > 0) {
+                    const results = currentUser.wishlist.map(async (itemId) => {
                         const item = await querySearchByGoodsID(itemId);
                         return item.info;
                     });
@@ -42,10 +47,18 @@ const HomePage = () => {
                 }
             }
         }
+        const fetchNewSellerItems = async () => {
+            if (currentUser && currentUser.items) {
+                const dbItems = await getItems();
+                console.log(dbItems);
+                setListingItems(dbItems);
+            }
+        };
 
         getRecommendedItems();
         getWishlistItems();
-    }, [user]);
+        fetchNewSellerItems();
+    }, []);
 
 
   return (
@@ -53,13 +66,14 @@ const HomePage = () => {
       <UserSection active="Home" />
       <div className="col-9">
         {console.log("recommended items", recommendedItems)}
-        {user && user.wishlist && <CarouselItems title="Recommended" id="R1" items={recommendedItems}/>}
-        {user && user.wishlist && <CarouselItems title="Wishlist" id="W1" items={wishlistItems}/>}
+        {currentUser && <CarouselItems title="Recommended" id="R1" items={recommendedItems}/>}
+        {currentUser && currentUser.wishlist && <CarouselItems title="Wishlist" id="W1" items={wishlistItems}/>}
+        {currentUser && currentUser.items && <CarouselItems title="Listed Items" id="W1" items={listingItems} customItems={true}/>}
 
-        {(!user || !user.username || user.items) && (
+        {(!currentUser || !currentUser.username || currentUser.items) && (
           <CarouselItems title="Best Sellers" id="W1" queryTitle="Shein" category="8"/>
         )}
-        {(!user || !user.username || user.items) && (
+        {(!currentUser || !currentUser.username || currentUser.items) && (
           <CarouselItems title="Recent Additions" id="R1" queryTitle="Shein" category="9" />
         )}
         <Outlet />

@@ -7,12 +7,12 @@ import querySearchByGoodsID from "../search-page-components/shien-queries-goodsI
 import querySearch from "../search-page-components/shein-service";
 import CreateItem from "../profile-page-components/create-item/createItem";
 
-const CreateItemPage = () => {
+const CreateItemPage = ({active = "Reviews"}) => {
     // const user = useSelector((state) => state.users.currentUser);
 
     return (
         <div className="row">
-            <UserSection active="Home" />
+            <UserSection active={active} />
             <div className="col-9">
                 <CreateItem/>
             </div>

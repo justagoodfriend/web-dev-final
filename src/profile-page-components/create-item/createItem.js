@@ -1,13 +1,16 @@
 import {useDispatch, useSelector} from "react-redux";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {useParams} from "react-router";
 import {createItemThunk} from "../../ApiClient/thunks/itemThunk";
+import {UserContext} from "../../redux/userContextTest";
 
 const CreateItem = ({
                      userId = null
                  }) => {
     // userId = useParams().uid;
-    const currentUser = useSelector((state) => state.users.currentUser);
+    // const currentUser = useSelector((state) => state.users.currentUser);
+    const { user } = useContext(UserContext);
+    const currentUser = JSON.parse(user);
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState("");

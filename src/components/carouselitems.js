@@ -7,6 +7,7 @@ import JsonItemComponent from "./jsonItem";
 import querySearch from "../search-page-components/shein-service";
 import {Link} from "react-router-dom";
 import homeQuerySearch from "../search-page-components/homepage-query";
+import ListingItem from "./listingItems";
 // import {Link} from "@chakra-ui/react";
 
 //props -> title => name of the heading for the component, id => unique id for the carousel items
@@ -55,16 +56,34 @@ const CarouselItems = (props) => {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <div className="cards">
-              {activeItems.map((clothingitem) => (
+              {
+                props.customItems &&
+                activeItems.map((clothingitem) => (
+                      <ListingItem key={clothingitem.itemId} item={clothingitem}/>
+                  ))
+              }
+              {
+                !props.customItems &&
+                  activeItems.map((clothingitem) => (
                   <JsonItemComponent key={clothingitem.goods_id} item={clothingitem}/>
-              ))}
+              ))
+              }
             </div>
           </div>
           <div className="carousel-item">
             <div className="cards">
-              {inactiveItems.map((clothingitem) => (
-                  <JsonItemComponent key={clothingitem.goods_id} item={clothingitem}/>
-              ))}
+              {
+                  props.customItems &&
+                  inactiveItems.map((clothingitem) => (
+                      <ListingItem key={clothingitem.itemId} item={clothingitem}/>
+                  ))
+              }
+              {
+                  !props.customItems &&
+                  inactiveItems.map((clothingitem) => (
+                      <JsonItemComponent key={clothingitem.goods_id} item={clothingitem}/>
+                  ))
+              }
             </div>
           </div>
         </div>

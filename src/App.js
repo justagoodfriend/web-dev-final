@@ -67,8 +67,8 @@ function App() {
               <Route path="/search/kids" element={<SearchPage page="Kids" />} />
               <Route path="/search/sale" element={<SearchPage page="Sale" />} />
               <Route path="/details/:iid" element={<DetailsPage />} />
-              <Route path="/listings" element={<Listings />} />
-              <Route path="/addItem" element={<CreateItemPage/>}/>
+              <Route path="/listings" element={<Listings active="Listings"/>} />
+              <Route path="/addItem" element={<CreateItemPage active="Add Item"/>}/>
             </Routes>
           </UserContext.Provider>
         </BrowserRouter>

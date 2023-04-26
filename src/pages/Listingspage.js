@@ -6,7 +6,7 @@ import ListingItem from "../components/listingItems";
 
 //page created to display the items within our database that a seller created:
 
-const Listings = () => {
+const Listings = ({active = "Reviews"}) => {
   const [database, setDatabase] = useState([]);
 
   const fetchNewSellerItems = async () => {
@@ -21,7 +21,7 @@ const Listings = () => {
 
   return (
     <div className="row">
-      <UserSection />
+      <UserSection active={active}/>
       <div className="col-9">
         <div>
           <h2 className="pt-3 ps-4">New Listings</h2>
