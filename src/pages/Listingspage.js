@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import UserSection from "../components/userSection";
 import { getItems } from "../ApiClient/services/item";
 import JsonItemComponent from "../components/jsonItem";
+import ListingItem from "../components/listingItems";
 
 //page created to display the items within our database that a seller created:
 
@@ -10,6 +11,7 @@ const Listings = () => {
 
   const fetchNewSellerItems = async () => {
     const dbItems = await getItems();
+    console.log(dbItems);
     setDatabase(dbItems);
   };
 
@@ -27,7 +29,7 @@ const Listings = () => {
         {
           <div className="cards result-layout">
             {database.map((item) => (
-              <JsonItemComponent item={item} />
+              <ListingItem item={item} />
             ))}
           </div>
         }

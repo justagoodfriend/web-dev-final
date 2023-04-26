@@ -39,8 +39,7 @@ const userController = (app) => {
     const user = await dao.findUserById(req.params.uid);
     if (user) {
       return res.json(user);
-    }
-    else res.sendStatus(404);
+    } else res.sendStatus(404);
   };
 
   const profile = async (req, res) => {
@@ -57,7 +56,11 @@ const userController = (app) => {
     res.sendStatus(200);
   };
 
-  const update = async (req, res) => {};
+  //think that's how it works:
+  const update = async (req, res) => {
+    const user = await dao.updateUser(req.body);
+    res.json(user);
+  };
 
   const updateLikes = async (req, res) => {
     console.log("routing to update likes?");

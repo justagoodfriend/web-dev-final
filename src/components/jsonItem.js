@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 
 const JsonItemComponent = ({ item }) => {
     return (
-        <Link to={`/details/${item.goods_id}`}>
-            <div className="card card-size pb-5">
+            <div className="card">
+                <Link to={`/details/${item.goods_id}`}>
                 <img src={item.goods_img} className="card-image-top" alt="..." />
                 <div className="card-body">
                     <p className="card-text">
@@ -13,8 +13,8 @@ const JsonItemComponent = ({ item }) => {
                         <b>{item.retailPrice.amountWithSymbol}</b>
                     </p>
                 </div>
+                </Link>
             </div>
-        </Link>
     );
 };
 
