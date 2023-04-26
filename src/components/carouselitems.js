@@ -25,8 +25,7 @@ const CarouselItems = (props) => {
         results = await homeQuerySearch(props.queryTitle, "9", props.category);
       }
 
-      // shuffled
-      const allResults = results.info.products.sort(() => 0.5 - Math.random());
+      const allResults = results.info.products;
 
       if (allResults.length > 3) {
         setActiveItems(allResults.slice(0, 3));
