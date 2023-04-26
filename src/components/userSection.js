@@ -114,7 +114,7 @@ const UserSection = ({ active = "Home" }) => {
               icon="bi bi-person-fill-gear text-white pe-3 fs-5"
             />
           )}
-          {
+          { (!currentUser || currentUser.wishlist) &&
             <>
               <Button
                 active={active}

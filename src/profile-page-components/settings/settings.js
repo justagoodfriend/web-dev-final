@@ -2,22 +2,27 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import * as userService from "../../ApiClient/services/users.js";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { profileThunk } from "../../ApiClient/thunks/authThunks.js";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useContext } from "react";
+import { UserContext } from "../../redux/userContextTest";
 const Settings = ({user= {}}) => {
   //fetch the items from the current
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.users.currentUser);
+  const targetID = useParams().uid;
+  const user2 = useContext(UserContext).user;
+  console.log(user);
+  const currentUser = JSON.parse(user2);
   useEffect(
     () => {
         dispatch(profileThunk());
-    },[]); 
+    },[currentUser]); 
   //in the profile page -> also may log out here as well
   return (
     <>
+      {currentUser._id != targetID && navigate("/profile/"+currentUser._id+"/settings")}
       {(currentUser) ? (
         <div className="custom-padding-left pt-3 d-flex flex-row pb-5 mb-5">
           <div className="d-flex flex-column col-7">
