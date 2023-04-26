@@ -13,6 +13,8 @@ import {
 } from "../ApiClient/thunks/favoritesThunk";
 import { updateUserLikesThunk } from "../ApiClient/thunks/authThunks";
 import { getItemById } from "../ApiClient/services/item";
+import { useContext } from "react";
+import { UserContext } from "../redux/userContextTest";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
   const [itemImg, setItemImg] = useState("");
@@ -22,7 +24,12 @@ const DetailsPage = () => {
   const sizes = ["Small", "Medium", "Large"];
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
-  const currentUser = useSelector((state) => state.users.currentUser);
+  //const currentUser = useSelector((state) => state.users.currentUser);
+
+  const { user } = useContext(UserContext);
+  console.log(user);
+  const currentUser = JSON.parse(user);
+  //const currentUser =
   // not in redux, mayble not important to use redux?
   const [liked, setLiked] = useState(false);
   const findUserLiked = async () => {
@@ -80,7 +87,8 @@ const DetailsPage = () => {
   }, []);
 
   const updateLikesHandler = () => {
-    if (currentUser != null) {
+    if (currentUser._id != null) {
+      console.log("LIKES currently favoriting");
       const item = {
         uid: currentUser._id,
         iid: goodsId,
@@ -93,16 +101,13 @@ const DetailsPage = () => {
       }
 
       setLiked(!liked);
-
-      //TODO afterwards, find if the current user liked this item:
-      //depending on whether liked or disliked/ create or delete
     } else {
       alert("Must be logged in to favorite an item");
     }
   };
 
   const createReviewHandler = () => {
-    if (currentUser != null) {
+    if (currentUser._id != null) {
       const reviewFull = {
         itemId: goodsId,
         content: review,
@@ -154,9 +159,6 @@ const DetailsPage = () => {
                 onClick={() => updateLikesHandler()}
               >
                 <span>Favorite</span>
-              </button>
-              <button className="rounded-pill xl-font-size py-1 add-to-cart-button">
-                <i className="bi bi-cart"></i> Add to Card
               </button>
               <label>
                 <div className="pb-1">
