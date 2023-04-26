@@ -6,6 +6,7 @@ import ProfilePage from "./pages/Profilepage";
 import SearchPage from "./pages/Searchpage";
 import SignInModal from "./pages/sign-in-modal";
 import SignUpModal from "./pages/sign-up-modal";
+import Listings from "./pages/Listingspage";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -21,7 +22,8 @@ import { useState, useMemo } from "react";
 //will map to them so for now I pass a unique id by prop
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user"));
-  //localStorage.clear();
+
+  //localStorage.clear() => use this if things fuck up with local storage :)
 
   //localStorage/useContext instead to share between componts:
   return (
@@ -64,6 +66,7 @@ function App() {
               <Route path="/search/kids" element={<SearchPage page="Kids" />} />
               <Route path="/search/sale" element={<SearchPage page="Sale" />} />
               <Route path="/details/:iid" element={<DetailsPage />} />
+              <Route path="/listings" element={<Listings />} />
             </Routes>
           </UserContext.Provider>
         </BrowserRouter>

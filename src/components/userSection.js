@@ -114,7 +114,7 @@ const UserSection = ({ active = "Home" }) => {
               icon="bi bi-person-fill-gear text-white pe-3 fs-5"
             />
           )}
-          { (currentUser.wishlist) &&
+          {
             <>
               <Button
                 active={active}
@@ -149,6 +149,16 @@ const UserSection = ({ active = "Home" }) => {
                 href="/new-item"
                 title="Add Item"
                 icon="bi bi-plus text-white pe-3 fs-5"
+              ></Button>
+            </>
+          )}
+          {currentUser && currentUser.wishlist && (
+            <>
+              <Button
+                active={active}
+                href="/listings"
+                title="Listings"
+                icon="bi bi-tag-fill text-white pe-3 fs-5"
               ></Button>
             </>
           )}

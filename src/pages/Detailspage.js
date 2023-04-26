@@ -53,6 +53,9 @@ const DetailsPage = () => {
   }, []);
 
   useEffect(() => {
+    //id: -> querySearch immediately, maybe first a check to see if the item exists within the database:
+    //if then we set results to that, else we then query like normal
+
     const getData = async () => {
       const results = await querySearchByGoodsID(goodsId);
       setItemImg(results.info.goods_img);
