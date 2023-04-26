@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import CurrentUserContext from "./redux/currentUserContext";
 import { UserContext } from "./redux/userContextTest";
 import { useState, useMemo } from "react";
+import CreateItemPage from "./pages/AddItemPage";
 
 //current user:
 
@@ -67,6 +68,7 @@ function App() {
               <Route path="/search/sale" element={<SearchPage page="Sale" />} />
               <Route path="/details/:iid" element={<DetailsPage />} />
               <Route path="/listings" element={<Listings />} />
+              <Route path="/addItem" element={<CreateItemPage/>}/>
             </Routes>
           </UserContext.Provider>
         </BrowserRouter>

@@ -146,7 +146,7 @@ const UserSection = ({ active = "Home" }) => {
             <>
               <Button
                 active={active}
-                href="/new-item"
+                href="/addItem"
                 title="Add Item"
                 icon="bi bi-plus text-white pe-3 fs-5"
               ></Button>
