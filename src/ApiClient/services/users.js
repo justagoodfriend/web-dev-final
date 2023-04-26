@@ -50,6 +50,14 @@ export const profile = async () => {
   return response.data;
 };
 
+export const findProfile = async (userID) => {
+  console.log("reached userService with Query for ID: " + userID);
+  const filepath = `${URL}/profile/${userID}`;
+  console.log("Sending this get req: "+ filepath);
+  const response = await api.get(`${URL}/profile/${userID}`);
+  return response.data;
+}
+
 export const updateLikes = async (goodsId) => {
   const response = await api.put(`${URL}/profile/likes${goodsId}`);
   return response.data;

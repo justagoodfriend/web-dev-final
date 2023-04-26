@@ -12,6 +12,9 @@ import {
   deleteFavoriteThunk,
 } from "../ApiClient/thunks/favoritesThunk";
 import { updateUserLikesThunk } from "../ApiClient/thunks/authThunks";
+import { getItemById } from "../ApiClient/services/item";
+import { useContext } from "react";
+import { UserContext } from "../redux/userContextTest";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
   const [itemImg, setItemImg] = useState("");
@@ -21,7 +24,12 @@ const DetailsPage = () => {
   const sizes = ["Small", "Medium", "Large"];
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
-  const currentUser = useSelector((state) => state.users.currentUser);
+  //const currentUser = useSelector((state) => state.users.currentUser);
+
+  const { user } = useContext(UserContext);
+  console.log(user);
+  const currentUser = JSON.parse(user);
+  //const currentUser =
   // not in redux, mayble not important to use redux?
   const [liked, setLiked] = useState(false);
   const findUserLiked = async () => {
@@ -53,24 +61,34 @@ const DetailsPage = () => {
   }, []);
 
   useEffect(() => {
+    //id: -> querySearch immediately, maybe first a check to see if the item exists within the database:
+    //if then we set results to that, else we then query like normal
+
     const getData = async () => {
-      const results = await querySearchByGoodsID(goodsId);
-      setItemImg(results.info.goods_img);
-      setItemName(results.info.goods_name);
-      setItemPrice(results.info.retail_price.amountWithSymbol);
-      const moreDetails = results.info.mainSaleAttribute.info;
-      let colors = [];
-      moreDetails.forEach((detail) => {
-        colors.push(detail.attr_value);
-      });
-      setItemColors(colors);
+      const initialItems = await getItemById(goodsId);
+      if (initialItems) {
+        //then set the itesms to be result
+        console.log(initialItems);
+      } else {
+        const results = await querySearchByGoodsID(goodsId);
+        setItemImg(results.info.goods_img);
+        setItemName(results.info.goods_name);
+        setItemPrice(results.info.retail_price.amountWithSymbol);
+        const moreDetails = results.info.mainSaleAttribute.info;
+        let colors = [];
+        moreDetails.forEach((detail) => {
+          colors.push(detail.attr_value);
+        });
+        setItemColors(colors);
+      }
     };
 
     getData();
   }, []);
 
   const updateLikesHandler = () => {
-    if (currentUser != null) {
+    if (currentUser._id != null) {
+      console.log("LIKES currently favoriting");
       const item = {
         uid: currentUser._id,
         iid: goodsId,
@@ -83,16 +101,13 @@ const DetailsPage = () => {
       }
 
       setLiked(!liked);
-
-      //TODO afterwards, find if the current user liked this item:
-      //depending on whether liked or disliked/ create or delete
     } else {
       alert("Must be logged in to favorite an item");
     }
   };
 
   const createReviewHandler = () => {
-    if (currentUser != null) {
+    if (currentUser._id != null) {
       const reviewFull = {
         itemId: goodsId,
         content: review,
@@ -144,9 +159,6 @@ const DetailsPage = () => {
                 onClick={() => updateLikesHandler()}
               >
                 <span>Favorite</span>
-              </button>
-              <button className="rounded-pill xl-font-size py-1 add-to-cart-button">
-                <i className="bi bi-cart"></i> Add to Card
               </button>
               <label>
                 <div className="pb-1">

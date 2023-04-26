@@ -33,6 +33,15 @@ const userController = (app) => {
     }
   };
 
+  const findProfileById = async (req, res) => {
+    console.log(req.params.uid);
+    console.log("Reached backend Controller : " + req.params.uid);
+    const user = await dao.findUserById(req.params.uid);
+    if (user) {
+      return res.json(user);
+    } else res.sendStatus(404);
+  };
+
   const profile = async (req, res) => {
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
@@ -47,9 +56,14 @@ const userController = (app) => {
     res.sendStatus(200);
   };
 
-  const update = async (req, res) => {};
+  //think that's how it works:
+  const update = async (req, res) => {
+    const user = await dao.updateUser(req.body);
+    res.json(user);
+  };
 
   const updateLikes = async (req, res) => {
+    console.log("routing to update likes?");
     const currentUser = req.session["currentUser"];
     const itemId = req.params.iid;
     const user = dao.updateLikes(currentUser, itemId);
@@ -62,6 +76,7 @@ const userController = (app) => {
   app.post("/api/users/profile", profile);
   app.post("/api/users/logout", logout);
   app.put("/api/users", update);
+  app.get("/api/users/profile/:uid", findProfileById);
   app.put("/api/users/profile/likes/:iid", updateLikes);
 };
 

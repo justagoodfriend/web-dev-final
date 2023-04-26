@@ -12,28 +12,35 @@ import {
   Input,
   Radio,
   RadioGroup,
-  Stack
+  Stack,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 //rename this later
 import * as userService from "../ApiClient/services/users";
+import { UserContext } from "../redux/userContextTest";
 
 export default function SignUpModal() {
   const profile = useSelector((state) => state.profile);
   const profilesDB = useSelector((state) => state.profilesDB);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { user, setUser } = useContext(UserContext);
 
   const testregister = async (newProfile) => {
-    await userService.register(newProfile);
-    // need to then proceed to build either new buyer or seller. 
-
-    navigate("/profile");
+    //TODO: error handling for this
+    const result = await userService.register(newProfile);
+    console.log(result);
+    localStorage.setItem("user", JSON.stringify(result));
+    // need to then proceed to build either new buyer or seller.
+    //setUser(JSON.stringify(result));
+    //console.log("set the current user as " + user);
+    navigate("/profile/" + result._id);
+    window.location.reload();
+    return false;
   };
-/** 
+  /** 
   const setUserProfile = (newProfile) => {
     dispatch({
       type: "SIGN_IN",
@@ -52,21 +59,22 @@ export default function SignUpModal() {
   const [userInputs, setUserInput] = useState({
     username: "",
     password: "",
-    email:"",
-    transactions: []
+    email: "",
+    transactions: [],
+    items: [],
   });
 
   const setAccountType = (input) => {
     const copy = userInputs;
-    if (input === 'buyer') {
+    if (input === "buyer") {
       delete copy.items;
-      setUserInput({...copy, reviews: [], wishlist:[]});
+      setUserInput({ ...copy, reviews: [], wishlist: [] });
     } else {
       delete copy.wishlist;
       delete copy.reviews;
-      setUserInput({...copy, items: []});
+      setUserInput({ ...copy, items: [] });
     }
-  }
+  };
 
   return (
     <>
@@ -117,10 +125,13 @@ export default function SignUpModal() {
                   setUserInput({ ...userInputs, password: e.target.value })
                 }
               />
-              <RadioGroup onChange={setAccountType} value={userInputs.reviews ? 'buyer' : 'seller'}>
-                <Stack direction='row'>
-                  <Radio value='buyer'>Buying</Radio>
-                  <Radio value='seller'>Selling</Radio>
+              <RadioGroup
+                onChange={setAccountType}
+                value={userInputs.reviews ? "buyer" : "seller"}
+              >
+                <Stack direction="row">
+                  <Radio value="buyer">Buying</Radio>
+                  <Radio value="seller">Selling</Radio>
                 </Stack>
               </RadioGroup>
             </FormControl>
@@ -142,7 +153,7 @@ export default function SignUpModal() {
       {!isOpen && <Navigate to="/" />}
     </>
   );
-/**
+  /**
   const createNewProfile = (newProfile) => {
     for (const item in profilesDB) {
       if (
