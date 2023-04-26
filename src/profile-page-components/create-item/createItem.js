@@ -1,4 +1,4 @@
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import React, {useState} from "react";
 import {useParams} from "react-router";
 import {createItemThunk} from "../../ApiClient/thunks/itemThunk";
@@ -6,7 +6,8 @@ import {createItemThunk} from "../../ApiClient/thunks/itemThunk";
 const CreateItem = ({
                      userId = null
                  }) => {
-    userId = useParams().uid;
+    // userId = useParams().uid;
+    const currentUser = useSelector((state) => state.users.currentUser);
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState("");
@@ -60,6 +61,7 @@ const CreateItem = ({
             }
             const item = {
                 itemId: Math.floor(100000000 + Math.random() * 900000000),
+                sellerId: currentUser._id,
                 title: title,
                 price: price,
                 colors: colorsArray,
