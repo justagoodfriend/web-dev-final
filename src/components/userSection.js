@@ -152,6 +152,16 @@ const UserSection = ({ active = "Home" }) => {
               ></Button>
             </>
           )}
+          {currentUser && currentUser.wishlist && (
+            <>
+              <Button
+                active={active}
+                href="/listings"
+                title="Listings"
+                icon="bi bi-tag-fill text-white pe-3 fs-5"
+              ></Button>
+            </>
+          )}
         </ul>
       </nav>
     </div>

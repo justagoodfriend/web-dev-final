@@ -12,6 +12,7 @@ import {
   deleteFavoriteThunk,
 } from "../ApiClient/thunks/favoritesThunk";
 import { updateUserLikesThunk } from "../ApiClient/thunks/authThunks";
+import { getItemById } from "../ApiClient/services/item";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
   const [itemImg, setItemImg] = useState("");
@@ -53,17 +54,26 @@ const DetailsPage = () => {
   }, []);
 
   useEffect(() => {
+    //id: -> querySearch immediately, maybe first a check to see if the item exists within the database:
+    //if then we set results to that, else we then query like normal
+
     const getData = async () => {
-      const results = await querySearchByGoodsID(goodsId);
-      setItemImg(results.info.goods_img);
-      setItemName(results.info.goods_name);
-      setItemPrice(results.info.retail_price.amountWithSymbol);
-      const moreDetails = results.info.mainSaleAttribute.info;
-      let colors = [];
-      moreDetails.forEach((detail) => {
-        colors.push(detail.attr_value);
-      });
-      setItemColors(colors);
+      const initialItems = await getItemById(goodsId);
+      if (initialItems) {
+        //then set the itesms to be result
+        console.log(initialItems);
+      } else {
+        const results = await querySearchByGoodsID(goodsId);
+        setItemImg(results.info.goods_img);
+        setItemName(results.info.goods_name);
+        setItemPrice(results.info.retail_price.amountWithSymbol);
+        const moreDetails = results.info.mainSaleAttribute.info;
+        let colors = [];
+        moreDetails.forEach((detail) => {
+          colors.push(detail.attr_value);
+        });
+        setItemColors(colors);
+      }
     };
 
     getData();
