@@ -60,19 +60,22 @@ export default function SignUpModal() {
     username: "",
     password: "",
     email: "",
-    transactions: [],
-    items: [],
   });
 
   const setAccountType = (input) => {
-    const copy = userInputs;
+    const copy = {
+      ...userInputs,
+      reviews: [],
+      wishlist: [],
+      items: []
+    };
     if (input === "buyer") {
       delete copy.items;
-      setUserInput({ ...copy, reviews: [], wishlist: [] });
+      setUserInput(copy);
     } else {
       delete copy.wishlist;
       delete copy.reviews;
-      setUserInput({ ...copy, items: [] });
+      setUserInput(copy);
     }
   };
 
@@ -126,8 +129,8 @@ export default function SignUpModal() {
                 }
               />
               <RadioGroup
-                onChange={setAccountType}
-                value={userInputs.reviews ? "buyer" : "seller"}
+                onChange={(e) => setAccountType(e)}
+                // value={userInputs.reviews ? "buyer" : "seller"}
               >
                 <Stack direction="row">
                   <Radio value="buyer">Buying</Radio>

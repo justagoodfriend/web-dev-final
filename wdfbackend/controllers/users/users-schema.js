@@ -8,8 +8,7 @@ const usersSchema = mongoose.Schema(
     // either or relationship -- buyers have reviews, sellers have items for sale. 
     reviews: {type: Buffer, required: false},
     wishlist: {type: Buffer, required: false},
-    items: {type:Buffer, required:false},
-    transactions: {type:Buffer, require: true}
+    items: {type:Buffer, required:false}
   },
   { collection: 'accounts' }
 );
