@@ -6,32 +6,51 @@ import ItemComponent from "./item";
 import JsonItemComponent from "./jsonItem";
 import querySearch from "../search-page-components/shein-service";
 import {Link} from "react-router-dom";
+import homeQuerySearch from "../search-page-components/homepage-query";
 // import {Link} from "@chakra-ui/react";
 
 //props -> title => name of the heading for the component, id => unique id for the carousel items
 const CarouselItems = (props) => {
   const [activeItems, setActiveItems] = useState([]);
   const [inactiveItems, setInactiveItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
-      const results = await querySearch(props.queryTitle, "9");
-      const allResults = results.info.products;
+      let results;
+      let allResults;
+
+      if (props.items) {
+        results = props.items;
+        console.log("props items", results);
+        allResults = results;
+      } else {
+        results = await homeQuerySearch(props.queryTitle, "9", props.category);
+        allResults = results.info.products;
+      }
+
       if (allResults.length > 3) {
-        setActiveItems(allResults.splice(0,3));
-        setInactiveItems(allResults.splice(3, allResults.length));
+        setActiveItems(allResults.slice(0, 3));
+        setInactiveItems(allResults.slice(3, 6));
       } else {
         setActiveItems(allResults);
         setInactiveItems(allResults);
       }
+      setLoading(false);
     };
     getData();
-  }, []);
+  }, [props]);
 
 
   return (
     <div>
       <h2 className="pt-3 ps-4"> {props.title}</h2>
+      {loading ? (
+          <div className="text-center">
+            <div className="spinner-border text-purple" role="status">
+            </div>
+          </div>
+      ) : (
       <div id={props.id} className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active">
@@ -58,6 +77,7 @@ const CarouselItems = (props) => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+      )}
     </div>
   );
 };

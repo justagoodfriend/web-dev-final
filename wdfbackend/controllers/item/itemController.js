@@ -14,11 +14,11 @@ const itemController = (app) => {
     res.json(item);
   };
 
-  const createItem = async (req, res) => {
-    console.log("creating item");
-    const newItem = await dao.createItem(req.body);
-    res.json(newItem);
-  };
+    const createItem = async (req, res) => {
+        console.log("creating item");
+        const newItem = await dao.createItem(req.body.item);
+        res.json(newItem);
+    }
 
   const updateItem = async (req, res) => {
     console.log("updating item");
