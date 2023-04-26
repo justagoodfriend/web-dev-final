@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const itemSchema = mongoose.Schema(
     {
-        itemId: { type: Number, required: true },
+        itemId: { type: Number, required: true, unique: true },
         title: String,
         price: String,
-        description: String,
-        availableColors: [String],
+        colors: [String],
+        sizes: [String],
         image: String,
     },
     { collection: "Items" }

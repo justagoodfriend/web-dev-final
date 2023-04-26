@@ -15,7 +15,7 @@ const itemController = (app) => {
 
     const createItem = async (req, res) => {
         console.log("creating item");
-        const newItem = await dao.createItem(req.body);
+        const newItem = await dao.createItem(req.body.item);
         res.json(newItem);
     }
 

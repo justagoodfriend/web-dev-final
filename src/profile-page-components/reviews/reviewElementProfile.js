@@ -43,7 +43,7 @@ const ReviewElementProfile = ({
         if (user != null) {
             console.log("user id", user._id);
             console.log("review author", review.author);
-            if (user._id == review.author) {
+            if (user._id === review.author) {
                 const icon = event.target;
                 const contentDiv = event.target.parentNode.parentNode.parentNode.children[1];
                 if (icon.className === "bi bi-pen pe-2") {
