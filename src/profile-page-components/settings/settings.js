@@ -5,12 +5,15 @@ import * as userService from "../../ApiClient/services/users.js";
 import { useNavigate } from "react-router";
 import { profileThunk } from "../../ApiClient/thunks/authThunks.js";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useContext } from "react";
+import { UserContext } from "../../redux/userContextTest";
 const Settings = ({user= {}}) => {
   //fetch the items from the current
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.users.currentUser);
+  const user2 = useContext(UserContext).user;
+  console.log(user);
+  const currentUser = JSON.parse(user2);
   useEffect(
     () => {
         dispatch(profileThunk());
