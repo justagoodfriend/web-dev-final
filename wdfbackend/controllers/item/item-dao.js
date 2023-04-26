@@ -11,6 +11,7 @@ export const findItemByItemId = async (itemId) => {
 };
 
 export const createItem = async (item) => {
+    // console.log("test", item);
     const newItem = await itemModel.create(item);
     return newItem;
 }
