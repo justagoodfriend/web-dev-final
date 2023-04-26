@@ -18,7 +18,7 @@ const ProfilePage = ({active = "Reviews"}) => {
                              className="profile-pic-larger rounded-circle border border-white border-3"/>
                     </div>
                     <div className="text-center">
-                        <h3 className="mb-0">{user && userID}</h3>
+                        <h3 className="mb-0">{user && user.username}</h3>
                     </div>
                 </div>
                 <div className="col-10">

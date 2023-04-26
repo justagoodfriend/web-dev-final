@@ -8,7 +8,7 @@ import querySearch from "../search-page-components/shein-service";
 
 const HomePage = () => {
   const user = useSelector((state) => state.users.currentUser);
-  console.log(user);
+  // console.log(user);
 
     const [recommendedItems, setRecommendedItems] = useState([]);
     const [wishlistItems, setWishlistItems] = useState([]);
@@ -26,7 +26,7 @@ const HomePage = () => {
                     setRecommendedItems(results.info.products);
                 } else {
                     const results = await querySearch("Shoes", 9);
-                    console.log(results.info.products);
+                    // console.log(results.info.products);
                     setRecommendedItems(results.info.products);
                 }
             }
@@ -52,7 +52,7 @@ const HomePage = () => {
     <div className="row">
       <UserSection active="Home" />
       <div className="col-9">
-        {console.log(user && user.items)}
+        {console.log("recommended items", recommendedItems)}
         {user && user.wishlist && <CarouselItems title="Recommended" id="R1" items={recommendedItems}/>}
         {user && user.wishlist && <CarouselItems title="Wishlist" id="W1" items={wishlistItems}/>}
 

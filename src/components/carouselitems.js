@@ -39,7 +39,7 @@ const CarouselItems = (props) => {
       setLoading(false);
     };
     getData();
-  }, []);
+  }, [props]);
 
 
   return (
