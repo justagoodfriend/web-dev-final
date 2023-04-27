@@ -6,7 +6,7 @@ export const findAllItems = async () => {
 };
 
 export const findItemByItemId = async (itemId) => {
-  const item = await itemModel.findOne({ id: itemId });
+  const item = await itemModel.findOne({ itemId });
   return item;
 };
 

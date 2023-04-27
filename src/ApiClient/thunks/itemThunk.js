@@ -21,6 +21,7 @@ export const findProductsThunk = createAsyncThunk(
 
 export const findItemByIdThunk = createAsyncThunk(
     'details/getItem', async (iid) => {
+        console.log("in thunk with", iid);
         const item = await itemService.getItemById(iid)
         return item;
     }
