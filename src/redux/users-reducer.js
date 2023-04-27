@@ -7,6 +7,7 @@ import {
   profileThunk,
   updateUserLikesThunk,
   findUserByIdThunk,
+  updateUserThunk
 } from "../ApiClient/thunks/authThunks";
 const initialState = {
   currentUser: {},
@@ -35,6 +36,9 @@ const userSlice = createSlice({
     },
     [findUserByIdThunk.fulfilled]: (state, { payload }) => {
       state.currentTarget = payload;
+    },
+    [updateUserThunk.fulfilled]: (state, { payload }) => {
+      state.currentUser = payload;
     }
   },
 });

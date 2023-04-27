@@ -59,7 +59,9 @@ const userController = (app) => {
   //think that's how it works:
   const update = async (req, res) => {
     const userID = req.params.uid;
-    const user = await dao.updateUser(userID, req.body);
+    console.log("updating user info for", userID);
+    console.log("seeing", req.body.userUpdate);
+    const user = await dao.updateUser(userID, req.body.userUpdate);
     res.json(user);
   };
 

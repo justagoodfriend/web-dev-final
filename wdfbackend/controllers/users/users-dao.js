@@ -31,8 +31,12 @@ export const createUser = async (user) => {
   return users;
 };
 
-export const updateUser = (uid, user) =>
-  userModel.updateOne({ _id: uid }, user);
+export const updateUser = (uid, {username, password, email, image}) => {
+
+  const user = userModel.updateOne({ _id: uid }, {$set: {username, password, email, image}});
+  return user;
+}
+
 
 export const updateLikes = async (uid, itemId) => {
   const user = await userModel.find({ _id: uid });

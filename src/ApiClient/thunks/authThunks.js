@@ -45,6 +45,14 @@ export const updateUserLikesThunk = createAsyncThunk(
     }
 );
 
+export const updateUserThunk = createAsyncThunk(
+    "users/profile/update",
+    async ({userID, username, password, email, image}) => {
+        const user = await userService.updateUser(userID, username, password, email, image)
+        return user;
+    }
+)
+
 export const findUserByIdThunk = createAsyncThunk(
   "users/profile",
   async (userID) => {

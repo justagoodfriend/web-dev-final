@@ -9,7 +9,7 @@ const usersSchema = mongoose.Schema(
     reviews: {type: Buffer, required: false},
     wishlist: {type: Buffer, required: false},
     items: {type: Buffer, required: false},
-    image: { type: String, requred: false }
+    image: { type: String, required: false }
   },
   { collection: 'accounts' }
 );

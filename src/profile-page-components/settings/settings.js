@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import * as userService from "../../ApiClient/services/users.js";
 import { useNavigate, useParams } from "react-router";
-import { profileThunk } from "../../ApiClient/thunks/authThunks.js";
+import {profileThunk, updateUserThunk} from "../../ApiClient/thunks/authThunks.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { UserContext } from "../../redux/userContextTest";
@@ -30,8 +30,11 @@ const Settings = ({user= {}}) => {
   useEffect(
     () => {
         dispatch(profileThunk());
+        console.log("target in settings", targetID);
     },[]); 
   //in the profile page -> also may log out here as well
+
+  console.log("target in settings", targetID);
   return (
     <>
       {currentUser._id != targetID && navigate("/profile/"+currentUser._id+"/settings")}
@@ -80,7 +83,7 @@ const Settings = ({user= {}}) => {
             <div className="pt-4">
               {/*TODO */}
               <button className="background-purple text-white rounded-3 no-border px-4 py-1" onClick={(e)=>{
-                userService.updateUser({targetID, ...userInputs});
+                dispatch(updateUserThunk({userID: targetID, ...userInputs}));
               }}>
                 Save
               </button>

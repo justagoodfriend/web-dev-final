@@ -66,27 +66,24 @@ export const updateLikes = async (goodsId) => {
 };
 
 
-export const updateUser = async ({
+export const updateUser = async (
   userID,
   username,
   password,
   email,
-  items,
-  reviews,
-  wishlist,
-  transactions,
   image
-}) => {
+) => {
   console.log(userID);
+  const userUpdate = {
+    username,
+    password,
+    email,
+    image
+  }
+  console.log("received in service", userUpdate);
     const response = await api.put(`${URL}/${userID}`, {
-      username,
-      password,
-      email,
-      items,
-      reviews,
-      wishlist,
-      transactions,
-      image
+      userUpdate
     });
+    console.log("got back", response);
     return response.data;
 };
