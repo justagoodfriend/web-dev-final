@@ -40,7 +40,9 @@ const ReviewElement = ({
             setTitle(results.info.goods_name);
         };
 
-        getData();
+        if (elementType === "profile") {
+            getData();
+        }
         getUserName();
     }, []);
     // get item info from item id
