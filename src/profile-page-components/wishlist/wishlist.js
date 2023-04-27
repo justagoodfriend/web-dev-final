@@ -17,9 +17,10 @@ const Wishlist = ({
   //get the currentUser here, based on whether the user is a seler/buyer the queries should be different
   const dispatch = useDispatch();
   const [database, setDatabase] = useState([]);
+  
   let paramUserId = useParams().uid;
   const userViewed = useSelector((state) => state.users.currentTarget);
-
+  
   if (!userId) {
     userId = paramUserId;
   }

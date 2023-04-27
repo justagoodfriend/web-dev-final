@@ -39,11 +39,14 @@ export const createFavorite = async (item) => {
   delete requestBody["uid"];
   delete requestBody["iid"];
 
+  //huh why does this work:
+  console.log(requestBody);
+
   const response = await api.post(
     `${URL}/users/${userId}/item/${itemId}`,
     requestBody
   );
-  console.log(response.data);
+  //console.log(response.data);
   return response.data;
 };
 
