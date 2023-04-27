@@ -5,8 +5,10 @@ export const findAllFavorites = async () => {
   return favorites;
 };
 
-export const findFavoritesForUser = async (userId) => {
-  const favorites = await favoritesModel.findById({ userId });
+export const findFavoritesForUser = async (uid) => {
+  console.log("Reached this method witin controller here is the id : " + uid);
+  //console.log(uid)
+  const favorites = await favoritesModel.find({ userId: uid });
   return favorites;
 };
 
