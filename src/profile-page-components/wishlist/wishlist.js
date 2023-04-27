@@ -5,11 +5,10 @@ import { getItemById, getItemsBySeller } from "../../ApiClient/services/item";
 import React, { useEffect, useContext, useState } from "react";
 import { UserContext } from "../../redux/userContextTest";
 import { getFavoritesByUserId } from "../../ApiClient/services/favorites";
-import {useParams} from "react-router";
-import {useDispatch} from "react-redux";
-import {findUserByIdThunk} from "../../ApiClient/thunks/authThunks";
+import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
+import { findUserByIdThunk } from "../../ApiClient/thunks/authThunks";
 import WishListItem from "../../components/WishlistProfile";
-
 
 const Wishlist = () => {
   //get the currentUser here, based on whether the user is a seler/buyer the queries should be different
@@ -27,7 +26,8 @@ const Wishlist = () => {
     //get all items, that correspond to sellerID
     const dbItems = await getItemsBySeller(userId);
     if (dbItems) {
-      setDatabase(dbItems);
+      const item = dbItems.map((item) => item.itemId);
+      setDatabase(item);
     }
   };
 
