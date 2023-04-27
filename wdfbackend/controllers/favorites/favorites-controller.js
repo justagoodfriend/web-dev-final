@@ -1,4 +1,5 @@
 import * as dao from "./favorites-dao.js";
+import * as itemDao from "../item/item-dao.js";
 
 const favoritesController = (app) => {
   const getFavorites = async (req, res) => {
@@ -23,6 +24,12 @@ const favoritesController = (app) => {
   const createFavorite = async (req, res) => {
     console.log("creating favorite");
     const newFav = await dao.createFavorite(req.params.uid, req.params.iid);
+    //maybe need an item?
+    //check if itemID already exists within DB -> create a new item under this schema:
+    const item = await itemDao.findItemByItemId(req.params.iid);
+    if (!item) {
+      itemDao.createItem(req.body);
+    }
     res.json(newFav);
   };
 
