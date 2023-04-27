@@ -9,7 +9,7 @@ const ProfileElement = ({
         return (<Reviews user={userId}/>);
     } else if (active === "Wishlist") {
         return (<Wishlist user={userId}/>);
-    } else if (active == "Items") {
+    } else if (active === "Items") {
         return (<Wishlist user={userId}/>);
     } 
     else {

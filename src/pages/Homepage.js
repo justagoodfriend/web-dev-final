@@ -7,6 +7,7 @@ import querySearchByGoodsID from "../search-page-components/shien-queries-goodsI
 import querySearch from "../search-page-components/shein-service";
 import {getItems} from "../ApiClient/services/item";
 import {UserContext} from "../redux/userContextTest";
+import Wishlist from "../profile-page-components/wishlist/wishlist";
 
 const HomePage = () => {
     const { user } = useContext(UserContext);
@@ -67,7 +68,14 @@ const HomePage = () => {
       <div className="col-9">
         {console.log("recommended items", recommendedItems)}
         {currentUser && <CarouselItems title="Recommended" id="R1" items={recommendedItems}/>}
-        {currentUser && currentUser.wishlist && <CarouselItems title="Wishlist" id="W1" items={wishlistItems}/>}
+        {currentUser && currentUser.wishlist &&
+            (
+                <div className="pt-3 ps-4">
+                    <h2> Favorited </h2>
+                    <Wishlist/>
+                </div>
+            )
+        }
         {currentUser && currentUser.items && <CarouselItems title="Listed Items" id="W1" items={listingItems} customItems={true}/>}
 
         {(!currentUser || !currentUser.username || currentUser.items) && (

@@ -6,8 +6,8 @@ import {UserContext} from "../../redux/userContextTest";
 import {useNavigate} from "react-router-dom";
 
 const CreateItem = ({
-                     userId = null
-                 }) => {
+                        userId = null
+                    }) => {
     // userId = useParams().uid;
     // const currentUser = useSelector((state) => state.users.currentUser);
     const { user } = useContext(UserContext);
@@ -150,23 +150,23 @@ const CreateItem = ({
                     </div>
                 </div>
                 <div id="container-sizes"></div>
-                    <div className="col-4 pt-3">
-                        <button className="bg-purple text-white rounded-3 no-border px-4 py-2 w-75"
-                                onClick={() => createListingHandler()}>
-                            Create Listing
-                        </button>
-                    </div>
+                <div className="col-4 pt-3">
+                    <button className="bg-purple text-white rounded-3 no-border px-4 py-2 w-75"
+                            onClick={() => createListingHandler()}>
+                        Create Listing
+                    </button>
                 </div>
+            </div>
             <div className="col-5 pt-5">
                 <b className="ps-3">Example Card</b>
                 <div className="pt-2">
-                <div className="card w-75">
-                    <img className="card-img-top" src="/images/black-wrap-up.jpeg" alt="Card image cap"/>
+                    <div className="card w-75">
+                        <img className="card-img-top" src="/images/black-wrap-up.jpeg" alt="Card image cap"/>
                         <div className="card-body">
                             <p className="card-text">Black Wrap Up Top<br/><b>$14.99</b></p>
 
                         </div>
-                </div>
+                    </div>
                 </div>
             </div>
         </div>

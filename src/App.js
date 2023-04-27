@@ -53,10 +53,6 @@ function App() {
                 path="/profile/:uid/items"
                 element={<ProfilePage active="Items" />}
               />
-              <Route
-                path="/profile/:uid/transactions"
-                element={<ProfilePage active="Transactions" />}
-              />
 
               <Route path="/search/:query" element={<SearchPage />} />
               <Route

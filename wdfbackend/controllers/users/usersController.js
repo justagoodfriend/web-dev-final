@@ -58,7 +58,8 @@ const userController = (app) => {
 
   //think that's how it works:
   const update = async (req, res) => {
-    const user = await dao.updateUser(req.body);
+    const userID = req.params.uid;
+    const user = await dao.updateUser(userID, req.body);
     res.json(user);
   };
 
@@ -75,7 +76,7 @@ const userController = (app) => {
   // are we sure this shouldn't be "Get"?
   app.post("/api/users/profile", profile);
   app.post("/api/users/logout", logout);
-  app.put("/api/users", update);
+  app.put("/api/users/:uid", update);
   app.get("/api/users/profile/:uid", findProfileById);
   app.put("/api/users/profile/likes/:iid", updateLikes);
 };
