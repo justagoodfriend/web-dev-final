@@ -13,8 +13,8 @@ const ProfilePage = ({active = "Reviews"}) => {
     const dispatch = useDispatch();
     useEffect(
         () => {
-            // dispatch(findUserByIdThunk(userID));
-            dispatch(profileThunk());
+            dispatch(findUserByIdThunk(userID));
+            // dispatch(profileThunk());
         },[]); 
     return (
         <div className="row">
@@ -31,8 +31,8 @@ const ProfilePage = ({active = "Reviews"}) => {
                     </div>
                 </div>
                 <div className="col-10">
-                    <ProfileNav active={active} user={user.username && target._id}/>
-                    <ProfileElement active={active} user={user.username && target._id}/>
+                    <ProfileNav active={active} user={target.username && target._id}/>
+                    <ProfileElement active={active} user={target.username && target._id}/>
                 </div>
             </div>
         </div>

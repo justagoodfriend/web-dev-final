@@ -72,7 +72,7 @@ const HomePage = () => {
             (
                 <div className="pt-3 ps-4">
                     <h2> Favorited </h2>
-                    <Wishlist/>
+                    <Wishlist userId={currentUser._id}/>
                 </div>
             )
         }

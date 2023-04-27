@@ -1,12 +1,23 @@
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import ProfileNavLink from "./profileNavLink";
 import { useParams } from "react-router";
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import { UserContext } from "../../redux/userContextTest";
+import {findUserByIdThunk} from "../../ApiClient/thunks/authThunks";
 const ProfileNav = ({ active = "Reviews" }) => {
+  // userId = user id of profile being viewed
   const userId = useParams().uid;
-  const user = useSelector((state) => state.users.currentTarget);
-  const source = JSON.parse(useContext(UserContext).user);
+  const userViewed = useSelector((state) => state.users.currentTarget);
+  // params for current user
+  // const source = JSON.parse(useContext(UserContext).user);
+  const { user } = useContext(UserContext);
+  const currentUser = JSON.parse(user);
+  const dispatch = useDispatch();
+
+  useEffect(
+      () => {
+        dispatch(findUserByIdThunk(userId));
+      },[]);
 
   return (
     <nav className="nav justify-content-around custom-padding-extra me-5">
@@ -18,7 +29,7 @@ const ProfileNav = ({ active = "Reviews" }) => {
           title="Reviews"
         />
       }
-      {user.wishlist && userId && (
+      {userViewed.wishlist && userId && (
         <>
           <ProfileNavLink
             active={active}
@@ -29,7 +40,7 @@ const ProfileNav = ({ active = "Reviews" }) => {
       )}
       {
         // Need to do HTTP get reqs for profie/id/items
-        user.items && userId &&(
+        userViewed.items && userId &&(
           <>
             <ProfileNavLink
               active={active}
@@ -38,6 +49,18 @@ const ProfileNav = ({ active = "Reviews" }) => {
             />
           </>
         )
+      }
+      {
+        // Need to do HTTP get reqs for profie/id/items
+          userId && currentUser._id === userId && (
+              <>
+                <ProfileNavLink
+                    active={active}
+                    href={"/profile/" + userId + "/settings"}
+                    title="Settings"
+                />
+              </>
+          )
       }
     </nav>
   );

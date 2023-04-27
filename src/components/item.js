@@ -13,12 +13,12 @@ const ItemComponent = ({
   //do we want to copy over the images into source as well too?
   return (
     <div className="card">
-      <img src={`/images/${item.image}`} className="card-image-top" alt="..." />
+      <img src={item.image} className="card-image-top" alt="..." />
       <div className="card-body">
         <p className="card-text">
           {item.title}
           <br />
-          <b>${item.price}</b>
+          <b>{item.price}</b>
         </p>
       </div>
     </div>
