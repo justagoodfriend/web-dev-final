@@ -5,7 +5,7 @@ const ListingItem = ({ item }) => {
   console.log("current item found " + item);
   return (
     <div>
-      {item && item.listing ? (
+      {item && item.sellerId && (
         <div className="card">
           <Link to={`/details/${item.itemId}`}>
             <img src={item.image} className="card-image-top" alt="..." />
@@ -18,8 +18,6 @@ const ListingItem = ({ item }) => {
             </div>
           </Link>
         </div>
-      ) : (
-        <></>
       )}
     </div>
   );
