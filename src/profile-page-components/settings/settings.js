@@ -15,7 +15,7 @@ const Settings = ({user= {}}) => {
   const dispatch = useDispatch();
   const targetID = useParams().uid;
   const user2 = useContext(UserContext).user;
-  console.log(user);
+  console.log(user2);
   const currentUser = JSON.parse(user2);
   const profilePics = ['nature.png', 'sunset.png', 'sunglasses.jpeg', 'profile-empty.jpeg' ];
 
@@ -79,11 +79,10 @@ const Settings = ({user= {}}) => {
             </label>
             <div className="pt-4">
               {/*TODO */}
-              <button className="background-purple text-white rounded-3 no-border px-4 py-1">
+              <button className="background-purple text-white rounded-3 no-border px-4 py-1" onClick={(e)=>{
+                userService.updateUser({targetID, ...userInputs});
+              }}>
                 Save
-              </button>
-              <button className="no-background no-border text-purple px-4 py-1">
-                Cancel
               </button>
               {/* TODO: style this button better */}
               <button
@@ -128,8 +127,9 @@ const Settings = ({user= {}}) => {
               <h5>Choose new image</h5>
             </button>
             <div>{userInputs.image}</div>
-            <button className="background-purple text-white rounded-3 no-border px-4 py-1 mt-2" onClick={handlePic}>
-              Save
+            <button className="background-purple text-white rounded-3 no-border px-4 py-1 mt-2"  onClick={(e)=>{
+                userService.updateUser({targetID, ...userInputs});
+              }}>
             </button>
           </div>
         </div>

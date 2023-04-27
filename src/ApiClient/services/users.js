@@ -42,29 +42,6 @@ export const login = async ({ username, password }) => {
   return user;
 };
 
-export const updateUser = async({  
-  username,
-  password,
-  email,
-  items,
-  reviews,
-  wishlist,
-  transactions,
-  image
-}) => {
-  const response = await api.put(`${URL}`, {
-    username,
-    password,
-    email,
-    items,
-    reviews,
-    wishlist,
-    transactions,
-    image
-  });
-  return response.data
-}
-
 export const logout = async () => {
   const response = await api.post(`${URL}/logout`);
   return response.data;
@@ -88,9 +65,28 @@ export const updateLikes = async (goodsId) => {
   return response.data;
 };
 
-/*
-   export const updateUser = async (user) => {
-    const response = await api.put(`${USERS_URL}/${user._id}`, user);
+
+export const updateUser = async ({
+  userID,
+  username,
+  password,
+  email,
+  items,
+  reviews,
+  wishlist,
+  transactions,
+  image
+}) => {
+  console.log(userID);
+    const response = await api.put(`${URL}/${userID}`, {
+      username,
+      password,
+      email,
+      items,
+      reviews,
+      wishlist,
+      transactions,
+      image
+    });
     return response.data;
-   };
-   */
+};
