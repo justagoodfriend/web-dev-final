@@ -7,6 +7,8 @@ import { profileThunk } from "../../ApiClient/thunks/authThunks.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { UserContext } from "../../redux/userContextTest";
+
+
 const Settings = ({user= {}}) => {
   //fetch the items from the current
   const navigate = useNavigate();
@@ -15,10 +17,18 @@ const Settings = ({user= {}}) => {
   const user2 = useContext(UserContext).user;
   console.log(user);
   const currentUser = JSON.parse(user2);
+
+  const [profilePic, setProfilePic] = useState('profile-empty.jpeg');
+  const profilePics = ['nature.png', 'sunset.png', 'sunglasses.jpeg', 'profile-empty.jpeg' ];
+
+  const handlePic = () => {
+    // dispatch(updateProfilePicture(currentUser._id, profilePic));
+  };
+
   useEffect(
     () => {
         dispatch(profileThunk());
-    },[currentUser]); 
+    },[]); 
   //in the profile page -> also may log out here as well
   return (
     <>
@@ -76,16 +86,34 @@ const Settings = ({user= {}}) => {
               </button>
             </div>
           </div>
-          <div className="col-4 pt-3">
+          <div className="col-4 pt-3 text-center">
             <img
               alt="..."
-              src={`/images/profile-empty.jpeg`}
-              className="rounded-4 profile-pic-larger2 m-0"
+              src={`/images/${profilePic}`}
+              className="rounded-4"
             />
+
+            <div className="pt-3">
+              {profilePics.map((pic, i) => (
+                  <button
+                      key={i}
+                      className="no-border no-background p-1 w-25"
+                      onClick={() => setProfilePic(pic)}
+                  >
+                    <img
+                        src={currentUser.picture || `/images/${pic}`}
+                        className="rounded-4"
+                     />
+                  </button>
+              ))}
+            </div>
             <button className="no-border no-background p-0 pt-3">
-              <h5>Upload new image</h5>
+              <h5>Choose new image</h5>
             </button>
-            <div>me_photo.jpg</div>
+            <div>{profilePic}</div>
+            <button className="background-purple text-white rounded-3 no-border px-4 py-1 mt-2" onClick={handlePic}>
+              Save
+            </button>
           </div>
         </div>
       ) : (

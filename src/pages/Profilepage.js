@@ -13,7 +13,7 @@ const ProfilePage = ({active = "Reviews"}) => {
     const dispatch = useDispatch();
     useEffect(
         () => {
-            dispatch(findUserByIdThunk(userID));
+            // dispatch(findUserByIdThunk(userID));
             dispatch(profileThunk());
         },[]); 
     return (
@@ -27,7 +27,7 @@ const ProfilePage = ({active = "Reviews"}) => {
                              className="profile-pic-larger rounded-circle border border-white border-3"/>
                     </div>
                     <div className="text-center">
-                        <h3 className="mb-0">{user && user.username}</h3>
+                        <h3 className="mb-0">{target && target.username}</h3>
                     </div>
                 </div>
                 <div className="col-10">

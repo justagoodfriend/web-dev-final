@@ -5,31 +5,27 @@ import { getItemById, getItemsBySeller } from "../../ApiClient/services/item";
 import React, { useEffect, useContext, useState } from "react";
 import { UserContext } from "../../redux/userContextTest";
 import { getFavoritesByUserId } from "../../ApiClient/services/favorites";
+import {useParams} from "react-router";
+import {useDispatch} from "react-redux";
+import {findUserByIdThunk} from "../../ApiClient/thunks/authThunks";
 import WishListItem from "../../components/WishlistProfile";
+
 
 const Wishlist = () => {
   //get the currentUser here, based on whether the user is a seler/buyer the queries should be different
   const [database, setDatabase] = useState([]);
+  let userId = useParams().uid;
   const { user } = useContext(UserContext);
-  const currentUser = JSON.parse(user);
-  console.log(currentUser);
-
-  /*
-    return (
-        <div className="d-flex flex-wrap custom-padding-left pt-3">
-            {
-                wishlist.map(item =>
-                    <WishlistItem key={item._id} item={item}/>
-                )
-            }
-        </div>
-    );
-    */
+  let currentUser = JSON.parse(user);
+  if (!userId) {
+    userId = currentUser._id;
+  }
+  // console.log(currentUser);
 
   //gets the favorited items by a seller
   const fetchSellersItems = async () => {
     //get all items, that correspond to sellerID
-    const dbItems = await getItemsBySeller(currentUser._id);
+    const dbItems = await getItemsBySeller(userId);
     if (dbItems) {
       setDatabase(dbItems);
     }

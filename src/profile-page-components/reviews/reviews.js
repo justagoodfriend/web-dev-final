@@ -1,16 +1,23 @@
-import ReviewElementProfile from "./reviewElementProfile";
+import ReviewElement from "./reviewElement";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {findReviewsForUserThunk} from "../../ApiClient/thunks/reviewsThunk";
-import ReviewElementItem from "./reviewElementItem";
 import {useParams} from "react-router";
+import {UserContext} from "../../redux/userContextTest";
 
 const Reviews = ({
     userId = null
                  }) => {
     const {reviews, loading} = useSelector(
         state => state.reviews)
-    userId = useParams().uid;
+    const { user } = useContext(UserContext);
+    // console.log(user);
+    const currentUser = JSON.parse(user);
+    if (useParams().uid) {
+        userId = useParams().uid;
+    } else {
+        userId = currentUser._id;
+    }
     const dispatch = useDispatch();
     useEffect(() => {
         if (userId != null) {
@@ -28,7 +35,7 @@ const Reviews = ({
             }
             {
                 reviews.map(review =>
-                    <ReviewElementProfile key={review._id} review={review}/>
+                    <ReviewElement key={review._id} review={review} elementType="profile"/>
                 )
             }
         </ul>
