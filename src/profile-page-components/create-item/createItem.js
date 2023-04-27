@@ -22,7 +22,7 @@ const CreateItem = ({
     const addColorsHandler = () => {
         let container = document.getElementById('container-colors');
         let newInput = document.createElement('input');
-        newInput.className = "bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-100";
+        newInput.className = "bg-secondary bg-opacity-10 rounded-3 border-2 border-purple me-2 p-3 py-2 mb-2 w-25";
         container.appendChild(newInput);
     }
     const removeColorsHandler = () => {
@@ -36,7 +36,7 @@ const CreateItem = ({
     const addSizesHandler = () => {
         let container = document.getElementById('container-sizes');
         let newInput = document.createElement('input');
-        newInput.className = "bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-100";
+        newInput.className = "bg-secondary bg-opacity-10 rounded-3 border-2 border-purple me-2 p-3 py-2 mb-2 w-25";
         container.appendChild(newInput);
     }
 
@@ -81,77 +81,93 @@ const CreateItem = ({
 
     return (
         <div className="custom-padding-left pt-3 d-flex flex-row pb-5 mb-5">
-            <div className="d-flex flex-column col-10 me-2">
+            <div className="d-flex flex-column col-7 me-2">
                 <div className="row">
                     <div className="col-6">
-                        <h2>List an Item</h2>
-                    </div>
-                    <div className="col-6">
-                        <button className="background-purple text-white rounded-3 no-border px-4 py-1 w-75"
-                                onClick={() => createListingHandler()}>
-                            Create Listing
-                        </button>
+                        <h2>Create A Listing</h2>
                     </div>
                 </div>
                 <label>
                     <div className="pb-1">
-                        <b>Name</b>
+                        <b>Item Name</b>
                     </div>
                     <input
-                        className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-100"
+                        className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-75"
                         onChange={(e) => {setTitle(e.target.value)}}
                     />
                 </label>
                 <label>
                     <div className="pb-1">
-                        <b>Price (include '$')</b>
+                        <b>Item Price </b>
                     </div>
                     <input
-                        className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-100"
+                        className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-75"
                         onChange={(e) => {setPrice(e.target.value)}}
+                        placeholder={'include \'$\''}
                     />
                 </label>
                 <label>
                     <div className="pb-1">
-                        <b>Image Link</b>
+                        <b>Item Image</b>
                     </div>
                     <input
-                        className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-100"
+                        className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-75"
                         onChange={(e) => {setImage(e.target.value)}}
+                        placeholder="provide an image link"
                     />
                 </label>
                 <b className="py-1">Colors</b>
                 <div className="row py-1">
-                    <div className="col-6">
-                        <button className="background-purple text-white rounded-3 no-border px-4 py-1 w-75"
+                    <div className="col-3">
+                        <button className="border-purple text-purple rounded-3 no-border px-4 py-1 w-75"
                                 onClick={() => addColorsHandler()}>
-                            Add Color
+                            <i className="bi bi-plus"></i>
+
                         </button>
                     </div>
-                    <div className="col-6">
-                        <button className="background-purple text-white rounded-3 no-border px-4 py-1 w-75"
+                    <div className="col-3">
+                        <button className="border-purple text-purple rounded-3 no-border px-4 py-1 w-75"
                                 onClick={() => removeColorsHandler()}>
-                            Remove Color
+                            <i className="bi bi-dash"></i>
+
                         </button>
                     </div>
                 </div>
                 <div id="container-colors"></div>
                 <b className="py-1">Sizes</b>
                 <div className="row py-1">
-                    <div className="col-6">
-                        <button className="background-purple text-white rounded-3 no-border px-4 py-1 w-75"
+                    <div className="col-3">
+                        <button className="border-purple text-purple rounded-3 no-border px-4 py-1 w-75"
                                 onClick={() => addSizesHandler()}>
-                            Add Size
+                            <i className="bi bi-plus"></i>
                         </button>
                     </div>
-                    <div className="col-6">
-                        <button className="background-purple text-white rounded-3 no-border px-4 py-1 w-75"
+                    <div className="col-3">
+                        <button className="border-purple text-purple rounded-3 no-border px-4 py-1 w-75"
                                 onClick={() => removeSizesHandler()}>
-                            Remove Size
+                            <i className="bi bi-dash"></i>
                         </button>
                     </div>
                 </div>
                 <div id="container-sizes"></div>
+                    <div className="col-4 pt-3">
+                        <button className="bg-purple text-white rounded-3 no-border px-4 py-2 w-75"
+                                onClick={() => createListingHandler()}>
+                            Create Listing
+                        </button>
+                    </div>
+                </div>
+            <div className="col-5 pt-5">
+                <b className="ps-3">Example Card</b>
+                <div className="pt-2">
+                <div className="card w-75">
+                    <img className="card-img-top" src="/images/black-wrap-up.jpeg" alt="Card image cap"/>
+                        <div className="card-body">
+                            <p className="card-text">Black Wrap Up Top<br/><b>$14.99</b></p>
+
+                        </div>
+                </div>
+                </div>
             </div>
         </div>
     )

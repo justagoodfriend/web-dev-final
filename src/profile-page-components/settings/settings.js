@@ -73,8 +73,7 @@ const Settings = ({user= {}}) => {
               </button>
               {/* TODO: style this button better */}
               <button
-                className="no-border text-purple px-4 py-1"
-                style={{ background: "red" }}
+                className="no-border bg-danger text-white px-4 py-1 rounded-2"
                 onClick={() => {
                   dispatch({})
                   // we need to call thunk here. 

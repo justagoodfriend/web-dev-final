@@ -50,7 +50,7 @@ const UserSection = ({ active = "Home" }) => {
                 id="logoutbutton"
               >
                 {" "}
-                Log Out{" "}
+                <b className="text-dark bg-light opacity-50 small-font rounded-2 mt-2 p-1"> Log Out{" "} </b>
               </span>
             ) : (
               <div className="login-navbar text-white">
