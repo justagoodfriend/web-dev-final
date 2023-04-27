@@ -16,6 +16,7 @@ export const register = async ({
   reviews,
   wishlist,
   transactions,
+  image,
 }) => {
   const response = await api.post(`${URL}/register`, {
     username,
@@ -25,6 +26,7 @@ export const register = async ({
     reviews,
     wishlist,
     transactions,
+    image
   });
 
   const user = response.data;
@@ -39,6 +41,29 @@ export const login = async ({ username, password }) => {
   const user = response.data;
   return user;
 };
+
+export const updateUser = async({  
+  username,
+  password,
+  email,
+  items,
+  reviews,
+  wishlist,
+  transactions,
+  image
+}) => {
+  const response = await api.put(`${URL}`, {
+    username,
+    password,
+    email,
+    items,
+    reviews,
+    wishlist,
+    transactions,
+    image
+  });
+  return response.data
+}
 
 export const logout = async () => {
   const response = await api.post(`${URL}/logout`);
