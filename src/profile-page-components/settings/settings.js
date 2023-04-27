@@ -28,7 +28,7 @@ const Settings = ({user= {}}) => {
   useEffect(
     () => {
         dispatch(profileThunk());
-    },[currentUser]); 
+    },[]); 
   //in the profile page -> also may log out here as well
   return (
     <>
