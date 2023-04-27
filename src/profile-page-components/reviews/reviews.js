@@ -13,8 +13,9 @@ const Reviews = ({
     const { user } = useContext(UserContext);
     // console.log(user);
     const currentUser = JSON.parse(user);
-    if (useParams().uid) {
-        userId = useParams().uid;
+    const temp = useParams().uid;
+    if (temp) {
+        userId = temp;
     } else {
         userId = currentUser._id;
     }
