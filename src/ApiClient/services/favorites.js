@@ -5,7 +5,8 @@ const api = axios.create({
   baseURL: "http://localhost:8080/api/favorites",
 });
 
-export const getFavoritesByUserId = async ({ uid }) => {
+export const getFavoritesByUserId = async (uid) => {
+  console.log("in this method: " + uid);
   const response = await api.get(`${URL}/users/${uid}/favorites`);
   return response.data;
 };
@@ -33,7 +34,15 @@ export const getFavoritesOfUserAndID = async (item) => {
 export const createFavorite = async (item) => {
   const userId = item["uid"];
   const itemId = item["iid"];
-  const response = await api.post(`${URL}/users/${userId}/item/${itemId}`);
+
+  const requestBody = item;
+  delete requestBody["uid"];
+  delete requestBody["iid"];
+
+  const response = await api.post(
+    `${URL}/users/${userId}/item/${itemId}`,
+    requestBody
+  );
   console.log(response.data);
   return response.data;
 };

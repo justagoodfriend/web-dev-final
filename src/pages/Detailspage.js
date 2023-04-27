@@ -26,11 +26,17 @@ const DetailsPage = () => {
   const [itemColors, setItemColors] = useState([]);
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
+
   const [sizes, setItemSizes] = useState(["Small", "Medium", "Large"]);
   const [sellerId, setSellerId] = useState("");
 
+  //set an empty item:
+
+  const [createdItem, setItem] = useState({});
+  //const currentUser = useSelector((state) => state.users.currentUser);
+
   const { user } = useContext(UserContext);
-  console.log(user);
+  //console.log(user);
   const currentUser = JSON.parse(user);
   const [liked, setLiked] = useState(false);
   const findUserLiked = async () => {
@@ -72,6 +78,17 @@ const DetailsPage = () => {
         moreDetails.forEach((detail) => {
           colors.push(detail.attr_value);
         });
+        const newItem = {
+          uid: currentUser._id,
+          iid: goodsId,
+          itemId: goodsId,
+          title: results.info.goods_name,
+          price: results.info.retail_price.amountWithSymbol,
+          colors: colors,
+          sizes: ["small", "medium", "large"],
+          image: results.info.goods_img,
+        };
+        setItem(newItem);
         setItemColors(colors);
       }
     };
@@ -80,16 +97,20 @@ const DetailsPage = () => {
 
   const updateLikesHandler = () => {
     if (currentUser._id != null) {
+      console.log(
+        "created this item prior when I loaded the page " +
+          JSON.stringify(createdItem)
+      );
       console.log("LIKES currently favoriting");
       const item = {
         uid: currentUser._id,
         iid: goodsId,
       };
-      console.log("Item" + item);
+      //console.log("Item" + item);
       if (liked) {
         dispatch(deleteFavoriteThunk(item));
       } else {
-        dispatch(createFavoriteThunk(item));
+        dispatch(createFavoriteThunk(createdItem));
       }
 
       setLiked(!liked);
