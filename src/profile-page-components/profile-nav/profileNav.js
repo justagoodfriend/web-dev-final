@@ -39,42 +39,6 @@ const ProfileNav = ({ active = "Reviews" }) => {
           </>
         )
       }
-      {
-          user.username === source.username &&
-          <ProfileNavLink
-              active={active}
-              href={"/profile/" + userId}
-              title="Reviews"
-          />
-      }
-      {user.wishlist && user.username === source.username && (
-          <>
-            <ProfileNavLink
-                active={active}
-                href={"/profile/wishlist"}
-                title="Wishlist"
-            />
-          </>
-      )}
-      {
-        // Need to do HTTP get reqs for profie/id/items
-          user.items && user.username === source.username && (
-              <>
-                <ProfileNavLink
-                    active={active}
-                    href={"/profile/items"}
-                    title="Items"
-                />
-              </>
-          )
-      }
-      {user.username === source.username && (
-        <ProfileNavLink
-          active={active}
-          href={"/profile/settings"}
-          title="Settings"
-        />
-      )}
     </nav>
   );
 };
