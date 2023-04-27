@@ -60,6 +60,7 @@ export default function SignUpModal() {
     username: "",
     password: "",
     email: "",
+    image: 'profile-empty.jpeg', 
   });
 
   const setAccountType = (input) => {

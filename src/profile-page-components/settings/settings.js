@@ -17,13 +17,15 @@ const Settings = ({user= {}}) => {
   const user2 = useContext(UserContext).user;
   console.log(user);
   const currentUser = JSON.parse(user2);
-
-  const [profilePic, setProfilePic] = useState('profile-empty.jpeg');
   const profilePics = ['nature.png', 'sunset.png', 'sunglasses.jpeg', 'profile-empty.jpeg' ];
 
   const handlePic = () => {
     // dispatch(updateProfilePicture(currentUser._id, profilePic));
   };
+
+  const [userInputs, setUserInput] = useState({
+    ...currentUser
+  });
 
   useEffect(
     () => {
@@ -42,7 +44,11 @@ const Settings = ({user= {}}) => {
               </div>
               <input
                 className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-75"
-                defaultValue={`${currentUser.email}`}
+                defaultValue={`${userInputs.email}`}
+                onChange={(e)=>{
+                  const copy = {...userInputs, email:e.target.value }
+                  setUserInput(copy);
+                }}
               />
             </label>
             <label>
@@ -51,7 +57,11 @@ const Settings = ({user= {}}) => {
               </div>
               <input
                 className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-75"
-                defaultValue={`${currentUser.username}`}
+                defaultValue={`${userInputs.username}`}
+                onChange={(e)=>{
+                  const copy = {...userInputs, username:e.target.value }
+                  setUserInput(copy);
+                }}
               />
             </label>
             <label>
@@ -60,7 +70,11 @@ const Settings = ({user= {}}) => {
               </div>
               <input
                 className="bg-secondary bg-opacity-10 rounded-3 border-2 border-purple p-3 py-2 mb-2 w-75"
-                defaultValue={`${currentUser.password}`}
+                defaultValue={`${userInputs.password}`}
+                onChange={(e)=>{
+                  const copy = {...userInputs, password:e.target.value }
+                  setUserInput(copy);
+                }}
               />
             </label>
             <div className="pt-4">
@@ -89,7 +103,7 @@ const Settings = ({user= {}}) => {
           <div className="col-4 pt-3 text-center">
             <img
               alt="..."
-              src={`/images/${profilePic}`}
+              src={`/images/${userInputs.image}`}
               className="rounded-4"
             />
 
@@ -98,10 +112,13 @@ const Settings = ({user= {}}) => {
                   <button
                       key={i}
                       className="no-border no-background p-1 w-25"
-                      onClick={() => setProfilePic(pic)}
+                      onClick={(e) => {
+                        const copy = {...userInputs, image: pic}
+                        setUserInput(copy);
+                      }}
                   >
                     <img
-                        src={currentUser.picture || `/images/${pic}`}
+                        src={`/images/${pic}`}
                         className="rounded-4"
                      />
                   </button>
@@ -110,7 +127,7 @@ const Settings = ({user= {}}) => {
             <button className="no-border no-background p-0 pt-3">
               <h5>Choose new image</h5>
             </button>
-            <div>{profilePic}</div>
+            <div>{userInputs.image}</div>
             <button className="background-purple text-white rounded-3 no-border px-4 py-1 mt-2" onClick={handlePic}>
               Save
             </button>
