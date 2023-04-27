@@ -11,6 +11,12 @@ export const getItemById = async (iid) => {
   return response.data;
 };
 
+export const getItemsBySeller = async (iid) => {
+  console.log(iid);
+  const response = await api.get(`${URL}/seller/${iid}`);
+  return response.data;
+};
+
 export const getItems = async () => {
   const response = await api.get(`${URL}`);
   return response.data;

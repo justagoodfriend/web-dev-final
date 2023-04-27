@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import itemModel from "./item-model.js";
 
 export const findAllItems = async () => {
@@ -10,11 +11,17 @@ export const findItemByItemId = async (itemId) => {
   return item;
 };
 
+export const findItemsBySellerID = async (sellerID) => {
+  //{author: new ObjectId(userId)}
+  const item = await itemModel.find({ sellerId: new ObjectId(sellerID) });
+  return item;
+};
+
 export const createItem = async (item) => {
-    // console.log("test", item);
-    const newItem = await itemModel.create(item);
-    return newItem;
-}
+  // console.log("test", item);
+  const newItem = await itemModel.create(item);
+  return newItem;
+};
 
 export const updateItem = async (iid, item) => {
   const items = await itemModel.updateOne({ _id: iid }, { $set: item });
