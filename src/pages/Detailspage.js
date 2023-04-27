@@ -15,22 +15,22 @@ import { updateUserLikesThunk } from "../ApiClient/thunks/authThunks";
 import { getItemById } from "../ApiClient/services/item";
 import { useContext } from "react";
 import { UserContext } from "../redux/userContextTest";
+import {findItemByIdThunk} from "../ApiClient/thunks/itemThunk";
+import {useNavigate} from "react-router-dom";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
   const [itemImg, setItemImg] = useState("");
   const [itemName, setItemName] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [itemColors, setItemColors] = useState([]);
-  const sizes = ["Small", "Medium", "Large"];
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
-  //const currentUser = useSelector((state) => state.users.currentUser);
+  const [sizes, setItemSizes] = useState(["Small", "Medium", "Large"]);
+  const [sellerId, setSellerId] = useState("");
 
   const { user } = useContext(UserContext);
   console.log(user);
   const currentUser = JSON.parse(user);
-  //const currentUser =
-  // not in redux, mayble not important to use redux?
   const [liked, setLiked] = useState(false);
   const findUserLiked = async () => {
     const item = {
@@ -43,32 +43,23 @@ const DetailsPage = () => {
     }
   };
   const dispatch = useDispatch();
-
-  //const likesOnItem = useSelector((state) => state.favorites);
-  //console.log(likesOnItem);
+  const navigate = useNavigate();
 
   useEffect(() => {
     findUserLiked();
-    //maybe / maybe not need this condition check idk
-    // if (currentUser != null) {
-    //   const item = {
-    //     uid: otherCurrentUser._id,
-    //     iid: goodsId,
-    //   };
-    //   dispatch(findFavoritesForItemandUserThunk(item));
-    // }
-    //on page load, fetch the response from the server, if has object -> means you liked
   }, []);
 
   useEffect(() => {
-    //id: -> querySearch immediately, maybe first a check to see if the item exists within the database:
-    //if then we set results to that, else we then query like normal
-
     const getData = async () => {
-      const initialItems = await getItemById(goodsId);
-      if (initialItems) {
-        //then set the itesms to be result
-        console.log(initialItems);
+      const initialItem = await getItemById(goodsId);
+      if (initialItem) {
+        console.log("test", initialItem);
+        setItemName(initialItem.title);
+        setItemImg(initialItem.image);
+        setItemPrice(initialItem.price);
+        setItemColors(initialItem.colors);
+        setItemSizes(initialItem.sizes);
+        setSellerId(initialItem.sellerId);
       } else {
         const results = await querySearchByGoodsID(goodsId);
         setItemImg(results.info.goods_img);
@@ -82,7 +73,6 @@ const DetailsPage = () => {
         setItemColors(colors);
       }
     };
-
     getData();
   }, []);
 
@@ -118,6 +108,11 @@ const DetailsPage = () => {
       alert("Must be logged in to post a review");
     }
   };
+
+  const navigateToSellerHandler = () => {
+    navigate("/profile/" + sellerId);
+  }
+
   return (
     <div className="row">
       <UserSection />
@@ -146,7 +141,7 @@ const DetailsPage = () => {
                 ))}
               </select>
               <select className="drop-down-button px-4 py-1">
-                <option disabled selected hidden>
+                <option disabled defaultValue="Select size" hidden>
                   {" "}
                   Select size
                 </option>
@@ -156,9 +151,13 @@ const DetailsPage = () => {
               </select>
               <button
                 className="rounded-pill xl-font-size py-1 add-to-cart-button"
-                onClick={() => updateLikesHandler()}
-              >
+                onClick={() => updateLikesHandler()}>
                 <span>Favorite</span>
+              </button>
+              <button
+                  className="rounded-pill xl-font-size py-1 add-to-cart-button"
+                  onClick={() => navigateToSellerHandler()}>
+                <span>View Seller Profile</span>
               </button>
               <label>
                 <div className="pb-1">
@@ -181,8 +180,7 @@ const DetailsPage = () => {
               </label>
               <button
                 className="rounded-pill xl-font-size py-1 add-to-cart-button"
-                onClick={() => createReviewHandler()}
-              >
+                onClick={() => createReviewHandler()}>
                 <i className="bi bi-pencil-square"></i> Post Review
               </button>
             </div>

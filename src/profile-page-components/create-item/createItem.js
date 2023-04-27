@@ -3,6 +3,7 @@ import React, {useContext, useState} from "react";
 import {useParams} from "react-router";
 import {createItemThunk} from "../../ApiClient/thunks/itemThunk";
 import {UserContext} from "../../redux/userContextTest";
+import {useNavigate} from "react-router-dom";
 
 const CreateItem = ({
                      userId = null
@@ -12,6 +13,7 @@ const CreateItem = ({
     const { user } = useContext(UserContext);
     const currentUser = JSON.parse(user);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
@@ -73,6 +75,7 @@ const CreateItem = ({
             }
             console.log(item);
             dispatch(createItemThunk(item));
+            navigate("/listings");
         }
     }
 

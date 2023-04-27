@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {findReviewsForItemThunk} from "../../ApiClient/thunks/reviewsThunk";
-import ReviewElementItem from "./reviewElementItem";
+import ReviewElement from "./reviewElement";
 
 const ReviewsItem = ({
     itemId=""
@@ -21,7 +21,7 @@ const ReviewsItem = ({
             }
             {
                 reviews.map(review =>
-                    <ReviewElementItem key={review._id} review={review}/>
+                    <ReviewElement key={review._id} review={review} elementType="item"/>
                 )
             }
         </ul>
