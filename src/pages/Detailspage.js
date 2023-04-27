@@ -15,8 +15,8 @@ import { updateUserLikesThunk } from "../ApiClient/thunks/authThunks";
 import { getItemById } from "../ApiClient/services/item";
 import { useContext } from "react";
 import { UserContext } from "../redux/userContextTest";
-import {findItemByIdThunk} from "../ApiClient/thunks/itemThunk";
-import {useNavigate} from "react-router-dom";
+import { findItemByIdThunk } from "../ApiClient/thunks/itemThunk";
+import { useNavigate } from "react-router-dom";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
   const [databaseItem, setDatabaseItem] = useState(false);
@@ -68,6 +68,12 @@ const DetailsPage = () => {
         setItemSizes(initialItem.sizes);
         setSellerId(initialItem.sellerId);
         setDatabaseItem(true);
+        const item = {
+          uid: currentUser._id,
+          iid: goodsId,
+          ...initialItem,
+        };
+        setItem(item);
       } else {
         const results = await querySearchByGoodsID(goodsId);
         setItemImg(results.info.goods_img);
@@ -78,7 +84,7 @@ const DetailsPage = () => {
         moreDetails.forEach((detail) => {
           colors.push(detail.attr_value);
         });
-        const newItem = {
+        const item = {
           uid: currentUser._id,
           iid: goodsId,
           itemId: goodsId,
@@ -88,7 +94,9 @@ const DetailsPage = () => {
           sizes: ["small", "medium", "large"],
           image: results.info.goods_img,
         };
-        setItem(newItem);
+        console.log("IN HERE! here is the item created:");
+        console.log(item);
+        setItem(item);
         setItemColors(colors);
       }
     };
@@ -96,7 +104,7 @@ const DetailsPage = () => {
   }, []);
 
   const updateLikesHandler = () => {
-    if (currentUser._id != null) {
+    if (currentUser && currentUser._id != null) {
       console.log(
         "created this item prior when I loaded the page " +
           JSON.stringify(createdItem)
@@ -120,7 +128,7 @@ const DetailsPage = () => {
   };
 
   const createReviewHandler = () => {
-    if (currentUser._id != null) {
+    if (currentUser && currentUser._id != null) {
       const reviewFull = {
         itemId: goodsId,
         content: review,
@@ -134,7 +142,7 @@ const DetailsPage = () => {
 
   const navigateToSellerHandler = () => {
     navigate("/profile/" + sellerId);
-  }
+  };
 
   return (
     <div className="row">
@@ -174,17 +182,18 @@ const DetailsPage = () => {
               </select>
               <button
                 className="rounded-pill xl-font-size py-1 add-to-cart-button"
-                onClick={() => updateLikesHandler()}>
+                onClick={() => updateLikesHandler()}
+              >
                 <span>Favorite</span>
               </button>
-              {
-                databaseItem &&
+              {databaseItem && (
                 <button
-                    className="rounded-pill xl-font-size py-1 add-to-cart-button"
-                    onClick={() => navigateToSellerHandler()}>
+                  className="rounded-pill xl-font-size py-1 add-to-cart-button"
+                  onClick={() => navigateToSellerHandler()}
+                >
                   <span>View Seller Profile</span>
                 </button>
-              }
+              )}
               <label>
                 <div className="pb-1">
                   <b>Review</b>
@@ -206,7 +215,8 @@ const DetailsPage = () => {
               </label>
               <button
                 className="rounded-pill xl-font-size py-1 add-to-cart-button"
-                onClick={() => createReviewHandler()}>
+                onClick={() => createReviewHandler()}
+              >
                 <i className="bi bi-pencil-square"></i> Post Review
               </button>
             </div>

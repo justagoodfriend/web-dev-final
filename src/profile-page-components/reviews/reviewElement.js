@@ -122,13 +122,9 @@ const ReviewElement = ({
                 alt="..."
                 className="profile-pic-round-mini rounded-circle"
               />
-              {currentUser && currentUser._id != review.author ? (
-                <Link to={`/profile/${review.author}`}>
-                  <div className="text-center">{userName}</div>
-                </Link>
-              ) : (
+              <Link to={`/profile/${review.author}`}>
                 <div className="text-center">{userName}</div>
-              )}
+              </Link>
             </div>
           </div>
           <div className="col-9 pe-0">

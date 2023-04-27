@@ -16,9 +16,12 @@ const Wishlist = () => {
   let userId = useParams().uid;
   const { user } = useContext(UserContext);
   let currentUser = JSON.parse(user);
+
+  /*
   if (!userId) {
     userId = currentUser._id;
   }
+  */
   // console.log(currentUser);
 
   //gets the favorited items by a seller
