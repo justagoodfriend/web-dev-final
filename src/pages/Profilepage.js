@@ -23,7 +23,7 @@ const ProfilePage = ({active = "Reviews"}) => {
             <div className="col-9 profile-background d-flex flex-row h-100">
                 <div className="d-flex flex-column custom-padding col-2">
                     <div className="pb-1 d-block mx-auto">
-                        <img src={`/images/profile-empty.jpeg`} alt="..."
+                        <img src={target.image} alt="..."
                              className="profile-pic-larger rounded-circle border border-white border-3"/>
                     </div>
                     <div className="text-center">

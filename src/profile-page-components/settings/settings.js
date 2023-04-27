@@ -17,7 +17,7 @@ const Settings = ({user= {}}) => {
   const user2 = useContext(UserContext).user;
   console.log(user2);
   const currentUser = JSON.parse(user2);
-  const profilePics = ['nature.png', 'sunset.png', 'sunglasses.jpeg', 'profile-empty.jpeg' ];
+  const profilePics = ['/images/nature.png', '/images/sunset.png', '/images/sunglasses.jpeg', '/images/profile-empty.jpeg' ];
 
   const handlePic = () => {
     // dispatch(updateProfilePicture(currentUser._id, profilePic));
@@ -81,13 +81,11 @@ const Settings = ({user= {}}) => {
               />
             </label>
             <div className="pt-4">
-              {/*TODO */}
-              <button className="background-purple text-white rounded-3 no-border px-4 py-1" onClick={(e)=>{
+              <button className="background-purple text-white rounded-3 no-border px-4 py-1 me-2" onClick={(e)=>{
                 dispatch(updateUserThunk({userID: targetID, ...userInputs}));
               }}>
                 Save
               </button>
-              {/* TODO: style this button better */}
               <button
                 className="no-border bg-danger text-white px-4 py-1 rounded-2"
                 onClick={() => {
@@ -104,7 +102,7 @@ const Settings = ({user= {}}) => {
           <div className="col-4 pt-3 text-center">
             <img
               alt="..."
-              src={`/images/${userInputs.image}`}
+              src={`${userInputs.image}`}
               className="rounded-4"
             />
 
@@ -119,7 +117,7 @@ const Settings = ({user= {}}) => {
                       }}
                   >
                     <img
-                        src={`/images/${pic}`}
+                        src={`${pic}`}
                         className="rounded-4"
                      />
                   </button>

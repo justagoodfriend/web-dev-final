@@ -27,11 +27,22 @@ const UserSection = ({ active = "Home" }) => {
     <div className="col-3 pt-3 ps-4 bg-purple" style={{ minHeight: "100vh" }}>
       <div className="row align">
         <div className="col-auto">
-          <img
-            src={`/images/profile-empty.jpeg`}
-            alt="..."
-            className="profile-pic rounded mb-2"
-          />
+          {
+            currentUser && currentUser.image &&
+              <img
+                  src={currentUser.image}
+                  alt="..."
+                  className="profile-pic rounded mb-2"
+              />
+          }
+          {
+            !currentUser &&
+              <img
+                src={`/images/profile-empty.jpeg`}
+                alt="..."
+                className="profile-pic rounded mb-2"
+            />
+          }
         </div>
 
         <div className="col">
