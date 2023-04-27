@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ListingItem = ({ item }) => {
   console.log("current item found " + item);
   return (
-    <div>
+    <>
       {item && item.sellerId && (
         <div className="card">
           <Link to={`/details/${item.itemId}`}>
@@ -19,7 +19,7 @@ const ListingItem = ({ item }) => {
           </Link>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

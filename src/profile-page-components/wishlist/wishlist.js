@@ -31,7 +31,7 @@ const Wishlist = ({
     const dbItems = await getItemsBySeller(userId);
     if (dbItems) {
       const item = dbItems.map((item) => item.itemId);
-      console.log(item);
+      // console.log(item);
       setDatabase(item);
     }
   };
