@@ -38,6 +38,22 @@ function App() {
                 <Route path="register" element={<SignUpModal />} />
               </Route>
               <Route
+                  path="/profile"
+                  element={<ProfilePage active="Reviews" />}
+              />
+              <Route
+                  path="/profile/wishlist"
+                  element={<ProfilePage active="Wishlist" />}
+              />
+              <Route
+                  path="/profile/settings"
+                  element={<ProfilePage active="Settings" />}
+              />
+              <Route
+                  path="/profile/items"
+                  element={<ProfilePage active="Items" />}
+              />
+              <Route
                 path="/profile/:uid"
                 element={<ProfilePage active="Reviews" />}
               />
@@ -52,10 +68,6 @@ function App() {
               <Route
                 path="/profile/:uid/items"
                 element={<ProfilePage active="Items" />}
-              />
-              <Route
-                path="/profile/:uid/transactions"
-                element={<ProfilePage active="Transactions" />}
               />
 
               <Route path="/search/:query" element={<SearchPage />} />
