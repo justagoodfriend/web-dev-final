@@ -36,7 +36,13 @@ const UserSection = ({ active = "Home" }) => {
 
         <div className="col">
           {/* TODO: make this take in the current user: */}
-          <h2 className="text-white m-0">Hi Guest!</h2>
+          <h2 className="text-white m-0">
+            Hi{" "}
+            {currentUser && currentUser.username
+              ? currentUser.username
+              : "Guest"}{" "}
+            !
+          </h2>
           <>
             {currentUser && currentUser.username ? (
               <span
@@ -46,11 +52,15 @@ const UserSection = ({ active = "Home" }) => {
                   //TODO: idk why but this doesn't navigate back home
                   navigate("/");
                   window.location.reload();
+                  return false;
                 }}
                 id="logoutbutton"
               >
                 {" "}
-                <b className="text-dark bg-light opacity-50 small-font rounded-2 mt-2 p-1"> Log Out{" "} </b>
+                <b className="text-dark bg-light opacity-50 small-font rounded-2 mt-2 p-1">
+                  {" "}
+                  Log Out{" "}
+                </b>
               </span>
             ) : (
               <div className="login-navbar text-white">
