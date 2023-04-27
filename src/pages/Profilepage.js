@@ -13,7 +13,7 @@ const ProfilePage = ({active = "Reviews"}) => {
     const dispatch = useDispatch();
     useEffect(
         () => {
-            dispatch(findUserByIdThunk(userID));
+            // dispatch(findUserByIdThunk(userID));
             dispatch(profileThunk());
         },[]); 
     return (

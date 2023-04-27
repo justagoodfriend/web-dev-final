@@ -11,13 +11,14 @@ const ProfileNav = ({ active = "Reviews" }) => {
   return (
     <nav className="nav justify-content-around custom-padding-extra me-5">
       {
+        userId &&
         <ProfileNavLink
           active={active}
           href={"/profile/" + userId}
           title="Reviews"
         />
       }
-      {user.wishlist && (
+      {user.wishlist && userId && (
         <>
           <ProfileNavLink
             active={active}
@@ -28,7 +29,7 @@ const ProfileNav = ({ active = "Reviews" }) => {
       )}
       {
         // Need to do HTTP get reqs for profie/id/items
-        user.items && (
+        user.items && userId &&(
           <>
             <ProfileNavLink
               active={active}
@@ -38,10 +39,39 @@ const ProfileNav = ({ active = "Reviews" }) => {
           </>
         )
       }
-      {user.username == source.username && (
+      {
+          user.username === source.username &&
+          <ProfileNavLink
+              active={active}
+              href={"/profile/" + userId}
+              title="Reviews"
+          />
+      }
+      {user.wishlist && user.username === source.username && (
+          <>
+            <ProfileNavLink
+                active={active}
+                href={"/profile/wishlist"}
+                title="Wishlist"
+            />
+          </>
+      )}
+      {
+        // Need to do HTTP get reqs for profie/id/items
+          user.items && user.username === source.username && (
+              <>
+                <ProfileNavLink
+                    active={active}
+                    href={"/profile/items"}
+                    title="Items"
+                />
+              </>
+          )
+      }
+      {user.username === source.username && (
         <ProfileNavLink
           active={active}
-          href={"/profile/" + userId + "/settings"}
+          href={"/profile/settings"}
           title="Settings"
         />
       )}

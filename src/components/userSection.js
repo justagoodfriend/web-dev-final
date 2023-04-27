@@ -109,7 +109,7 @@ const UserSection = ({ active = "Home" }) => {
           {currentUser && currentUser.username && (
             <Button
               active={active}
-              href={"/profile/" + currentUser._id}
+              href={"/profile"}
               title="Profile"
               icon="bi bi-person-fill-gear text-white pe-3 fs-5"
             />
