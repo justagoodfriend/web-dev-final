@@ -30,6 +30,7 @@ const ReviewElement = ({
   const [contentValue, setContentValue] = useState(review.content);
   const [ratingValue, setRatingValue] = useState(review.rating.toString());
   const [userName, setUserName] = useState(null);
+  const [userImage, setUserImage] = useState(null);
   const { user } = useContext(UserContext);
   // console.log(user);
   const currentUser = JSON.parse(user);
@@ -37,6 +38,7 @@ const ReviewElement = ({
   const getUserName = async () => {
     const profile = await userService.findProfile(review.author);
     setUserName(profile.username);
+    setUserImage(profile.image);
   };
 
   useEffect(() => {
@@ -118,7 +120,7 @@ const ReviewElement = ({
           <div className="col-2 d-flex align-items-center">
             <div className="ms-3">
               <img
-                src={`/images/profile-empty.jpeg`}
+                src={`${userImage}`}
                 alt="..."
                 className="profile-pic-round-mini rounded-circle"
               />
