@@ -13,10 +13,12 @@ const ProfileNav = ({
     return (
         <nav className="nav justify-content-around custom-padding-extra me-5">
             {
-                user.wishlist && <>
+                <>
                   <ProfileNavLink active={active} href={"/profile/" + userId } title="Reviews"/>
-                  <ProfileNavLink active={active} href={"/profile/" + userId + "/wishlist"} title="Wishlist"/>
                 </>
+            }
+            { user.wishlist && 
+                <ProfileNavLink active={active} href={"/profile/" + userId + "/wishlist"} title="Wishlist"/>
             }
             {
               // Need to do HTTP get reqs for profie/id/items
