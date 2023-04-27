@@ -19,6 +19,7 @@ import {findItemByIdThunk} from "../ApiClient/thunks/itemThunk";
 import {useNavigate} from "react-router-dom";
 const DetailsPage = () => {
   const goodsId = useParams().iid;
+  const [databaseItem, setDatabaseItem] = useState(false);
   const [itemImg, setItemImg] = useState("");
   const [itemName, setItemName] = useState("");
   const [itemPrice, setItemPrice] = useState("");
@@ -60,6 +61,7 @@ const DetailsPage = () => {
         setItemColors(initialItem.colors);
         setItemSizes(initialItem.sizes);
         setSellerId(initialItem.sellerId);
+        setDatabaseItem(true);
       } else {
         const results = await querySearchByGoodsID(goodsId);
         setItemImg(results.info.goods_img);
@@ -154,11 +156,14 @@ const DetailsPage = () => {
                 onClick={() => updateLikesHandler()}>
                 <span>Favorite</span>
               </button>
-              <button
-                  className="rounded-pill xl-font-size py-1 add-to-cart-button"
-                  onClick={() => navigateToSellerHandler()}>
-                <span>View Seller Profile</span>
-              </button>
+              {
+                databaseItem &&
+                <button
+                    className="rounded-pill xl-font-size py-1 add-to-cart-button"
+                    onClick={() => navigateToSellerHandler()}>
+                  <span>View Seller Profile</span>
+                </button>
+              }
               <label>
                 <div className="pb-1">
                   <b>Review</b>
