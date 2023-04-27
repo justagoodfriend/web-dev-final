@@ -1,8 +1,7 @@
-import ReviewElementProfile from "./reviewElementProfile";
+import ReviewElement from "./reviewElement";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {findReviewsForUserThunk} from "../../ApiClient/thunks/reviewsThunk";
-import ReviewElementItem from "./reviewElementItem";
 import {useParams} from "react-router";
 
 const Reviews = ({
@@ -28,7 +27,7 @@ const Reviews = ({
             }
             {
                 reviews.map(review =>
-                    <ReviewElementProfile key={review._id} review={review}/>
+                    <ReviewElement key={review._id} review={review} elementType="profile"/>
                 )
             }
         </ul>

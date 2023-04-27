@@ -1,6 +1,19 @@
-import wishlist from "./wishlist.json";
-import WishlistItem from "./wishlistItem";
-const Wishlist = ({user = {}}) => {
+//import wishlist from "./wishlist.json";
+//import WishlistItem from "./wishlistItem";
+import ListingItem from "../../components/listingItems";
+import { getItemsBySeller } from "../../ApiClient/services/item";
+import React, { useEffect, useContext, useState } from "react";
+import { UserContext } from "../../redux/userContextTest";
+import { getFavoritesByUserId } from "../../ApiClient/services/favorites";
+
+const Wishlist = () => {
+  //get the currentUser here, based on whether the user is a seler/buyer the queries should be different
+  const [database, setDatabase] = useState([]);
+  const { user } = useContext(UserContext);
+  const currentUser = JSON.parse(user);
+  console.log(currentUser);
+
+  /*
     return (
         <div className="d-flex flex-wrap custom-padding-left pt-3">
             {
@@ -10,6 +23,41 @@ const Wishlist = ({user = {}}) => {
             }
         </div>
     );
-}
+    */
+
+  //gets the favorited items by a seller
+  const fetchSellersItems = async () => {
+    //get all items, that correspond to sellerID
+    const dbItems = await getItemsBySeller(currentUser._id);
+    if (dbItems) {
+      setDatabase(dbItems);
+    }
+  };
+
+  //gets the favorited items by a buyer
+  //TODO: fix this so that it works for a buyer, since it breaks the Mongoose DB
+  const fetchBuyerFavorited = async () => {
+    const dbItems = await getFavoritesByUserId(currentUser._id);
+    if (dbItems) {
+      setDatabase(dbItems);
+    }
+  };
+
+  useEffect(() => {
+    if (currentUser && currentUser.items) {
+      fetchSellersItems();
+    } else {
+      fetchBuyerFavorited();
+    }
+  }, []);
+
+  return (
+    <div className="cards result-layout">
+      {database.map((item) => (
+        <ListingItem item={item} />
+      ))}
+    </div>
+  );
+};
 
 export default Wishlist;

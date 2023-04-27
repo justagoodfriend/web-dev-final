@@ -7,6 +7,13 @@ const itemController = (app) => {
     res.json(items);
   };
 
+  const findItemsBySeller = async (req, res) => {
+    console.log("finding items by this seller");
+    console.log(req.params.iid);
+    const items = await dao.findItemsBySellerID(req.params.iid);
+    res.json(items);
+  };
+
   const getItemById = async (req, res) => {
     console.log("getting item with id:", req.params.iid);
     const item = await dao.findItemByItemId(req.params.iid);
@@ -14,11 +21,11 @@ const itemController = (app) => {
     res.json(item);
   };
 
-    const createItem = async (req, res) => {
-        console.log("creating item");
-        const newItem = await dao.createItem(req.body.item);
-        res.json(newItem);
-    }
+  const createItem = async (req, res) => {
+    console.log("creating item");
+    const newItem = await dao.createItem(req.body.item);
+    res.json(newItem);
+  };
 
   const updateItem = async (req, res) => {
     console.log("updating item");
@@ -34,6 +41,7 @@ const itemController = (app) => {
 
   app.get("/api/details", getItems);
   app.get("/api/details/:iid", getItemById);
+  app.get("/api/details/seller/:iid", findItemsBySeller);
   app.post("/api/details/create", createItem);
   app.put("/api/update/:iid", updateItem);
   app.delete("/api/delete/:iid", deleteItem);

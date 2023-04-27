@@ -8,6 +8,13 @@ const api = axios.create({
 export const getItemById = async (iid) => {
   console.log(iid);
   const response = await api.get(`${URL}/${iid}`);
+  console.log("response", response.data);
+  return response.data;
+};
+
+export const getItemsBySeller = async (iid) => {
+  console.log(iid);
+  const response = await api.get(`${URL}/seller/${iid}`);
   return response.data;
 };
 
